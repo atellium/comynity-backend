@@ -1,0 +1,75 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env/
+ENV/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Uploaded files
+media/
+uploads/
+
+# Collected static files
+staticfiles/
+
+# Development tools
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.nox/
+
+# Type checking and linting
+.mypy_cache/
+.ruff_cache/
+
+# Build files
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# Django translations
+*.mo
+task.txt
+categories.txt
+business_categories.json
+data_format.json

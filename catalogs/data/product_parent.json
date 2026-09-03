@@ -1,0 +1,302 @@
+[
+    {
+        "name": "Clothing",
+        "label": "Clothing",
+        "type": "product",
+        "parent": null,
+        "aliases": "fashion, apparel, garments, clothes",
+        "sort_order": 1,
+        "is_active": true,
+        "is_featured": true
+    },
+    {
+        "name": "Footwear",
+        "label": "Footwear",
+        "type": "product",
+        "parent": null,
+        "aliases": "shoes, sandals, slippers, footwear",
+        "sort_order": 2,
+        "is_active": true,
+        "is_featured": true
+    },
+    {
+        "name": "Mobile Phones",
+        "label": "Mobile Phones",
+        "type": "product",
+        "parent": null,
+        "aliases": "mobile, smartphone, phone, mobiles",
+        "sort_order": 3,
+        "is_active": true,
+        "is_featured": true
+    },
+    {
+        "name": "Mobile Accessories",
+        "label": "Mobile Accessories",
+        "type": "product",
+        "parent": null,
+        "aliases": "charger, cable, cover, earphone, power bank, mobile accessories",
+        "sort_order": 4,
+        "is_active": true,
+        "is_featured": true
+    },
+    {
+        "name": "Electronics",
+        "label": "Electronics",
+        "type": "product",
+        "parent": null,
+        "aliases": "electronic items, gadgets, consumer electronics",
+        "sort_order": 5,
+        "is_active": true,
+        "is_featured": true
+    },
+    {
+        "name": "Home Appliances",
+        "label": "Home Appliances",
+        "type": "product",
+        "parent": null,
+        "aliases": "appliances, household appliances, kitchen appliances",
+        "sort_order": 6,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Jewellery",
+        "label": "Jewellery",
+        "type": "product",
+        "parent": null,
+        "aliases": "jewelry, gold, silver, ornaments",
+        "sort_order": 7,
+        "is_active": true,
+        "is_featured": true
+    },
+    {
+        "name": "Watches",
+        "label": "Watches",
+        "type": "product",
+        "parent": null,
+        "aliases": "watch, wrist watch, smart watch",
+        "sort_order": 8,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Bags & Luggage",
+        "label": "Bags & Luggage",
+        "type": "product",
+        "parent": null,
+        "aliases": "bags, luggage, backpack, handbag, suitcase",
+        "sort_order": 9,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Beauty & Cosmetics",
+        "label": "Beauty & Cosmetics",
+        "type": "product",
+        "parent": null,
+        "aliases": "cosmetics, makeup, beauty products",
+        "sort_order": 10,
+        "is_active": true,
+        "is_featured": true
+    },
+    {
+        "name": "Personal Care",
+        "label": "Personal Care",
+        "type": "product",
+        "parent": null,
+        "aliases": "personal care products, grooming, hygiene",
+        "sort_order": 11,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Fashion Accessories",
+        "label": "Fashion Accessories",
+        "type": "product",
+        "parent": null,
+        "aliases": "accessories, fashion items, belts, sunglasses, wallets",
+        "sort_order": 12,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Home & Kitchen",
+        "label": "Home & Kitchen",
+        "type": "product",
+        "parent": null,
+        "aliases": "home products, kitchen products, utensils, household items",
+        "sort_order": 13,
+        "is_active": true,
+        "is_featured": true
+    },
+    {
+        "name": "Furniture",
+        "label": "Furniture",
+        "type": "product",
+        "parent": null,
+        "aliases": "home furniture, office furniture, furnishings",
+        "sort_order": 14,
+        "is_active": true,
+        "is_featured": true
+    },
+    {
+        "name": "Grocery & Packaged Food",
+        "label": "Grocery & Packaged Food",
+        "type": "product",
+        "parent": null,
+        "aliases": "grocery, groceries, packaged food, food products",
+        "sort_order": 15,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Stationery",
+        "label": "Stationery",
+        "type": "product",
+        "parent": null,
+        "aliases": "stationary, school supplies, office supplies",
+        "sort_order": 16,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Books",
+        "label": "Books",
+        "type": "product",
+        "parent": null,
+        "aliases": "book, textbook, novels, study books",
+        "sort_order": 17,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Toys & Games",
+        "label": "Toys & Games",
+        "type": "product",
+        "parent": null,
+        "aliases": "toys, games, kids toys, board games",
+        "sort_order": 18,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Gifts",
+        "label": "Gifts",
+        "type": "product",
+        "parent": null,
+        "aliases": "gift items, presents, gifting",
+        "sort_order": 19,
+        "is_active": true,
+        "is_featured": true
+    },
+    {
+        "name": "Sports & Fitness",
+        "label": "Sports & Fitness",
+        "type": "product",
+        "parent": null,
+        "aliases": "sports, fitness, gym equipment, sporting goods",
+        "sort_order": 20,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Automotive Accessories",
+        "label": "Automotive Accessories",
+        "type": "product",
+        "parent": null,
+        "aliases": "car accessories, bike accessories, automobile accessories",
+        "sort_order": 21,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Hardware & Tools",
+        "label": "Hardware & Tools",
+        "type": "product",
+        "parent": null,
+        "aliases": "hardware, tools, building tools, hand tools",
+        "sort_order": 22,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Electrical Items",
+        "label": "Electrical Items",
+        "type": "product",
+        "parent": null,
+        "aliases": "electricals, switches, lights, fans, electrical products",
+        "sort_order": 23,
+        "is_active": true,
+        "is_featured": true
+    },
+    {
+        "name": "Computers & Accessories",
+        "label": "Computers & Accessories",
+        "type": "product",
+        "parent": null,
+        "aliases": "computer, laptop, desktop, computer accessories",
+        "sort_order": 24,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Baby Products",
+        "label": "Baby Products",
+        "type": "product",
+        "parent": null,
+        "aliases": "baby items, infant products, newborn products",
+        "sort_order": 25,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Health & Wellness",
+        "label": "Health & Wellness",
+        "type": "product",
+        "parent": null,
+        "aliases": "wellness products, healthcare products, health products",
+        "sort_order": 26,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Medical Supplies",
+        "label": "Medical Supplies",
+        "type": "product",
+        "parent": null,
+        "aliases": "medical equipment, medical products, healthcare supplies",
+        "sort_order": 27,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Pet Supplies",
+        "label": "Pet Supplies",
+        "type": "product",
+        "parent": null,
+        "aliases": "pet products, pet food, pet accessories",
+        "sort_order": 28,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Musical Instruments",
+        "label": "Musical Instruments",
+        "type": "product",
+        "parent": null,
+        "aliases": "music instruments, guitar, keyboard, drums",
+        "sort_order": 29,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Handicrafts & Local Products",
+        "label": "Handicrafts & Local Products",
+        "type": "product",
+        "parent": null,
+        "aliases": "handicrafts, handmade products, local products, crafts",
+        "sort_order": 30,
+        "is_active": true,
+        "is_featured": false
+    }
+]

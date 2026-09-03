@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Garia Station",
+        "slug": "garia-station",
+        "aliases": "Garia, Garia Station, goria",
+        "latitude": 22.467324,
+        "longitude": 88.403916
+    },
+    {
+        "name": "Garia",
+        "slug": "garia",
+        "aliases": "",
+        "latitude": 22.464239,
+        "longitude": 88.380572
+    },
+    {
+        "name": "New Garia",
+        "slug": "new-garia",
+        "aliases": "",
+        "latitude": 22.472419,
+        "longitude": 88.396569
+    }
+]
