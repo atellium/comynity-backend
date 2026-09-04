@@ -630,3 +630,35 @@ class BusinessGalleryImage(TimestampedModel):
 
     def __str__(self):
         return f"{self.business}: {self.image.name}"
+
+
+class BusinessGalleryUpload(TimestampedModel):
+    class Status(models.TextChoices):
+        PENDING = "pending", "Pending upload"
+        PROCESSING = "processing", "Processing"
+        READY = "ready", "Ready"
+        FAILED = "failed", "Failed"
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    business = models.ForeignKey(
+        Business,
+        on_delete=models.CASCADE,
+        related_name="gallery_uploads",
+    )
+    object_key = models.CharField(max_length=500, unique=True)
+    content_type = models.CharField(max_length=32)
+    status = models.CharField(max_length=12, choices=Status.choices, default=Status.PENDING)
+    error = models.CharField(max_length=500, blank=True, default="")
+    gallery_image = models.OneToOneField(
+        BusinessGalleryImage,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="upload",
+    )
+
+    class Meta:
+        db_table = "business_gallery_uploads"
+
+    def __str__(self):
+        return f"{self.business}: {self.status} ({self.id})"

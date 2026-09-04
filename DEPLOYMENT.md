@@ -114,6 +114,35 @@ docker compose exec web python manage.py createsuperuser
 docker compose exec web python manage.py check --deploy
 ```
 
+## Direct R2 gallery uploads
+
+Business gallery uploads use short-lived presigned R2 URLs and are normalized
+asynchronously by the `worker` service. Apply migrations and start both web and
+worker services during deployment:
+
+```sh
+docker compose run --rm -e RUN_MIGRATIONS=true -e COLLECT_STATIC=false web true
+docker compose up -d --build web worker
+```
+
+In the R2 bucket settings, add a browser CORS rule for each frontend origin:
+
+```json
+[
+  {
+    "AllowedOrigins": ["https://your-frontend.example"],
+    "AllowedMethods": ["PUT"],
+    "AllowedHeaders": ["Content-Type"],
+    "ExposeHeaders": ["ETag"],
+    "MaxAgeSeconds": 3600
+  }
+]
+```
+
+The worker uses the same `R2_*` and `REDIS_URL` values as the web service.
+Presigned URLs expire after five minutes. Configure an R2 lifecycle rule to
+remove objects under `media/businesses/gallery/pending/` after one day.
+
 ## Updates and backups
 
 ```sh

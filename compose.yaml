@@ -18,7 +18,7 @@ services:
       GDAL_DATA: /usr/share/gdal
       PROJ_LIB: /usr/share/proj
     extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - "host.docker.internal:host-gateway" 
     expose:
       - "8000"
     volumes:
@@ -38,6 +38,29 @@ services:
       timeout: 5s
       retries: 10
       start_period: 20s
+    security_opt:
+      - no-new-privileges:true
+
+  worker:
+    build:
+      context: .
+    restart: unless-stopped
+    command: ["celery", "-A", "config", "worker", "--loglevel=INFO", "--concurrency=2"]
+    env_file:
+      - .env
+    environment:
+      REDIS_URL: redis://redis:6379/0
+      RUN_MIGRATIONS: "false"
+      COLLECT_STATIC: "false"
+      GDAL_LIBRARY_PATH: ""
+      GEOS_LIBRARY_PATH: ""
+      GDAL_DATA: /usr/share/gdal
+      PROJ_LIB: /usr/share/proj
+    volumes:
+      - .:/app
+    depends_on:
+      redis:
+        condition: service_healthy
     security_opt:
       - no-new-privileges:true
 

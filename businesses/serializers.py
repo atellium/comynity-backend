@@ -2,7 +2,7 @@ from django.db import transaction
 from django.utils import timezone
 from rest_framework import serializers
 
-from businesses.models import Business, BusinessCategoryAssignment, BusinessGalleryImage, BusinessHoliday, BusinessHour, BusinessProfile
+from businesses.models import Business, BusinessCategoryAssignment, BusinessGalleryImage, BusinessGalleryUpload, BusinessHoliday, BusinessHour, BusinessProfile
 from businesses.services import get_business_hours_status
 from categories.models import BusinessCategory
 from catalogs.models import Catalog, CatalogCategory
@@ -96,6 +96,28 @@ class BusinessGalleryImageSerializer(serializers.ModelSerializer):
             return None
         request = self.context.get("request")
         return request.build_absolute_uri(obj.image.url) if request else obj.image.url
+
+
+class BusinessGalleryUploadCreateSerializer(serializers.Serializer):
+    content_type = serializers.ChoiceField(
+        choices=("image/jpeg", "image/png", "image/webp")
+    )
+
+
+class BusinessGalleryUploadSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
+    class Meta:
+        model = BusinessGalleryUpload
+        fields = ("id", "status", "error", "image")
+
+    def get_image(self, obj):
+        if not obj.gallery_image_id:
+            return None
+        return BusinessGalleryImageSerializer(
+            obj.gallery_image,
+            context=self.context,
+        ).data
 
 
 class BusinessGalleryImageWriteSerializer(serializers.ModelSerializer):
