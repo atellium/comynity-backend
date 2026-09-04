@@ -114,11 +114,12 @@ docker compose exec web python manage.py createsuperuser
 docker compose exec web python manage.py check --deploy
 ```
 
-## Direct R2 gallery uploads
+## Direct R2 image uploads
 
-Business gallery uploads use short-lived presigned R2 URLs and are normalized
-asynchronously by the `worker` service. Apply migrations and start both web and
-worker services during deployment:
+Business galleries, product galleries, business thumbnails, and offer images
+use short-lived presigned R2 URLs and are normalized asynchronously by the
+`worker` service. Apply migrations and start both web and worker services during
+deployment:
 
 ```sh
 docker compose run --rm -e RUN_MIGRATIONS=true -e COLLECT_STATIC=false web true

@@ -633,6 +633,11 @@ class BusinessGalleryImage(TimestampedModel):
 
 
 class BusinessGalleryUpload(TimestampedModel):
+    class Kind(models.TextChoices):
+        GALLERY = "gallery", "Business gallery"
+        THUMBNAIL = "thumbnail", "Business thumbnail"
+        OFFER = "offer", "Offer image"
+
     class Status(models.TextChoices):
         PENDING = "pending", "Pending upload"
         PROCESSING = "processing", "Processing"
@@ -647,6 +652,8 @@ class BusinessGalleryUpload(TimestampedModel):
     )
     object_key = models.CharField(max_length=500, unique=True)
     content_type = models.CharField(max_length=32)
+    kind = models.CharField(max_length=12, choices=Kind.choices, default=Kind.GALLERY)
+    target_id = models.UUIDField(null=True, blank=True)
     status = models.CharField(max_length=12, choices=Status.choices, default=Status.PENDING)
     error = models.CharField(max_length=500, blank=True, default="")
     gallery_image = models.OneToOneField(

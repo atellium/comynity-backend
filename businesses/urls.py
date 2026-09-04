@@ -11,6 +11,7 @@ urlpatterns = [
     path("businesses/<slug:slug>/", views.business_detail, name="business-detail"),
     path("businesses/mine/<slug:slug>/gallery/", views.business_gallery, name="business-gallery"),
     path("businesses/mine/<slug:slug>/gallery/uploads/", views.business_gallery_upload_create, name="business-gallery-upload-create"),
+    path("businesses/mine/<slug:slug>/thumbnail/uploads/", views.business_thumbnail_upload_create, name="business-thumbnail-upload-create"),
     path("businesses/mine/<slug:slug>/gallery/uploads/<uuid:upload_id>/", views.business_gallery_upload_detail, name="business-gallery-upload-detail"),
     path("businesses/mine/<slug:slug>/gallery/uploads/<uuid:upload_id>/complete/", views.business_gallery_upload_complete, name="business-gallery-upload-complete"),
     # # path("businesses/<slug:slug>/gallery/<uuid:image_id>/", views.business_gallery_image_detail, name="business-gallery-image-detail"),

@@ -385,3 +385,24 @@ class CatalogImage(TimestampedModel):
                 kwargs["update_fields"] = set(update_fields) | {"image"}
 
         return super().save(*args, **kwargs)
+
+
+class CatalogImageUpload(TimestampedModel):
+    class Status(models.TextChoices):
+        PENDING = "pending", "Pending upload"
+        PROCESSING = "processing", "Processing"
+        READY = "ready", "Ready"
+        FAILED = "failed", "Failed"
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    catalog = models.ForeignKey(Catalog, on_delete=models.CASCADE, related_name="image_uploads")
+    object_key = models.CharField(max_length=500, unique=True)
+    content_type = models.CharField(max_length=32)
+    status = models.CharField(max_length=12, choices=Status.choices, default=Status.PENDING)
+    error = models.CharField(max_length=500, blank=True, default="")
+    catalog_image = models.OneToOneField(
+        CatalogImage, on_delete=models.SET_NULL, null=True, blank=True, related_name="upload"
+    )
+
+    class Meta:
+        db_table = "catalog_image_uploads"

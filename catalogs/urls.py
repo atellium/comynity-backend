@@ -26,6 +26,9 @@ urlpatterns = [
         views.catalog_image_create,
         name="catalog-image-create",
     ),
+    path("businesses/mine/<slug:business_slug>/catalogs/<slug:catalog_slug>/images/uploads/", views.catalog_image_upload_create, name="catalog-image-upload-create"),
+    path("businesses/mine/<slug:business_slug>/catalogs/<slug:catalog_slug>/images/uploads/<uuid:upload_id>/", views.catalog_image_upload_detail, name="catalog-image-upload-detail"),
+    path("businesses/mine/<slug:business_slug>/catalogs/<slug:catalog_slug>/images/uploads/<uuid:upload_id>/complete/", views.catalog_image_upload_complete, name="catalog-image-upload-complete"),
     path(
         "businesses/mine/<slug:business_slug>/catalogs/<slug:catalog_slug>/images/<int:image_id>/",
         views.catalog_image_manage,

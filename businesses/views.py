@@ -227,6 +227,23 @@ def business_gallery_upload_create(request, slug):
         object_key=object_key,
         content_type=content_type,
     )
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def business_thumbnail_upload_create(request, slug):
+    business = _owned_business(request, slug)
+    if not settings.R2_ENABLED:
+        return Response({"detail": "Direct uploads require R2_ENABLED."}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+    serializer = BusinessGalleryUploadCreateSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    content_type = serializer.validated_data["content_type"]
+    object_key = new_upload_key(f"thumbnail-{business.pk}", content_type)
+    upload = BusinessGalleryUpload.objects.create(
+        business=business, object_key=object_key, content_type=content_type,
+        kind=BusinessGalleryUpload.Kind.THUMBNAIL,
+    )
+    return Response({"id": upload.pk, "upload_url": presign_upload(object_key, content_type), "content_type": content_type, "expires_in": 300}, status=status.HTTP_201_CREATED)
     return Response(
         {
             "id": upload.pk,

@@ -106,10 +106,11 @@ class BusinessGalleryUploadCreateSerializer(serializers.Serializer):
 
 class BusinessGalleryUploadSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField()
+    asset_url = serializers.SerializerMethodField()
 
     class Meta:
         model = BusinessGalleryUpload
-        fields = ("id", "status", "error", "image")
+        fields = ("id", "status", "error", "image", "asset_url")
 
     def get_image(self, obj):
         if not obj.gallery_image_id:
@@ -118,6 +119,19 @@ class BusinessGalleryUploadSerializer(serializers.ModelSerializer):
             obj.gallery_image,
             context=self.context,
         ).data
+
+    def get_asset_url(self, obj):
+        field = None
+        if obj.status == BusinessGalleryUpload.Status.READY:
+            if obj.kind == BusinessGalleryUpload.Kind.THUMBNAIL:
+                field = obj.business.thumbnail
+            elif obj.kind == BusinessGalleryUpload.Kind.OFFER and obj.target_id:
+                offer = obj.business.offers.filter(pk=obj.target_id).first()
+                field = offer.image if offer else None
+        if not field:
+            return None
+        request = self.context.get("request")
+        return request.build_absolute_uri(field.url) if request else field.url
 
 
 class BusinessGalleryImageWriteSerializer(serializers.ModelSerializer):

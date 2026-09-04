@@ -21,4 +21,5 @@ urlpatterns = [
         views.offer_manage,
         name="offer-manage",
     ),
+    path("businesses/mine/<slug:business_slug>/offers/<uuid:offer_id>/image/uploads/", views.offer_image_upload_create, name="offer-image-upload-create"),
 ]

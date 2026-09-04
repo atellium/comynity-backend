@@ -1,10 +1,14 @@
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.exceptions import NotFound
+from rest_framework.exceptions import NotFound, ValidationError
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.exceptions import PermissionDenied
 from django.db import transaction
+from django.conf import settings
+from botocore.exceptions import ClientError
+
+from businesses.direct_uploads import new_upload_key, presign_upload, r2_client, storage_key
 
 from businesses.services import get_business_for_update
 
@@ -20,8 +24,10 @@ from catalogs.serializers import (
     CatalogGallerySyncSerializer,
     CatalogImageBulkUploadSerializer,
     CatalogImageWriteSerializer,
+    CatalogImageUploadCreateSerializer,
+    CatalogImageUploadSerializer,
 )
-from catalogs.models import CatalogImage
+from catalogs.models import CatalogImage, CatalogImageUpload
 from catalogs.services import (
     get_public_business,
     get_public_product_by_slug,
@@ -252,6 +258,58 @@ def catalog_image_create(request, business_slug, catalog_slug):
         },
         status=status.HTTP_201_CREATED,
     )
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def catalog_image_upload_create(request, business_slug, catalog_slug):
+    catalog = _owned_catalog(request, business_slug, catalog_slug)
+    if not settings.R2_ENABLED:
+        return Response({"detail": "Direct uploads require R2_ENABLED."}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+    serializer = CatalogImageUploadCreateSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    content_type = serializer.validated_data["content_type"]
+    object_key = new_upload_key(f"catalog-{catalog.pk}", content_type)
+    upload = CatalogImageUpload.objects.create(catalog=catalog, object_key=object_key, content_type=content_type)
+    return Response({"id": upload.pk, "upload_url": presign_upload(object_key, content_type), "content_type": content_type, "expires_in": 300}, status=status.HTTP_201_CREATED)
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def catalog_image_upload_detail(request, business_slug, catalog_slug, upload_id):
+    catalog = _owned_catalog(request, business_slug, catalog_slug)
+    upload = CatalogImageUpload.objects.select_related("catalog_image").filter(pk=upload_id, catalog=catalog).first()
+    if upload is None:
+        raise NotFound("Product image upload not found.")
+    return Response(CatalogImageUploadSerializer(upload, context={"request": request}).data)
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def catalog_image_upload_complete(request, business_slug, catalog_slug, upload_id):
+    catalog = _owned_catalog(request, business_slug, catalog_slug)
+    upload = CatalogImageUpload.objects.filter(pk=upload_id, catalog=catalog).first()
+    if upload is None:
+        raise NotFound("Product image upload not found.")
+    if upload.status != CatalogImageUpload.Status.PENDING:
+        raise ValidationError({"detail": "This upload has already been finalized."})
+    client = r2_client()
+    try:
+        metadata = client.head_object(Bucket=settings.R2_BUCKET_NAME, Key=storage_key(upload.object_key))
+    except ClientError as exc:
+        raise ValidationError({"detail": "The uploaded object was not found in R2."}) from exc
+    if metadata["ContentLength"] > settings.MAX_IMAGE_UPLOAD_BYTES:
+        client.delete_object(Bucket=settings.R2_BUCKET_NAME, Key=storage_key(upload.object_key))
+        upload.status, upload.error = CatalogImageUpload.Status.FAILED, "Image file is too large."
+        upload.save(update_fields=("status", "error", "updated_at"))
+        raise ValidationError({"detail": upload.error})
+    if metadata.get("ContentType") != upload.content_type:
+        raise ValidationError({"detail": "Uploaded image content type does not match the request."})
+    upload.status = CatalogImageUpload.Status.PROCESSING
+    upload.save(update_fields=("status", "updated_at"))
+    from catalogs.tasks import process_catalog_image_upload
+    process_catalog_image_upload.delay(str(upload.pk))
+    return Response(CatalogImageUploadSerializer(upload, context={"request": request}).data, status=status.HTTP_202_ACCEPTED)
 
 
 @api_view(["PATCH", "DELETE"])
