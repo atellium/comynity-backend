@@ -39,7 +39,7 @@ def normalize_business(business):
 
 
 def normalize_business_profile(profile):
-    profile.description = (profile.description or "").strip() or None
+    profile.description = (profile.description or "").strip()
     profile.seo_title = (profile.seo_title or "").strip()
     profile.seo_description = (profile.seo_description or "").strip()
     profile.seo_keywords = (profile.seo_keywords or "").strip()
