@@ -549,6 +549,9 @@ class BusinessUpdateSerializer(serializers.ModelSerializer):
     def validate_thumbnail(self, value):
         return validate_image_upload(value)
 
+    def validate_description(self, value):
+        return value or ""
+
     def validate_categories(self, value):
         category_ids = [category.pk for category in value]
         if len(category_ids) != len(set(category_ids)):
@@ -567,7 +570,13 @@ class BusinessUpdateSerializer(serializers.ModelSerializer):
                 for position, category in enumerate(categories)
             )
         if profile_data:
-            profile, _ = BusinessProfile.objects.get_or_create(business=instance)
+            # Supply the PATCH values during creation. Creating an empty profile
+            # first can violate a legacy database NOT NULL constraint before the
+            # submitted description gets assigned below.
+            profile, _ = BusinessProfile.objects.get_or_create(
+                business=instance,
+                defaults=profile_data,
+            )
             for field, value in profile_data.items():
                 setattr(profile, field, value)
             profile.full_clean()

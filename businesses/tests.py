@@ -18,10 +18,10 @@ from django.urls import resolve, reverse
 from PIL import Image
 from rest_framework.test import APIRequestFactory, force_authenticate
 
-from businesses.models import Business, BusinessCategoryAssignment, BusinessGalleryImage, BusinessHoliday, BusinessHour
+from businesses.models import Business, BusinessCategoryAssignment, BusinessGalleryImage, BusinessHoliday, BusinessHour, BusinessProfile
 from businesses.admin import BusinessAdmin, BusinessAdminForm
 from businesses.serializers import BusinessDetailSerializer, BusinessGalleryImageWriteSerializer, BusinessGallerySyncSerializer, BusinessHoursUpdateSerializer, BusinessListQuerySerializer, BusinessListSerializer, BusinessLocationSerializer, BusinessUpdateSerializer, CatalogProductSerializer, CategoryFilterSerializer, OwnerBusinessDetailSerializer
-from businesses.services import BUSINESS_HOUR_PATTERNS, get_business_hours_status, normalize_business, paginate_businesses, prepare_business_for_save, save_business
+from businesses.services import BUSINESS_HOUR_PATTERNS, get_business_hours_status, normalize_business, normalize_business_profile, paginate_businesses, prepare_business_for_save, save_business
 from businesses.management.commands.seed_dummy_businesses import BUSINESS_NAMES, CENTER_LATITUDE, CENTER_LONGITUDE, RADIUS_KM
 from businesses.validators import validate_alternate_numbers, validate_established_year, validate_social_urls
 from businesses.views import business_detail, business_hours_update, my_business_list, owner_business_detail
@@ -671,6 +671,22 @@ class BusinessDetailAPITests(SimpleTestCase):
 
 
 class BusinessUpdateAPITests(SimpleTestCase):
+    def test_profile_normalization_keeps_empty_description_non_null(self):
+        profile = BusinessProfile(description="   ")
+
+        normalize_business_profile(profile)
+
+        self.assertEqual(profile.description, "")
+
+    def test_null_description_patch_is_normalized_to_empty_string(self):
+        serializer = BusinessUpdateSerializer(
+            data={"description": None},
+            partial=True,
+        )
+
+        self.assertTrue(serializer.is_valid(), serializer.errors)
+        self.assertEqual(serializer.validated_data["profile"]["description"], "")
+
     def test_public_endpoint_is_read_only_and_owner_endpoint_supports_patch(self):
         self.assertNotIn("patch", business_detail.cls.http_method_names)
         self.assertIn("patch", owner_business_detail.cls.http_method_names)
