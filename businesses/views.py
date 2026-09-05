@@ -227,6 +227,15 @@ def business_gallery_upload_create(request, slug):
         object_key=object_key,
         content_type=content_type,
     )
+    return Response(
+        {
+            "id": upload.pk,
+            "upload_url": presign_upload(object_key, content_type),
+            "content_type": content_type,
+            "expires_in": 300,
+        },
+        status=status.HTTP_201_CREATED,
+    )
 
 
 @api_view(["POST"])
@@ -243,7 +252,6 @@ def business_thumbnail_upload_create(request, slug):
         business=business, object_key=object_key, content_type=content_type,
         kind=BusinessGalleryUpload.Kind.THUMBNAIL,
     )
-    return Response({"id": upload.pk, "upload_url": presign_upload(object_key, content_type), "content_type": content_type, "expires_in": 300}, status=status.HTTP_201_CREATED)
     return Response(
         {
             "id": upload.pk,
