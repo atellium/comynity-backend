@@ -127,6 +127,16 @@ class ProductListQuerySerializer(serializers.Serializer):
         return attrs
 
 
+class OwnerCatalogListQuerySerializer(serializers.Serializer):
+    type = serializers.ChoiceField(
+        choices=(
+            Catalog.TypeChoices.PRODUCT,
+            Catalog.TypeChoices.DOCTOR,
+        ),
+        required=True,
+    )
+
+
 class ProductCategorySerializer(serializers.ModelSerializer):
     display_name = serializers.CharField(read_only=True)
     image = serializers.SerializerMethodField()
@@ -494,3 +504,9 @@ class CatalogWriteSerializer(serializers.ModelSerializer):
                 )
 
         return attrs
+
+
+class OwnerCatalogListSerializer(CatalogWriteSerializer):
+    """List catalogs owned by the authenticated business owner."""
+
+    categories = ProductCategorySerializer(many=True, read_only=True)

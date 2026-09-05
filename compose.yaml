@@ -45,7 +45,7 @@ services:
     build:
       context: .
     restart: unless-stopped
-    command: ["celery", "-A", "config", "worker", "--loglevel=INFO", "--concurrency=2"]
+    command: ["celery", "-A", "config", "worker", "--loglevel=INFO", "--concurrency=5"]
     env_file:
       - .env
     environment:

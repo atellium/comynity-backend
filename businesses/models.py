@@ -322,6 +322,11 @@ class BusinessProfile(TimestampedModel, SEOModel):
         validators=[validate_alternate_numbers],
     )
 
+    services = models.JSONField(
+        default=list,
+        blank=True,
+    )
+
     class Meta:
         db_table = "business_profiles"
         verbose_name_plural = "Business Profiles"

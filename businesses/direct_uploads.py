@@ -28,6 +28,10 @@ def new_upload_key(business_id, content_type):
     return f"businesses/gallery/pending/{business_id}/{uuid4().hex}{ALLOWED_CONTENT_TYPES[content_type]}"
 
 
+def new_webp_key(folder, owner_id):
+    return f"{folder}/{owner_id}/{uuid4().hex}.webp"
+
+
 def presign_upload(relative_key, content_type):
     return r2_client().generate_presigned_url(
         "put_object",

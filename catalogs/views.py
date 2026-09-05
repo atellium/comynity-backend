@@ -8,7 +8,7 @@ from django.db import transaction
 from django.conf import settings
 from botocore.exceptions import ClientError
 
-from businesses.direct_uploads import new_upload_key, presign_upload, r2_client, storage_key
+from businesses.direct_uploads import new_webp_key, presign_upload, r2_client, storage_key
 
 from businesses.services import get_business_for_update
 
@@ -17,6 +17,8 @@ from catalogs.serializers import (
     ProductDetailSerializer,
     ProductListQuerySerializer,
     ProductListSerializer,
+    OwnerCatalogListQuerySerializer,
+    OwnerCatalogListSerializer,
     CatalogWriteSerializer,
     CatalogCategoryListQuerySerializer,
     CatalogCategoryListSerializer,
@@ -35,6 +37,7 @@ from catalogs.services import (
     list_public_products,
     paginate_products,
     get_catalog_for_owner,
+    list_catalogs_for_owner,
     list_catalog_categories,
     paginate_catalog_categories,
 )
@@ -76,10 +79,22 @@ def _owned_catalog(request, business_slug, catalog_slug):
     return catalog
 
 
-@api_view(["POST"])
+@api_view(["GET", "POST"])
 @permission_classes([IsAuthenticated])
 def catalog_create(request, business_slug):
     business = _owned_business(request, business_slug)
+    if request.method == "GET":
+        query = OwnerCatalogListQuerySerializer(data=request.query_params)
+        query.is_valid(raise_exception=True)
+        catalogs = list_catalogs_for_owner(business, query.validated_data["type"])
+        return Response(
+            {
+                "results": OwnerCatalogListSerializer(
+                    catalogs, many=True, context={"request": request, "business": business}
+                ).data
+            }
+        )
+
     serializer = CatalogWriteSerializer(
         data=request.data,
         context={"request": request, "business": business},
@@ -268,8 +283,8 @@ def catalog_image_upload_create(request, business_slug, catalog_slug):
         return Response({"detail": "Direct uploads require R2_ENABLED."}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
     serializer = CatalogImageUploadCreateSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
-    content_type = serializer.validated_data["content_type"]
-    object_key = new_upload_key(f"catalog-{catalog.pk}", content_type)
+    content_type = "image/webp"
+    object_key = new_webp_key("catalog/items", catalog.pk)
     upload = CatalogImageUpload.objects.create(catalog=catalog, object_key=object_key, content_type=content_type)
     return Response({"id": upload.pk, "upload_url": presign_upload(object_key, content_type), "content_type": content_type, "expires_in": 300}, status=status.HTTP_201_CREATED)
 
@@ -305,11 +320,11 @@ def catalog_image_upload_complete(request, business_slug, catalog_slug, upload_i
         raise ValidationError({"detail": upload.error})
     if metadata.get("ContentType") != upload.content_type:
         raise ValidationError({"detail": "Uploaded image content type does not match the request."})
-    upload.status = CatalogImageUpload.Status.PROCESSING
-    upload.save(update_fields=("status", "updated_at"))
-    from catalogs.tasks import process_catalog_image_upload
-    process_catalog_image_upload.delay(str(upload.pk))
-    return Response(CatalogImageUploadSerializer(upload, context={"request": request}).data, status=status.HTTP_202_ACCEPTED)
+    image = CatalogImage.objects.create(catalog=upload.catalog, image=upload.object_key)
+    upload.catalog_image = image
+    upload.status = CatalogImageUpload.Status.READY
+    upload.save(update_fields=("catalog_image", "status", "updated_at"))
+    return Response(CatalogImageUploadSerializer(upload, context={"request": request}).data, status=status.HTTP_200_OK)
 
 
 @api_view(["PATCH", "DELETE"])
