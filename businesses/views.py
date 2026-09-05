@@ -1,14 +1,19 @@
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework.exceptions import NotFound
+from rest_framework.exceptions import NotFound, ValidationError
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.exceptions import PermissionDenied
 from django.db import transaction
 from django.utils import timezone
+from datetime import timedelta
 
-from businesses.models import BusinessGalleryImage
-from businesses.serializers import BusinessDetailSerializer, BusinessGalleryBulkUploadSerializer, BusinessGalleryImageSerializer, BusinessGalleryImageWriteSerializer, BusinessGallerySyncSerializer, BusinessHourSerializer, BusinessHoursUpdateSerializer, BusinessListQuerySerializer, BusinessListSerializer, BusinessUpdateSerializer, CategoryFilterSerializer, OwnerBusinessDetailSerializer
+from django.conf import settings
+from botocore.exceptions import ClientError
+
+from businesses.direct_uploads import new_upload_key, presign_upload, r2_client, storage_key
+from businesses.models import BusinessGalleryImage, BusinessGalleryUpload
+from businesses.serializers import BusinessDetailSerializer, BusinessGalleryBulkUploadSerializer, BusinessGalleryImageSerializer, BusinessGalleryImageWriteSerializer, BusinessGallerySyncSerializer, BusinessGalleryUploadCreateSerializer, BusinessGalleryUploadSerializer, BusinessHourSerializer, BusinessHoursUpdateSerializer, BusinessListQuerySerializer, BusinessListSerializer, BusinessUpdateSerializer, CategoryFilterSerializer, OwnerBusinessDetailSerializer
 from businesses.services import get_business_by_slug, get_public_business_by_slug, get_business_category, get_business_for_update, list_businesses, paginate_businesses, replace_business_hours
 
 
@@ -192,6 +197,114 @@ def business_gallery(request, slug):
             ).data
         }
     )
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def business_gallery_upload_create(request, slug):
+    business = _owned_business(request, slug)
+    if not settings.R2_ENABLED:
+        return Response(
+            {"detail": "Direct uploads require R2_ENABLED."},
+            status=status.HTTP_503_SERVICE_UNAVAILABLE,
+        )
+    stale_before = timezone.now() - timedelta(minutes=10)
+    business.gallery_uploads.filter(
+        status=BusinessGalleryUpload.Status.PENDING,
+        created_at__lt=stale_before,
+    ).update(status=BusinessGalleryUpload.Status.FAILED, error="Upload expired.")
+    active_uploads = business.gallery_uploads.filter(
+        status__in=(BusinessGalleryUpload.Status.PENDING, BusinessGalleryUpload.Status.PROCESSING)
+    ).count()
+    if business.gallery_images.count() + active_uploads >= 20:
+        raise ValidationError({"image": "A business can have a maximum of 20 gallery images."})
+    serializer = BusinessGalleryUploadCreateSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    content_type = serializer.validated_data["content_type"]
+    object_key = new_upload_key(business.pk, content_type)
+    upload = BusinessGalleryUpload.objects.create(
+        business=business,
+        object_key=object_key,
+        content_type=content_type,
+    )
+    return Response(
+        {
+            "id": upload.pk,
+            "upload_url": presign_upload(object_key, content_type),
+            "content_type": content_type,
+            "expires_in": 300,
+        },
+        status=status.HTTP_201_CREATED,
+    )
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def business_thumbnail_upload_create(request, slug):
+    business = _owned_business(request, slug)
+    if not settings.R2_ENABLED:
+        return Response({"detail": "Direct uploads require R2_ENABLED."}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+    serializer = BusinessGalleryUploadCreateSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    content_type = serializer.validated_data["content_type"]
+    object_key = new_upload_key(f"thumbnail-{business.pk}", content_type)
+    upload = BusinessGalleryUpload.objects.create(
+        business=business, object_key=object_key, content_type=content_type,
+        kind=BusinessGalleryUpload.Kind.THUMBNAIL,
+    )
+    return Response(
+        {
+            "id": upload.pk,
+            "upload_url": presign_upload(object_key, content_type),
+            "content_type": content_type,
+            "expires_in": 300,
+        },
+        status=status.HTTP_201_CREATED,
+    )
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def business_gallery_upload_detail(request, slug, upload_id):
+    business = _owned_business(request, slug)
+    upload = BusinessGalleryUpload.objects.select_related("gallery_image").filter(
+        pk=upload_id, business=business
+    ).first()
+    if upload is None:
+        raise NotFound("Gallery upload not found.")
+    return Response(BusinessGalleryUploadSerializer(upload, context={"request": request}).data)
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def business_gallery_upload_complete(request, slug, upload_id):
+    business = _owned_business(request, slug)
+    upload = BusinessGalleryUpload.objects.filter(pk=upload_id, business=business).first()
+    if upload is None:
+        raise NotFound("Gallery upload not found.")
+    if upload.status != BusinessGalleryUpload.Status.PENDING:
+        raise ValidationError({"detail": "This upload has already been finalized."})
+    client = r2_client()
+    try:
+        metadata = client.head_object(
+            Bucket=settings.R2_BUCKET_NAME,
+            Key=storage_key(upload.object_key),
+        )
+    except ClientError as exc:
+        raise ValidationError({"detail": "The uploaded object was not found in R2."}) from exc
+    if metadata["ContentLength"] > settings.MAX_IMAGE_UPLOAD_BYTES:
+        client.delete_object(Bucket=settings.R2_BUCKET_NAME, Key=storage_key(upload.object_key))
+        upload.status = BusinessGalleryUpload.Status.FAILED
+        upload.error = "Image file is too large."
+        upload.save(update_fields=("status", "error", "updated_at"))
+        raise ValidationError({"detail": upload.error})
+    if metadata.get("ContentType") != upload.content_type:
+        raise ValidationError({"detail": "Uploaded image content type does not match the request."})
+    upload.status = BusinessGalleryUpload.Status.PROCESSING
+    upload.save(update_fields=("status", "updated_at"))
+    from businesses.tasks import process_business_gallery_upload
+    process_business_gallery_upload.delay(str(upload.pk))
+    return Response(BusinessGalleryUploadSerializer(upload, context={"request": request}).data, status=status.HTTP_202_ACCEPTED)
 
 
 @api_view(["PATCH", "DELETE"])

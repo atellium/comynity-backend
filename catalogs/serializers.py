@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from catalogs.models import Catalog, CatalogCategory, CatalogImage
+from catalogs.models import Catalog, CatalogCategory, CatalogImage, CatalogImageUpload
 from core.image_service import validate_image_upload
 
 
@@ -217,6 +217,23 @@ class CatalogImageSerializer(serializers.ModelSerializer):
         return request.build_absolute_uri(obj.image.url) if request else obj.image.url
 
 
+class CatalogImageUploadCreateSerializer(serializers.Serializer):
+    content_type = serializers.ChoiceField(choices=("image/jpeg", "image/png", "image/webp"))
+
+
+class CatalogImageUploadSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
+    class Meta:
+        model = CatalogImageUpload
+        fields = ("id", "status", "error", "image")
+
+    def get_image(self, obj):
+        if not obj.catalog_image_id:
+            return None
+        return CatalogImageSerializer(obj.catalog_image, context=self.context).data
+
+
 class CatalogImageWriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = CatalogImage
@@ -258,6 +275,7 @@ class CatalogImageBulkUploadSerializer(serializers.Serializer):
 
     images = serializers.ListField(
         child=serializers.ImageField(),
+        max_length=5,
         allow_empty=False,
     )
     alt_text = serializers.CharField(required=False, allow_blank=True, max_length=200)
@@ -315,6 +333,7 @@ class CatalogGallerySyncSerializer(serializers.Serializer):
 
     images = serializers.ListField(
         child=serializers.ImageField(),
+        max_length=5,
         required=False,
         allow_empty=True,
     )

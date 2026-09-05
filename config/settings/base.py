@@ -161,6 +161,9 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 MAX_IMAGE_UPLOAD_BYTES = env.int("MAX_IMAGE_UPLOAD_BYTES", default=10 * 1024 * 1024)
 MAX_IMAGE_PIXELS = env.int("MAX_IMAGE_PIXELS", default=40_000_000)
+CELERY_BROKER_URL = env.str("REDIS_URL")
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 120
 
 LOGGING = {
     "version": 1,
@@ -181,21 +184,26 @@ STORAGES = {
 }
 
 R2_ENABLED = env.bool("R2_ENABLED", default=False)
+R2_ACCESS_KEY_ID = env.str("R2_ACCESS_KEY_ID", default="")
+R2_SECRET_ACCESS_KEY = env.str("R2_SECRET_ACCESS_KEY", default="")
+R2_BUCKET_NAME = env.str("R2_BUCKET_NAME", default="")
+R2_ENDPOINT_URL = env.str("R2_ENDPOINT_URL", default="")
+R2_LOCATION = env.str("R2_LOCATION", default="media").strip("/")
 if R2_ENABLED:
     r2_public_development_url = env.str(
         "R2_PUBLIC_DEVELOPMENT_URL", default=""
     ).strip()
     r2_custom_domain = env.str("R2_CUSTOM_DOMAIN", default="").strip()
     r2_storage_options = {
-        "access_key": env.str("R2_ACCESS_KEY_ID"),
-        "secret_key": env.str("R2_SECRET_ACCESS_KEY"),
-        "bucket_name": env.str("R2_BUCKET_NAME"),
-        "endpoint_url": env.str("R2_ENDPOINT_URL"),
+        "access_key": R2_ACCESS_KEY_ID,
+        "secret_key": R2_SECRET_ACCESS_KEY,
+        "bucket_name": R2_BUCKET_NAME,
+        "endpoint_url": R2_ENDPOINT_URL,
         "region_name": "auto",
         "signature_version": "s3v4",
         "default_acl": None,
         "file_overwrite": False,
-        "location": env.str("R2_LOCATION", default="media").strip("/"),
+        "location": R2_LOCATION,
         "querystring_auth": env.bool("R2_QUERYSTRING_AUTH", default=True),
         "querystring_expire": env.int("R2_QUERYSTRING_EXPIRE", default=3600),
     }
