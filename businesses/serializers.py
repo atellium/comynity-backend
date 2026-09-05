@@ -161,6 +161,7 @@ class BusinessGalleryImageWriteSerializer(serializers.ModelSerializer):
 class BusinessGalleryBulkUploadSerializer(serializers.Serializer):
     images = serializers.ListField(
         child=serializers.ImageField(),
+        max_length=5,
         allow_empty=False,
     )
 
@@ -187,6 +188,7 @@ class BusinessGallerySyncSerializer(serializers.Serializer):
     )
     images = serializers.ListField(
         child=serializers.ImageField(),
+        max_length=5,
         required=False,
         default=list,
         allow_empty=True,

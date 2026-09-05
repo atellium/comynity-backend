@@ -275,6 +275,7 @@ class CatalogImageBulkUploadSerializer(serializers.Serializer):
 
     images = serializers.ListField(
         child=serializers.ImageField(),
+        max_length=5,
         allow_empty=False,
     )
     alt_text = serializers.CharField(required=False, allow_blank=True, max_length=200)
@@ -332,6 +333,7 @@ class CatalogGallerySyncSerializer(serializers.Serializer):
 
     images = serializers.ListField(
         child=serializers.ImageField(),
+        max_length=5,
         required=False,
         allow_empty=True,
     )
