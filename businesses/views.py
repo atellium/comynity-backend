@@ -11,7 +11,7 @@ from datetime import timedelta
 from django.conf import settings
 from botocore.exceptions import ClientError
 
-from businesses.direct_uploads import new_upload_key, presign_upload, r2_client, storage_key
+from businesses.direct_uploads import new_webp_key, presign_upload, r2_client, storage_key
 from businesses.models import BusinessGalleryImage, BusinessGalleryUpload
 from businesses.serializers import BusinessDetailSerializer, BusinessGalleryBulkUploadSerializer, BusinessGalleryImageSerializer, BusinessGalleryImageWriteSerializer, BusinessGallerySyncSerializer, BusinessGalleryUploadCreateSerializer, BusinessGalleryUploadSerializer, BusinessHourSerializer, BusinessHoursUpdateSerializer, BusinessListQuerySerializer, BusinessListSerializer, BusinessUpdateSerializer, CategoryFilterSerializer, OwnerBusinessDetailSerializer
 from businesses.services import get_business_by_slug, get_public_business_by_slug, get_business_category, get_business_for_update, list_businesses, paginate_businesses, replace_business_hours
@@ -220,8 +220,8 @@ def business_gallery_upload_create(request, slug):
         raise ValidationError({"image": "A business can have a maximum of 20 gallery images."})
     serializer = BusinessGalleryUploadCreateSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
-    content_type = serializer.validated_data["content_type"]
-    object_key = new_upload_key(business.pk, content_type)
+    content_type = "image/webp"
+    object_key = new_webp_key("businesses/gallery", business.pk)
     upload = BusinessGalleryUpload.objects.create(
         business=business,
         object_key=object_key,
@@ -246,8 +246,8 @@ def business_thumbnail_upload_create(request, slug):
         return Response({"detail": "Direct uploads require R2_ENABLED."}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
     serializer = BusinessGalleryUploadCreateSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
-    content_type = serializer.validated_data["content_type"]
-    object_key = new_upload_key(f"thumbnail-{business.pk}", content_type)
+    content_type = "image/webp"
+    object_key = new_webp_key("businesses/thumbnails", business.pk)
     upload = BusinessGalleryUpload.objects.create(
         business=business, object_key=object_key, content_type=content_type,
         kind=BusinessGalleryUpload.Kind.THUMBNAIL,
@@ -300,11 +300,29 @@ def business_gallery_upload_complete(request, slug, upload_id):
         raise ValidationError({"detail": upload.error})
     if metadata.get("ContentType") != upload.content_type:
         raise ValidationError({"detail": "Uploaded image content type does not match the request."})
-    upload.status = BusinessGalleryUpload.Status.PROCESSING
-    upload.save(update_fields=("status", "updated_at"))
-    from businesses.tasks import process_business_gallery_upload
-    process_business_gallery_upload.delay(str(upload.pk))
-    return Response(BusinessGalleryUploadSerializer(upload, context={"request": request}).data, status=status.HTTP_202_ACCEPTED)
+    with transaction.atomic():
+        if upload.kind == BusinessGalleryUpload.Kind.GALLERY:
+            image = BusinessGalleryImage.objects.create(
+                business=upload.business,
+                image=upload.object_key,
+            )
+            upload.gallery_image = image
+        elif upload.kind == BusinessGalleryUpload.Kind.THUMBNAIL:
+            old_image = upload.business.thumbnail
+            upload.business.thumbnail = upload.object_key
+            upload.business.save(update_fields=("thumbnail", "updated_at"))
+            if old_image:
+                transaction.on_commit(lambda: old_image.delete(save=False))
+        else:
+            offer = upload.business.offers.get(pk=upload.target_id)
+            old_image = offer.image
+            offer.image = upload.object_key
+            offer.save(update_fields=("image", "updated_at"))
+            if old_image:
+                transaction.on_commit(lambda: old_image.delete(save=False))
+        upload.status = BusinessGalleryUpload.Status.READY
+        upload.save(update_fields=("gallery_image", "status", "updated_at"))
+    return Response(BusinessGalleryUploadSerializer(upload, context={"request": request}).data, status=status.HTTP_200_OK)
 
 
 @api_view(["PATCH", "DELETE"])

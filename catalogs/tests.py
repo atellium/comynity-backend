@@ -11,7 +11,9 @@ from django.core.management.base import CommandError
 from django.test import SimpleTestCase, TestCase
 from django.urls import reverse
 from rest_framework import serializers
+from rest_framework.test import APIRequestFactory, force_authenticate
 
+from . import views
 from .models import Catalog, CatalogCategory, CatalogImage, generate_catalog_public_id
 from .serializers import (
     CatalogWriteSerializer,
@@ -20,6 +22,7 @@ from .serializers import (
     CatalogGallerySyncSerializer,
     CatalogImageBulkUploadSerializer,
     CatalogImageWriteSerializer,
+    OwnerCatalogListQuerySerializer,
     ProductDetailSerializer,
     ProductListQuerySerializer,
     ProductListSerializer,
@@ -183,6 +186,9 @@ class ProductListEndpointTests(SimpleTestCase):
 
 
 class CatalogManagementContractTests(SimpleTestCase):
+    def setUp(self):
+        self.factory = APIRequestFactory()
+
     def test_create_url_is_scoped_to_owned_business(self):
         self.assertEqual(
             reverse(
@@ -216,6 +222,46 @@ class CatalogManagementContractTests(SimpleTestCase):
         )
 
         self.assertTrue(serializer.is_valid(), serializer.errors)
+
+    def test_list_query_requires_type(self):
+        serializer = OwnerCatalogListQuerySerializer(data={})
+
+        self.assertFalse(serializer.is_valid())
+        self.assertEqual(set(serializer.errors), {"type"})
+
+    def test_list_query_accepts_supported_owner_types(self):
+        for catalog_type in ("product", "service", "doctor"):
+            serializer = OwnerCatalogListQuerySerializer(data={"type": catalog_type})
+
+            self.assertTrue(serializer.is_valid(), serializer.errors)
+            self.assertEqual(serializer.validated_data["type"], catalog_type)
+
+    def test_list_query_rejects_unsupported_type(self):
+        serializer = OwnerCatalogListQuerySerializer(data={"type": "property"})
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn("type", serializer.errors)
+
+    @patch("catalogs.views.list_catalogs_for_owner", return_value=[])
+    @patch("catalogs.views._owned_business")
+    def test_list_catalogs_filters_by_required_type(self, owned_business, list_catalogs):
+        business = type("BusinessResult", (), {"pk": uuid4(), "owner_id": uuid4()})()
+        owned_business.return_value = business
+        request = self.factory.get(
+            reverse(
+                "catalogs:catalog-create",
+                kwargs={"business_slug": "royal-store"},
+            ),
+            {"type": "service"},
+        )
+        force_authenticate(request, user=type("UserResult", (), {"pk": business.owner_id})())
+
+        response = views.catalog_create(request, business_slug="royal-store")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data, {"results": []})
+        self.assertEqual(owned_business.call_args.args[1], "royal-store")
+        list_catalogs.assert_called_once_with(business, "service")
 
     def test_partial_update_does_not_require_name_or_type(self):
         catalog = Catalog(name="Premium Shirt", type="product")

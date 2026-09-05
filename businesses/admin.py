@@ -74,6 +74,7 @@ class BusinessProfileInline(admin.StackedInline):
                     "description",
                     "social_urls",
                     "alternate_numbers",
+                    "services",
                 )
             },
         ),

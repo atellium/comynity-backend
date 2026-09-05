@@ -446,6 +446,7 @@ class BusinessDetailSerializer(BusinessListSerializer):
     """Detailed representation using the same grouped contract as the list API."""
 
     description = serializers.CharField(source="profile.description", allow_null=True, read_only=True)
+    services = serializers.JSONField(source="profile.services", read_only=True)
     seo = BusinessSEOSerializer(source="profile", read_only=True)
     metadata = serializers.SerializerMethodField()
     product = serializers.SerializerMethodField()
@@ -468,6 +469,7 @@ class BusinessDetailSerializer(BusinessListSerializer):
             "location",
             "contact",
             "hours",
+            "services",
             "product",
             "offers",
             "seo",
@@ -567,6 +569,7 @@ class BusinessUpdateSerializer(serializers.ModelSerializer):
     categories = serializers.PrimaryKeyRelatedField(queryset=BusinessCategory.objects.all(), many=True, required=False)
     city = serializers.PrimaryKeyRelatedField(queryset=City.objects.select_related("state"), required=False)
     description = serializers.CharField(source="profile.description", required=False, allow_blank=True, allow_null=True)
+    services = serializers.JSONField(source="profile.services", required=False, allow_null=True)
     established_year = serializers.IntegerField(required=False, allow_null=True, min_value=1800)
     alternate_numbers = serializers.JSONField(source="profile.alternate_numbers", required=False, allow_null=True)
     social_urls = serializers.JSONField(source="profile.social_urls", required=False, allow_null=True)
@@ -579,7 +582,7 @@ class BusinessUpdateSerializer(serializers.ModelSerializer):
         fields = (
             "name", "handle", "categories", "address", "landmark", "locality", "city", "postal_code",
             "latitude", "longitude", "phone", "whatsapp", "email", "website", "thumbnail",
-            "description", "established_year", "alternate_numbers", "social_urls",
+            "description", "services", "established_year", "alternate_numbers", "social_urls",
             "is_active", "display_full_address", "display_business_hours",
             "seo_title", "seo_description", "seo_keywords",
         )

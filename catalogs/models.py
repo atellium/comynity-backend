@@ -151,7 +151,6 @@ class CatalogCategory(AutoSlugModel, TimestampedModel):
 class Catalog(TimestampedModel):
     class TypeChoices(models.TextChoices):
         PRODUCT = "product", "Product"
-        SERVICE = "service", "Service"
         DOCTOR = "doctor", "Doctor"
         PROPERTY = "property", "Property"
         MENU = "menu", "Menu"

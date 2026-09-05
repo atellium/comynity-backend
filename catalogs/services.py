@@ -167,6 +167,14 @@ def get_catalog_for_owner(business, slug):
     )
 
 
+def list_catalogs_for_owner(business, catalog_type):
+    return (
+        Catalog.objects.filter(business=business, type=catalog_type)
+        .prefetch_related("categories")
+        .order_by("sort_order", "name", "id")
+    )
+
+
 def paginate_products(queryset, page, page_size):
     paginator = Paginator(queryset, page_size)
     page_obj = paginator.get_page(page)
