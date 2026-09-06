@@ -22,6 +22,11 @@ urlpatterns = [
         name="catalog-manage",
     ),
     path(
+        "businesses/mine/<slug:business_slug>/catalogs/<slug:catalog_slug>/edit/",
+        views.catalog_edit,
+        name="catalog-edit",
+    ),
+    path(
         "businesses/mine/<slug:business_slug>/catalogs/<slug:catalog_slug>/images/",
         views.catalog_image_create,
         name="catalog-image-create",

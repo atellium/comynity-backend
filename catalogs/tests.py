@@ -276,6 +276,25 @@ class CatalogManagementContractTests(SimpleTestCase):
             "/api/businesses/mine/royal-store/catalogs/premium-shirt-a1b2c3d4/",
         )
 
+    def test_edit_url_uses_business_and_catalog_slugs(self):
+        self.assertEqual(
+            reverse(
+                "catalogs:catalog-edit",
+                kwargs={
+                    "business_slug": "royal-store",
+                    "catalog_slug": "premium-shirt-a1b2c3d4",
+                },
+            ),
+            "/api/businesses/mine/royal-store/catalogs/"
+            "premium-shirt-a1b2c3d4/edit/",
+        )
+
+    def test_edit_view_supports_patch_and_put(self):
+        self.assertEqual(
+            set(views.catalog_edit.cls.http_method_names),
+            {"patch", "put", "options"},
+        )
+
     def test_create_requires_name_and_type(self):
         serializer = CatalogWriteSerializer(data={})
 

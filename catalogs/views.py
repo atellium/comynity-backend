@@ -143,6 +143,29 @@ def catalog_manage(request, business_slug, catalog_slug):
     )
 
 
+@api_view(["PATCH", "PUT"])
+@permission_classes([IsAuthenticated])
+def catalog_edit(request, business_slug, catalog_slug):
+    catalog = _owned_catalog(request, business_slug, catalog_slug)
+    business = catalog.business
+    serializer = CatalogWriteSerializer(
+        catalog,
+        data=request.data,
+        partial=request.method == "PATCH",
+        context={"request": request, "business": business},
+    )
+    serializer.is_valid(raise_exception=True)
+    with transaction.atomic():
+        catalog = serializer.save()
+    return Response(
+        {
+            "result": CatalogWriteSerializer(
+                catalog, context={"request": request, "business": business}
+            ).data
+        }
+    )
+
+
 @api_view(["GET", "POST", "PATCH"])
 @permission_classes([IsAuthenticated])
 def catalog_image_create(request, business_slug, catalog_slug):
