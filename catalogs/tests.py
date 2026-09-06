@@ -601,6 +601,41 @@ class SeedCatalogCategoriesCommandTests(TestCase):
         self.assertIsNone(category.parent)
         self.assertEqual(category.label, "Phones")
 
+    def test_repeat_run_updates_existing_category_by_slug(self):
+        category = CatalogCategory.objects.create(
+            name="Old Mobile",
+            slug="mobile-phones",
+            type="product",
+            label="Old label",
+            aliases="old",
+            sort_order=10,
+            is_active=False,
+            is_featured=True,
+            is_display=False,
+        )
+
+        self.run_seed(
+            [
+                {
+                    "name": "Mobile Phones",
+                    "label": "Phones",
+                    "slug": "mobile-phones",
+                    "type": "product",
+                    "aliases": "smartphone",
+                }
+            ]
+        )
+
+        category.refresh_from_db()
+        self.assertEqual(CatalogCategory.objects.count(), 1)
+        self.assertEqual(category.name, "Mobile Phones")
+        self.assertEqual(category.label, "Phones")
+        self.assertEqual(category.aliases, "smartphone")
+        self.assertEqual(category.sort_order, 0)
+        self.assertTrue(category.is_active)
+        self.assertFalse(category.is_featured)
+        self.assertTrue(category.is_display)
+
     def test_rejects_parent_with_a_different_type(self):
         parent = CatalogCategory.objects.create(name="Services", type="service")
 

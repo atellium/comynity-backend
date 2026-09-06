@@ -3,12 +3,14 @@ from pathlib import Path
 
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
+from django.db.models import Q
+from django.utils.text import slugify
 
 from catalogs.models import CatalogCategory
 
 
 DEFAULT_CATEGORIES_FILE = (
-    Path(__file__).resolve().parents[2] / "data" / "product_parent.json"
+    Path(__file__).resolve().parents[2] / "data" / "categories.json"
 )
 
 
@@ -44,12 +46,32 @@ class Command(BaseCommand):
             values = self._validated_values(category, index, parent)
             name = values.pop("name")
             category_type = values.pop("type")
+            slug = values.pop("slug")
 
-            _, created = CatalogCategory.objects.update_or_create(
-                type=category_type,
+            catalog_category = self._find_existing_category(
+                category_type=category_type,
                 name=name,
-                defaults={**values, "parent": parent},
+                slug=slug,
+                index=index,
             )
+            if catalog_category is None:
+                catalog_category = CatalogCategory(
+                    type=category_type,
+                    name=name,
+                    slug=slug,
+                )
+                created = True
+            else:
+                created = False
+                catalog_category.type = category_type
+                catalog_category.name = name
+                catalog_category.slug = slug
+
+            for field, value in values.items():
+                setattr(catalog_category, field, value)
+            catalog_category.parent = parent
+            catalog_category.save()
+
             created_count += int(created)
             updated_count += int(not created)
 
@@ -85,6 +107,20 @@ class Command(BaseCommand):
             raise CommandError("The categories JSON must contain a list of objects.")
         return categories
 
+    def _find_existing_category(self, *, category_type, name, slug, index):
+        matches = list(
+            CatalogCategory.objects.filter(
+                Q(slug=slug) | Q(name=name),
+                type=category_type,
+            )[:2]
+        )
+        if len(matches) > 1:
+            raise CommandError(
+                f"Category #{index} matches multiple existing categories by "
+                "name and slug. Make name and slug point to the same category."
+            )
+        return matches[0] if matches else None
+
     def _validated_values(self, category, index, parent):
         if not isinstance(category, dict):
             raise CommandError(f"Category #{index} must be a JSON object.")
@@ -114,15 +150,24 @@ class Command(BaseCommand):
             )
 
         boolean_values = {}
-        for field, default in (("is_active", True), ("is_featured", False)):
+        for field, default in (
+            ("is_active", True),
+            ("is_featured", False),
+            ("is_display", True),
+        ):
             value = category.get(field, default)
             if not isinstance(value, bool):
                 raise CommandError(f"Category #{index} {field} must be a boolean.")
             boolean_values[field] = value
 
+        slug = str(category.get("slug") or slugify(category.get("label") or name)).strip()
+        if not slug:
+            raise CommandError(f"Category #{index} slug could not be generated.")
+
         return {
             "name": name,
             "type": category_type,
+            "slug": slug,
             "label": str(category.get("label", "")).strip(),
             "aliases": str(category.get("aliases", "")).strip(),
             "sort_order": sort_order,
