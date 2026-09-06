@@ -44,4 +44,9 @@ urlpatterns = [
         views.business_product_list,
         name="business-product-list",
     ),
+    path(
+        "businesses/<slug:slug>/catalogs/",
+        views.business_catalog_list,
+        name="business-catalog-list",
+    ),
 ]

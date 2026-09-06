@@ -26,6 +26,7 @@ from .serializers import (
     ProductDetailSerializer,
     ProductListQuerySerializer,
     ProductListSerializer,
+    PublicCatalogListQuerySerializer,
 )
 
 
@@ -71,7 +72,7 @@ class ProductListEndpointTests(SimpleTestCase):
                 "catalogs:business-product-list",
                 kwargs={"slug": "royal-grocery-store"},
             ),
-            "/api/businesses/royal-grocery-store/products/",
+            "/api/businesses/royal-grocery-store/catalogs/products/",
         )
 
     def test_product_detail_url_uses_product_slug(self):
@@ -124,6 +125,71 @@ class ProductListEndpointTests(SimpleTestCase):
 
         self.assertFalse(query.is_valid())
         self.assertIn("max_price", query.errors)
+
+    def test_public_catalog_list_url(self):
+        self.assertEqual(
+            reverse(
+                "catalogs:business-catalog-list",
+                kwargs={"slug": "royal-grocery-store"},
+            ),
+            "/api/businesses/royal-grocery-store/catalogs/",
+        )
+
+    def test_public_catalog_list_query_requires_type(self):
+        query = PublicCatalogListQuerySerializer(data={})
+
+        self.assertFalse(query.is_valid())
+        self.assertEqual(set(query.errors), {"type"})
+
+    def test_public_catalog_list_query_accepts_supported_type(self):
+        query = PublicCatalogListQuerySerializer(data={"type": "doctor"})
+
+        self.assertTrue(query.is_valid(), query.errors)
+        self.assertEqual(query.validated_data["type"], "doctor")
+
+    @patch("catalogs.views.paginate_products")
+    @patch("catalogs.views.list_public_catalogs")
+    @patch("catalogs.views.list_available_catalog_categories")
+    @patch("catalogs.views.get_public_business")
+    def test_public_catalog_list_filters_by_required_type(
+        self,
+        get_business,
+        list_categories,
+        list_catalogs,
+        paginate_products,
+    ):
+        get_business.return_value = type(
+            "BusinessResult",
+            (),
+            {"pk": uuid4(), "name": "Royal Store", "slug": "royal-store"},
+        )()
+        list_categories.return_value = []
+        list_catalogs.return_value = []
+        paginate_products.return_value = (
+            [],
+            {
+                "page": 1,
+                "page_size": 20,
+                "total_pages": 1,
+                "total_items": 0,
+                "has_next": False,
+                "has_previous": False,
+            },
+        )
+
+        response = self.client.get(
+            reverse(
+                "catalogs:business-catalog-list",
+                kwargs={"slug": "royal-store"},
+            ),
+            {"type": "doctor"},
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["results"], [])
+        list_catalogs.assert_called_once()
+        self.assertEqual(list_catalogs.call_args.args[1]["type"], "doctor")
+        list_categories.assert_called_once_with(get_business.return_value, "doctor")
 
     @patch("catalogs.views.paginate_products")
     @patch("catalogs.views.list_public_products")

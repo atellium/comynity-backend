@@ -17,6 +17,7 @@ from catalogs.serializers import (
     ProductDetailSerializer,
     ProductListQuerySerializer,
     ProductListSerializer,
+    PublicCatalogListQuerySerializer,
     OwnerCatalogListQuerySerializer,
     OwnerCatalogListSerializer,
     CatalogWriteSerializer,
@@ -33,7 +34,9 @@ from catalogs.models import CatalogImage, CatalogImageUpload
 from catalogs.services import (
     get_public_business,
     get_public_product_by_slug,
+    list_available_catalog_categories,
     list_available_product_categories,
+    list_public_catalogs,
     list_public_products,
     paginate_products,
     get_catalog_for_owner,
@@ -355,6 +358,43 @@ def catalog_image_manage(request, business_slug, catalog_slug, image_id):
             "result": CatalogImageSerializer(
                 image, context={"request": request}
             ).data
+        }
+    )
+
+
+@api_view(["GET"])
+@permission_classes([AllowAny])
+def business_catalog_list(request, slug):
+    business = get_public_business(slug)
+    if business is None:
+        raise NotFound("Business not found.")
+
+    query = PublicCatalogListQuerySerializer(data=request.query_params)
+    query.is_valid(raise_exception=True)
+    filters = query.validated_data
+    catalogs, pagination = paginate_products(
+        list_public_catalogs(business, filters),
+        filters["page"],
+        filters["page_size"],
+    )
+    return Response(
+        {
+            "business": {
+                "id": business.pk,
+                "name": business.name,
+                "slug": business.slug,
+            },
+            "categories": ProductCategorySerializer(
+                list_available_catalog_categories(business, filters["type"]),
+                many=True,
+                context={"request": request},
+            ).data,
+            "pagination": pagination,
+            "results": ProductListSerializer(
+                catalogs,
+                many=True,
+                context={"request": request},
+            ).data,
         }
     )
 
