@@ -20,6 +20,7 @@ from catalogs.serializers import (
     PublicCatalogListQuerySerializer,
     OwnerCatalogListQuerySerializer,
     OwnerCatalogListSerializer,
+    CatalogDetailSerializer,
     CatalogWriteSerializer,
     CatalogCategoryListQuerySerializer,
     CatalogCategoryListSerializer,
@@ -107,7 +108,7 @@ def catalog_create(request, business_slug):
         catalog = serializer.save(business=business)
     return Response(
         {
-            "result": CatalogWriteSerializer(
+            "result": CatalogDetailSerializer(
                 catalog, context={"request": request, "business": business}
             ).data
         },
@@ -136,7 +137,7 @@ def catalog_manage(request, business_slug, catalog_slug):
         catalog = serializer.save()
     return Response(
         {
-            "result": CatalogWriteSerializer(
+            "result": CatalogDetailSerializer(
                 catalog, context={"request": request, "business": business}
             ).data
         }
@@ -159,7 +160,21 @@ def catalog_edit(request, business_slug, catalog_slug):
         catalog = serializer.save()
     return Response(
         {
-            "result": CatalogWriteSerializer(
+            "result": CatalogDetailSerializer(
+                catalog, context={"request": request, "business": business}
+            ).data
+        }
+    )
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def catalog_detail(request, business_slug, catalog_slug):
+    catalog = _owned_catalog(request, business_slug, catalog_slug)
+    business = catalog.business
+    return Response(
+        {
+            "result": CatalogDetailSerializer(
                 catalog, context={"request": request, "business": business}
             ).data
         }
