@@ -17,6 +17,7 @@ from . import views
 from .models import Catalog, CatalogCategory, CatalogImage, generate_catalog_public_id
 from .serializers import (
     CatalogWriteSerializer,
+    CatalogDetailSerializer,
     CatalogCategoryListQuerySerializer,
     CatalogImageSerializer,
     CatalogGallerySyncSerializer,
@@ -295,6 +296,25 @@ class CatalogManagementContractTests(SimpleTestCase):
             {"patch", "put", "options"},
         )
 
+    def test_detail_url_uses_business_and_catalog_slugs(self):
+        self.assertEqual(
+            reverse(
+                "catalogs:catalog-detail",
+                kwargs={
+                    "business_slug": "royal-store",
+                    "catalog_slug": "premium-shirt-a1b2c3d4",
+                },
+            ),
+            "/api/businesses/mine/royal-store/catalogs/"
+            "premium-shirt-a1b2c3d4/details/",
+        )
+
+    def test_detail_view_supports_get(self):
+        self.assertEqual(
+            set(views.catalog_detail.cls.http_method_names),
+            {"get", "options"},
+        )
+
     def test_create_requires_name_and_type(self):
         serializer = CatalogWriteSerializer(data={})
 
@@ -357,6 +377,44 @@ class CatalogManagementContractTests(SimpleTestCase):
         )
 
         self.assertTrue(serializer.is_valid(), serializer.errors)
+
+    def test_detail_serializer_returns_expanded_categories(self):
+        category = CatalogCategory(
+            id=4,
+            name="Homeopathy",
+            label="Homeopathy",
+            slug="homeopathy",
+            type="specialty",
+        )
+        catalog = type(
+            "CatalogResult",
+            (),
+            {
+                "id": uuid4(),
+                "public_id": "a1b2c3d4",
+                "name": "Consultation",
+                "slug": "consultation-a1b2c3d4",
+                "type": "doctor",
+                "description": "",
+                "price_type": "fixed",
+                "price": None,
+                "max_price": None,
+                "original_price": None,
+                "variants": [],
+                "specifications": {},
+                "custom_fields": [],
+                "categories": [category],
+                "is_featured": False,
+                "is_active": True,
+                "sort_order": 0,
+            },
+        )()
+
+        data = CatalogDetailSerializer(catalog).data
+
+        self.assertEqual(data["categories"][0]["id"], 4)
+        self.assertEqual(data["categories"][0]["name"], "Homeopathy")
+        self.assertEqual(data["categories"][0]["slug"], "homeopathy")
 
 
 class CatalogCategoryListContractTests(SimpleTestCase):

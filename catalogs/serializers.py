@@ -494,6 +494,12 @@ class CatalogWriteSerializer(serializers.ModelSerializer):
         }
 
 
+class CatalogDetailSerializer(CatalogWriteSerializer):
+    """Return an owned catalog with expanded category objects."""
+
+    categories = CatalogCategoryListSerializer(many=True, read_only=True)
+
+
 class OwnerCatalogListSerializer(CatalogWriteSerializer):
     """List catalogs owned by the authenticated business owner."""
 
