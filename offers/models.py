@@ -43,6 +43,7 @@ class Offer(TimestampedModel):
 
     image = models.ImageField(
         upload_to="offers/",
+        max_length=500,
         null=True,
         blank=True,
     )

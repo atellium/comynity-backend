@@ -98,6 +98,7 @@ class CatalogCategoryListSerializer(serializers.ModelSerializer):
 
 
 class ProductListQuerySerializer(serializers.Serializer):
+    type = serializers.ChoiceField(required=False, choices=Catalog.TypeChoices.choices)
     category = serializers.SlugField(required=False, max_length=255)
     search = serializers.CharField(required=False, max_length=200, trim_whitespace=True)
     min_price = serializers.DecimalField(required=False, max_digits=12, decimal_places=2, min_value=0)
@@ -125,6 +126,10 @@ class ProductListQuerySerializer(serializers.Serializer):
                 {"max_price": "Must be greater than or equal to min_price."}
             )
         return attrs
+
+
+class PublicCatalogListQuerySerializer(ProductListQuerySerializer):
+    type = serializers.ChoiceField(required=True, choices=Catalog.TypeChoices.choices)
 
 
 class OwnerCatalogListQuerySerializer(serializers.Serializer):
@@ -163,6 +168,7 @@ class ProductListSerializer(serializers.ModelSerializer):
             "public_id",
             "name",
             "slug",
+            "type",
             "price_type",
             "price",
             "max_price",
@@ -486,24 +492,6 @@ class CatalogWriteSerializer(serializers.ModelSerializer):
             "is_active": {"required": False},
             "sort_order": {"required": False},
         }
-
-    def validate(self, attrs):
-        catalog_type = attrs.get(
-            "type", getattr(self.instance, "type", Catalog.TypeChoices.PRODUCT)
-        )
-        categories = attrs.get("categories")
-        if categories is None and self.instance is not None and "type" in attrs:
-            categories = self.instance.categories.all()
-        if categories is not None:
-            invalid = [
-                category.pk for category in categories if category.type != catalog_type
-            ]
-            if invalid:
-                raise serializers.ValidationError(
-                    {"categories": "Every category must have the same type as the catalog."}
-                )
-
-        return attrs
 
 
 class OwnerCatalogListSerializer(CatalogWriteSerializer):

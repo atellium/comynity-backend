@@ -584,6 +584,7 @@ class BusinessGalleryImage(TimestampedModel):
 
     image = models.ImageField(
         upload_to="businesses/gallery/",
+        max_length=500,
         validators=[
             FileExtensionValidator(
                 ["jpg", "jpeg", "png", "webp"]

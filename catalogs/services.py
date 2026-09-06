@@ -82,7 +82,7 @@ def get_public_business(slug):
     ).first()
 
 
-def list_public_products(business, filters):
+def list_public_catalogs(business, filters):
     category_queryset = CatalogCategory.objects.filter(is_active=True).only(
         "id", "name", "label", "slug", "image", "sort_order"
     )
@@ -91,7 +91,7 @@ def list_public_products(business, filters):
     ).only("catalog_id", "image")
     queryset = Catalog.objects.filter(
         business=business,
-        type=Catalog.TypeChoices.PRODUCT,
+        type=filters["type"],
         is_active=True,
     ).prefetch_related(
         Prefetch("categories", queryset=category_queryset),
@@ -121,11 +121,16 @@ def list_public_products(business, filters):
     return queryset.distinct().order_by(f"{direction}{filters['sort_by']}", "id")
 
 
-def list_available_product_categories(business):
+def list_public_products(business, filters):
+    filters = {**filters, "type": Catalog.TypeChoices.PRODUCT}
+    return list_public_catalogs(business, filters)
+
+
+def list_available_catalog_categories(business, catalog_type):
     return (
         CatalogCategory.objects.filter(
             catalog_items__business=business,
-            catalog_items__type=Catalog.TypeChoices.PRODUCT,
+            catalog_items__type=catalog_type,
             catalog_items__is_active=True,
             is_active=True,
             is_display=True,
@@ -133,6 +138,10 @@ def list_available_product_categories(business):
         .distinct()
         .order_by("sort_order", "name")
     )
+
+
+def list_available_product_categories(business):
+    return list_available_catalog_categories(business, Catalog.TypeChoices.PRODUCT)
 
 
 def get_public_product_by_slug(slug):
