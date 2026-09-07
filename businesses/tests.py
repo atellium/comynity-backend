@@ -283,6 +283,9 @@ class BusinessAdminTests(SimpleTestCase):
         self.assertNotIn("Services", [title for title, _ in model_admin.fieldsets])
         self.assertEqual(model_admin.form, BusinessAdminForm)
 
+    def test_admin_form_includes_offerings(self):
+        self.assertIn("offerings", BusinessAdminForm.base_fields)
+
     def test_json_fields_have_guided_textareas(self):
         self.assertEqual(BusinessAdminForm.base_fields["alt_numbers"].widget.attrs["rows"], 3)
         self.assertEqual(BusinessAdminForm.base_fields["social_urls"].widget.attrs["rows"], 4)
@@ -585,6 +588,22 @@ class BusinessDetailAPITests(SimpleTestCase):
 
         business = Business(is_active=True)
         self.assertTrue(BusinessListSerializer(business).data["is_active"])
+
+    def test_offerings_are_in_list_public_owner_and_update_contracts(self):
+        self.assertIn("offerings", BusinessListSerializer.Meta.fields)
+        self.assertIn("offerings", BusinessDetailSerializer.Meta.fields)
+        self.assertIn("offerings", OwnerBusinessDetailSerializer.Meta.fields)
+        self.assertIn("offerings", BusinessUpdateSerializer.Meta.fields)
+
+        offerings = [{"title": "Consultation", "price": "500"}]
+        business = Business(offerings=offerings)
+
+        self.assertEqual(BusinessListSerializer(business).data["offerings"], offerings)
+        self.assertEqual(BusinessDetailSerializer(business).data["offerings"], offerings)
+
+        serializer = BusinessUpdateSerializer(data={"offerings": offerings}, partial=True)
+        self.assertTrue(serializer.is_valid(), serializer.errors)
+        self.assertEqual(serializer.validated_data["offerings"], offerings)
 
     def test_category_summary_includes_id(self):
         category = BusinessCategory(

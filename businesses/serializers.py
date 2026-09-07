@@ -404,6 +404,7 @@ class BusinessListSerializer(serializers.ModelSerializer):
             "handle",
             "slug",
             "established_year",
+            "offerings",
             "is_active",
             "is_verified",
             "publication_status",
@@ -459,6 +460,7 @@ class BusinessDetailSerializer(BusinessListSerializer):
             "handle",
             "slug",
             "established_year",
+            "offerings",
             "is_active",
             "is_verified",
             "publication_status",
@@ -582,7 +584,7 @@ class BusinessUpdateSerializer(serializers.ModelSerializer):
         fields = (
             "name", "handle", "categories", "address", "landmark", "locality", "city", "postal_code",
             "latitude", "longitude", "phone", "whatsapp", "email", "website", "thumbnail",
-            "description", "services", "established_year", "alternate_numbers", "social_urls",
+            "description", "services", "established_year", "offerings", "alternate_numbers", "social_urls",
             "is_active", "display_full_address", "display_business_hours",
             "seo_title", "seo_description", "seo_keywords",
         )

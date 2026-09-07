@@ -237,6 +237,7 @@ class BusinessAdmin(admin.ModelAdmin):
                     "slug",
                     "handle",
                     "established_year",
+                    "offerings",
                 )
             },
         ),

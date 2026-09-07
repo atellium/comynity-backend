@@ -72,6 +72,11 @@ class Business(TimestampedModel):
         validators=[validate_established_year],
     )
 
+    offerings = models.JSONField(
+        default=list,
+        blank=True,
+    )
+
     categories = models.ManyToManyField(
         "categories.BusinessCategory",
         through="BusinessCategoryAssignment",

@@ -114,7 +114,7 @@ def seed_businesses(records):
     missing_categories, missing_cities, missing_owners = category_ids - categories.keys(), city_ids - cities.keys(), owner_ids - owners.keys()
     if missing_categories or missing_cities or missing_owners:
         raise BusinessSeedError(f"Missing references: categories={sorted(missing_categories)}, cities={sorted(missing_cities)}, owners={sorted(map(str, missing_owners))}")
-    writable = {"name", "slug", "handle", "established_year", "address", "landmark", "locality", "postal_code", "latitude", "longitude", "phone", "whatsapp", "email", "website", "status", "is_active", "is_verified", "display_full_address", "display_business_hours"}
+    writable = {"name", "slug", "handle", "established_year", "offerings", "address", "landmark", "locality", "postal_code", "latitude", "longitude", "phone", "whatsapp", "email", "website", "status", "is_active", "is_verified", "display_full_address", "display_business_hours"}
     profile_fields = {"description", "alternate_numbers", "social_urls", "seo_title", "seo_description", "seo_keywords"}
     profile_aliases = {"alt_numbers": "alternate_numbers"}
     accepted = writable | profile_fields | set(profile_aliases) | {"id", "owner", "categories", "city", "thumbnail", "published_at"}
@@ -283,7 +283,7 @@ def business_response_queryset(
     category_queryset = BusinessCategory.objects.only(
         "id", "slug", "display_name", "name"
     ).order_by("business_assignments__sort_order", "business_assignments__id")
-    response_fields = ("id", "owner_id", "name", "handle", "slug", "established_year", "thumbnail", "address", "landmark", "locality", "city_id", "postal_code", "location", "phone", "whatsapp", "email", "website", "status", "is_active", "is_verified", "display_full_address", "display_business_hours", "published_at", "created_at", "updated_at")
+    response_fields = ("id", "owner_id", "name", "handle", "slug", "established_year", "offerings", "thumbnail", "address", "landmark", "locality", "city_id", "postal_code", "location", "phone", "whatsapp", "email", "website", "status", "is_active", "is_verified", "display_full_address", "display_business_hours", "published_at", "created_at", "updated_at")
     from businesses.models import BusinessHour
     hours_queryset = BusinessHour.objects.only("business_id", "days", "opens_at", "closes_at").order_by("opens_at")
     prefetches = [
