@@ -44,10 +44,20 @@ urlpatterns = [
         views.catalog_image_manage,
         name="catalog-image-manage",
     ),
+    # path(
+    #     "r/products/<slug:slug>/",
+    #     views.product_detail,
+    #     name="product-detail",
+    # ),
+    # path(
+    #     "products/<slug:slug>/",
+    #     views.product_detail,
+    #     name="product-detail-legacy",
+    # ),
     path(
         "catalogs/products/<slug:slug>/",
         views.product_detail,
-        name="product-detail",
+        name="catalog-product-detail",
     ),
     path(
         "businesses/<slug:slug>/catalogs/products/",

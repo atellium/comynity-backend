@@ -15,6 +15,7 @@ from rest_framework.test import APIRequestFactory, force_authenticate
 
 from . import views
 from .models import Catalog, CatalogCategory, CatalogImage, generate_catalog_public_id
+from .services import list_public_catalogs, list_public_products
 from .serializers import (
     CatalogWriteSerializer,
     CatalogDetailSerializer,
@@ -50,6 +51,7 @@ class ProductListEndpointTests(SimpleTestCase):
                 "specifications": {"material": "Cotton"},
                 "categories": [],
                 "is_featured": True,
+                "sort_order": 4,
                 "_prefetched_primary_images": [],
             },
         )()
@@ -63,9 +65,13 @@ class ProductListEndpointTests(SimpleTestCase):
         )
         self.assertEqual(data["specifications"], {"material": "Cotton"})
         self.assertTrue(data["is_featured"])
+        self.assertEqual(data["sort_order"], 4)
 
     def test_product_detail_serializer_includes_id(self):
         self.assertIn("id", ProductDetailSerializer.Meta.fields)
+
+    def test_product_detail_serializer_includes_sort_order(self):
+        self.assertIn("sort_order", ProductDetailSerializer.Meta.fields)
 
     def test_url_uses_business_slug(self):
         self.assertEqual(
@@ -80,6 +86,24 @@ class ProductListEndpointTests(SimpleTestCase):
         self.assertEqual(
             reverse(
                 "catalogs:product-detail",
+                kwargs={"slug": "premium-shirt-a1b2c3d4"},
+            ),
+            "/api/r/products/premium-shirt-a1b2c3d4/",
+        )
+
+    def test_catalog_product_detail_url_is_supported(self):
+        self.assertEqual(
+            reverse(
+                "catalogs:catalog-product-detail",
+                kwargs={"slug": "premium-shirt-a1b2c3d4"},
+            ),
+            "/api/catalogs/products/premium-shirt-a1b2c3d4/",
+        )
+
+    def test_legacy_product_detail_url_is_supported(self):
+        self.assertEqual(
+            reverse(
+                "catalogs:product-detail-legacy",
                 kwargs={"slug": "premium-shirt-a1b2c3d4"},
             ),
             "/api/products/premium-shirt-a1b2c3d4/",
@@ -252,6 +276,78 @@ class ProductListEndpointTests(SimpleTestCase):
         )
 
 
+class PublicCatalogOrderingTests(TestCase):
+    def setUp(self):
+        from businesses.models import Business
+
+        self.business = Business.objects.create(
+            name="Royal Store",
+            address="12 Market Road",
+            slug="royal-store",
+            status=Business.Status.PUBLISHED,
+            is_active=True,
+        )
+
+    def _catalog(self, name, *, catalog_type="product", featured=False, sort_order=0, price="10.00"):
+        return Catalog.objects.create(
+            business=self.business,
+            name=name,
+            type=catalog_type,
+            is_featured=featured,
+            sort_order=sort_order,
+            price=Decimal(price),
+        )
+
+    def test_products_return_featured_first_by_sort_order_then_normal_current_sort(self):
+        self._catalog("Normal Cheap", featured=False, sort_order=1, price="10.00")
+        self._catalog("Featured Later", featured=True, sort_order=2, price="30.00")
+        self._catalog("Normal Expensive", featured=False, sort_order=0, price="40.00")
+        self._catalog("Featured Unordered", featured=True, sort_order=0, price="50.00")
+        self._catalog("Featured Earlier", featured=True, sort_order=1, price="20.00")
+
+        products = list(
+            list_public_products(
+                self.business,
+                {
+                    "sort_by": "price",
+                    "sort_order": "desc",
+                },
+            )
+        )
+
+        self.assertEqual(
+            [product.name for product in products],
+            [
+                "Featured Earlier",
+                "Featured Later",
+                "Featured Unordered",
+                "Normal Expensive",
+                "Normal Cheap",
+            ],
+        )
+
+    def test_catalogs_return_featured_first_for_requested_type(self):
+        self._catalog("Normal A", catalog_type="doctor", featured=False, sort_order=0)
+        self._catalog("Featured B", catalog_type="doctor", featured=True, sort_order=2)
+        self._catalog("Featured A", catalog_type="doctor", featured=True, sort_order=1)
+
+        catalogs = list(
+            list_public_catalogs(
+                self.business,
+                {
+                    "type": "doctor",
+                    "sort_by": "name",
+                    "sort_order": "asc",
+                },
+            )
+        )
+
+        self.assertEqual(
+            [catalog.name for catalog in catalogs],
+            ["Featured A", "Featured B", "Normal A"],
+        )
+
+
 class CatalogManagementContractTests(SimpleTestCase):
     def setUp(self):
         self.factory = APIRequestFactory()
@@ -328,6 +424,22 @@ class CatalogManagementContractTests(SimpleTestCase):
 
         self.assertTrue(serializer.is_valid(), serializer.errors)
 
+    def test_create_accepts_sort_order(self):
+        serializer = CatalogWriteSerializer(
+            data={"name": "Premium Shirt", "type": "product", "sort_order": 7}
+        )
+
+        self.assertTrue(serializer.is_valid(), serializer.errors)
+        self.assertEqual(serializer.validated_data["sort_order"], 7)
+
+    def test_create_rejects_negative_sort_order(self):
+        serializer = CatalogWriteSerializer(
+            data={"name": "Premium Shirt", "type": "product", "sort_order": -1}
+        )
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn("sort_order", serializer.errors)
+
     def test_list_query_requires_type(self):
         serializer = OwnerCatalogListQuerySerializer(data={})
 
@@ -378,6 +490,17 @@ class CatalogManagementContractTests(SimpleTestCase):
 
         self.assertTrue(serializer.is_valid(), serializer.errors)
 
+    def test_partial_update_accepts_sort_order(self):
+        catalog = Catalog(name="Premium Shirt", type="product")
+        serializer = CatalogWriteSerializer(
+            catalog,
+            data={"sort_order": 3},
+            partial=True,
+        )
+
+        self.assertTrue(serializer.is_valid(), serializer.errors)
+        self.assertEqual(serializer.validated_data["sort_order"], 3)
+
     def test_detail_serializer_returns_expanded_categories(self):
         category = CatalogCategory(
             id=4,
@@ -415,6 +538,7 @@ class CatalogManagementContractTests(SimpleTestCase):
         self.assertEqual(data["categories"][0]["id"], 4)
         self.assertEqual(data["categories"][0]["name"], "Homeopathy")
         self.assertEqual(data["categories"][0]["slug"], "homeopathy")
+        self.assertEqual(data["sort_order"], 0)
 
 
 class CatalogCategoryListContractTests(SimpleTestCase):

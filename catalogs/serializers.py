@@ -177,6 +177,7 @@ class ProductListSerializer(serializers.ModelSerializer):
             "specifications",
             "categories",
             "is_featured",
+            "sort_order",
             "primary_image",
         )
 
@@ -447,12 +448,15 @@ class ProductDetailSerializer(serializers.ModelSerializer):
             "categories",
             "images",
             "is_featured",
+            "sort_order",
             "business",
         )
 
 
 class CatalogWriteSerializer(serializers.ModelSerializer):
     """Create and update catalogs owned by the authenticated business owner."""
+
+    sort_order = serializers.IntegerField(required=False, min_value=0)
 
     class Meta:
         model = Catalog
@@ -490,7 +494,6 @@ class CatalogWriteSerializer(serializers.ModelSerializer):
             "categories": {"required": False},
             "is_featured": {"required": False},
             "is_active": {"required": False},
-            "sort_order": {"required": False},
         }
 
 
