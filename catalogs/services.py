@@ -1,8 +1,32 @@
 from django.core.paginator import Paginator
-from django.db.models import Prefetch, Q
+from django.db.models import Case, F, IntegerField, Prefetch, Q, When
 
 from businesses.models import Business
 from catalogs.models import Catalog, CatalogCategory, CatalogImage
+
+
+def order_featured_first(queryset, sort_by, sort_order):
+    direction = "-" if sort_order == "desc" else ""
+    return (
+        queryset.alias(
+            featured_priority=Case(
+                When(is_featured=True, sort_order__gt=0, then=0),
+                default=1,
+                output_field=IntegerField(),
+            ),
+            featured_sort_order=Case(
+                When(is_featured=True, sort_order__gt=0, then=F("sort_order")),
+                default=None,
+                output_field=IntegerField(),
+            )
+        )
+        .order_by(
+            "featured_priority",
+            "featured_sort_order",
+            f"{direction}{sort_by}",
+            "id",
+        )
+    )
 
 
 def list_catalog_categories(filters):
@@ -117,8 +141,11 @@ def list_public_catalogs(business, filters):
     if "is_featured" in filters:
         queryset = queryset.filter(is_featured=filters["is_featured"])
 
-    direction = "-" if filters["sort_order"] == "desc" else ""
-    return queryset.distinct().order_by(f"{direction}{filters['sort_by']}", "id")
+    return order_featured_first(
+        queryset.distinct(),
+        filters["sort_by"],
+        filters["sort_order"],
+    )
 
 
 def list_public_products(business, filters):

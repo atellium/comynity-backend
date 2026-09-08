@@ -8,7 +8,7 @@ from uuid import UUID
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.db import IntegrityError, router, transaction
-from django.db.models import Exists, OuterRef, Q
+from django.db.models import Case, Exists, F, IntegerField, OuterRef, Q, When
 from django.db.models import Prefetch
 from django.db.models import FloatField, ExpressionWrapper
 from django.contrib.gis.db.models.functions import Distance
@@ -353,7 +353,24 @@ def business_response_queryset(
                 "sort_order",
                 "created_at",
             )
-            .order_by("-is_featured", "sort_order", "created_at")
+            .alias(
+                featured_priority=Case(
+                    When(is_featured=True, sort_order__gt=0, then=0),
+                    default=1,
+                    output_field=IntegerField(),
+                ),
+                featured_sort_order=Case(
+                    When(is_featured=True, sort_order__gt=0, then=F("sort_order")),
+                    default=None,
+                    output_field=IntegerField(),
+                ),
+            )
+            .order_by(
+                "featured_priority",
+                "featured_sort_order",
+                "created_at",
+                "id",
+            )
             .prefetch_related(
                 Prefetch(
                     "images",
