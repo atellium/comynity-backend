@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib import admin
 from django.contrib.gis.geos import Point
+from django.utils import timezone
 from django.utils.html import format_html
 
 from .models import (
@@ -173,6 +174,8 @@ class BusinessAdmin(admin.ModelAdmin):
         "status",
         "is_active",
         "is_verified",
+        "is_paid",
+        "paid_until",
         "owner",
         "published_at",
     )
@@ -181,6 +184,7 @@ class BusinessAdmin(admin.ModelAdmin):
         "status",
         "is_active",
         "is_verified",
+        "is_paid",
         "city__state",
         "city",
         "created_at",
@@ -286,6 +290,16 @@ class BusinessAdmin(admin.ModelAdmin):
             },
         ),
         (
+            "Payment",
+            {
+                "fields": (
+                    "is_paid",
+                    "payment_date",
+                    "paid_until",
+                )
+            },
+        ),
+        (
             "Display Settings",
             {
                 "classes": ("collapse",),
@@ -320,6 +334,8 @@ class BusinessAdmin(admin.ModelAdmin):
         "mark_as_inactive",
         "mark_as_verified",
         "mark_as_unverified",
+        "mark_as_paid",
+        "mark_as_unpaid",
         "publish_businesses",
     )
 
@@ -359,6 +375,14 @@ class BusinessAdmin(admin.ModelAdmin):
     @admin.action(description="Remove verification")
     def mark_as_unverified(self, request, queryset):
         queryset.update(is_verified=False)
+
+    @admin.action(description="Mark selected businesses as paid")
+    def mark_as_paid(self, request, queryset):
+        queryset.update(is_paid=True, payment_date=timezone.now())
+
+    @admin.action(description="Mark selected businesses as unpaid")
+    def mark_as_unpaid(self, request, queryset):
+        queryset.update(is_paid=False, paid_until=None)
 
     @admin.action(description="Publish selected businesses")
     def publish_businesses(self, request, queryset):
