@@ -195,6 +195,19 @@ class Business(TimestampedModel):
         blank=True,
     )
 
+    is_paid = models.BooleanField(
+        default=False,
+        blank=True,
+    )
+    payment_date = models.DateTimeField(
+        null=True,
+        blank=True,
+    )
+    paid_until = models.DateTimeField(
+        null=True,
+        blank=True,
+    )
+
     class Meta:
         db_table = "businesses"
         ordering = ("name", "id")
