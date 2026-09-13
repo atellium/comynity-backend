@@ -1,0 +1,1010 @@
+[
+    {
+        "name": "Clothing",
+        "label": "Clothing",
+        "slug": "clothing",
+        "type": "product",
+        "aliases": "fashion, clothes, garments, apparel"
+    },
+    {
+        "name": "Men's Clothing",
+        "label": "Men's Clothing",
+        "slug": "mens-clothing",
+        "type": "product",
+        "aliases": "men clothes, menswear, men's fashion, male clothing"
+    },
+    {
+        "name": "Women's Clothing",
+        "label": "Women's Clothing",
+        "slug": "womens-clothing",
+        "type": "product",
+        "aliases": "women clothes, womenswear, ladies clothing, ladies fashion"
+    },
+    {
+        "name": "Kids' Clothing",
+        "label": "Kids' Clothing",
+        "slug": "kids-clothing",
+        "type": "product",
+        "aliases": "children clothes, kids wear, boys clothing, girls clothing"
+    },
+    {
+        "name": "Saree",
+        "label": "Sarees",
+        "slug": "sarees",
+        "type": "product",
+        "aliases": "sari, saree, ethnic wear"
+    },
+    {
+        "name": "Kurti",
+        "label": "Kurtis",
+        "slug": "kurtis",
+        "type": "product",
+        "aliases": "kurta, ladies kurti, women kurti"
+    },
+    {
+        "name": "Shirt",
+        "label": "Shirts",
+        "slug": "shirts",
+        "type": "product",
+        "aliases": "formal shirt, casual shirt, men's shirt"
+    },
+    {
+        "name": "T-Shirt",
+        "label": "T-Shirts",
+        "slug": "t-shirts",
+        "type": "product",
+        "aliases": "tee, tshirt, t shirt"
+    },
+    {
+        "name": "Trouser",
+        "label": "Trousers",
+        "slug": "trousers",
+        "type": "product",
+        "aliases": "pants, formal pants"
+    },
+    {
+        "name": "Jeans",
+        "label": "Jeans",
+        "slug": "jeans",
+        "type": "product",
+        "aliases": "denim, denim pants"
+    },
+    {
+        "name": "Dress",
+        "label": "Dresses",
+        "slug": "dresses",
+        "type": "product",
+        "aliases": "women dress, ladies dress, gown"
+    },
+    {
+        "name": "Ethnic Wear",
+        "label": "Ethnic Wear",
+        "slug": "ethnic-wear",
+        "type": "product",
+        "aliases": "traditional clothing, traditional wear, indian wear"
+    },
+    {
+        "name": "Innerwear",
+        "label": "Innerwear",
+        "slug": "innerwear",
+        "type": "product",
+        "aliases": "underwear, lingerie, undergarments"
+    },
+    {
+        "name": "Winter Wear",
+        "label": "Winter Wear",
+        "slug": "winter-wear",
+        "type": "product",
+        "aliases": "sweater, jacket, woollen, warm clothes"
+    },
+    {
+        "name": "Footwear",
+        "label": "Footwear",
+        "slug": "footwear",
+        "type": "product",
+        "aliases": "shoes, sandals, slippers, footwear"
+    },
+    {
+        "name": "Shoe",
+        "label": "Shoes",
+        "slug": "shoes",
+        "type": "product",
+        "aliases": "shoe, sneakers, formal shoes, casual shoes"
+    },
+    {
+        "name": "Sandal",
+        "label": "Sandals",
+        "slug": "sandals",
+        "type": "product",
+        "aliases": "sandals, ladies sandals, men's sandals"
+    },
+    {
+        "name": "Slipper",
+        "label": "Slippers",
+        "slug": "slippers",
+        "type": "product",
+        "aliases": "flip flops, chappal, house slippers"
+    },
+    {
+        "name": "Bag",
+        "label": "Bags",
+        "slug": "bags",
+        "type": "product",
+        "aliases": "handbag, backpack, luggage, purse"
+    },
+    {
+        "name": "Handbag",
+        "label": "Handbags",
+        "slug": "handbags",
+        "type": "product",
+        "aliases": "ladies bag, purse, women bag"
+    },
+    {
+        "name": "Luggage",
+        "label": "Luggage",
+        "slug": "luggage",
+        "type": "product",
+        "aliases": "suitcase, trolley bag, travel bag"
+    },
+    {
+        "name": "Jewellery",
+        "label": "Jewellery",
+        "slug": "jewellery",
+        "type": "product",
+        "aliases": "jewelry, ornaments, gold, silver"
+    },
+    {
+        "name": "Gold Jewellery",
+        "label": "Gold Jewellery",
+        "slug": "gold-jewellery",
+        "type": "product",
+        "aliases": "gold ornaments, gold necklace, gold bangles"
+    },
+    {
+        "name": "Silver Jewellery",
+        "label": "Silver Jewellery",
+        "slug": "silver-jewellery",
+        "type": "product",
+        "aliases": "silver ornaments, silver chain, silver jewellery"
+    },
+    {
+        "name": "Artificial Jewellery",
+        "label": "Artificial Jewellery",
+        "slug": "artificial-jewellery",
+        "type": "product",
+        "aliases": "fashion jewellery, imitation jewellery, costume jewellery"
+    },
+    {
+        "name": "Watch",
+        "label": "Watches",
+        "slug": "watches",
+        "type": "product",
+        "aliases": "wrist watch, smartwatch, timepiece"
+    },
+    {
+        "name": "Eyewear",
+        "label": "Eyewear",
+        "slug": "eyewear",
+        "type": "product",
+        "aliases": "spectacles, glasses, frames, sunglasses"
+    },
+    {
+        "name": "Sunglasses",
+        "label": "Sunglasses",
+        "slug": "sunglasses",
+        "type": "product",
+        "aliases": "sun glasses, shades"
+    },
+    {
+        "name": "Mobile Phone",
+        "label": "Mobile Phones",
+        "slug": "mobile-phones",
+        "type": "product",
+        "aliases": "mobile, smartphone, phone, handset"
+    },
+    {
+        "name": "Mobile Accessory",
+        "label": "Mobile Accessories",
+        "slug": "mobile-accessories",
+        "type": "product",
+        "aliases": "phone accessories, charger, cover, mobile parts"
+    },
+    {
+        "name": "Mobile Charger",
+        "label": "Mobile Chargers",
+        "slug": "mobile-chargers",
+        "type": "product",
+        "aliases": "charger, phone charger, adapter"
+    },
+    {
+        "name": "Mobile Cover",
+        "label": "Mobile Covers",
+        "slug": "mobile-covers",
+        "type": "product",
+        "aliases": "phone case, mobile case, back cover"
+    },
+    {
+        "name": "Earphone",
+        "label": "Earphones",
+        "slug": "earphones",
+        "type": "product",
+        "aliases": "earbuds, headphones, headset"
+    },
+    {
+        "name": "Power Bank",
+        "label": "Power Banks",
+        "slug": "power-banks",
+        "type": "product",
+        "aliases": "portable charger, battery bank"
+    },
+    {
+        "name": "Computer",
+        "label": "Computers",
+        "slug": "computers",
+        "type": "product",
+        "aliases": "pc, desktop, computer"
+    },
+    {
+        "name": "Laptop",
+        "label": "Laptops",
+        "slug": "laptops",
+        "type": "product",
+        "aliases": "notebook, portable computer"
+    },
+    {
+        "name": "Computer Accessory",
+        "label": "Computer Accessories",
+        "slug": "computer-accessories",
+        "type": "product",
+        "aliases": "pc accessories, computer peripherals, laptop accessories"
+    },
+    {
+        "name": "Printer",
+        "label": "Printers",
+        "slug": "printers",
+        "type": "product",
+        "aliases": "printing machine, laser printer, inkjet printer"
+    },
+    {
+        "name": "Electronics",
+        "label": "Electronics",
+        "slug": "electronics",
+        "type": "product",
+        "aliases": "electronic items, electronic goods, gadgets"
+    },
+    {
+        "name": "Television",
+        "label": "Televisions",
+        "slug": "televisions",
+        "type": "product",
+        "aliases": "tv, smart tv, led tv"
+    },
+    {
+        "name": "Speaker",
+        "label": "Speakers",
+        "slug": "speakers",
+        "type": "product",
+        "aliases": "bluetooth speaker, sound system, audio speaker"
+    },
+    {
+        "name": "Camera",
+        "label": "Cameras",
+        "slug": "cameras",
+        "type": "product",
+        "aliases": "digital camera, dslr, mirrorless camera"
+    },
+    {
+        "name": "Home Appliance",
+        "label": "Home Appliances",
+        "slug": "home-appliances",
+        "type": "product",
+        "aliases": "household appliance, electrical appliance"
+    },
+    {
+        "name": "Refrigerator",
+        "label": "Refrigerators",
+        "slug": "refrigerators",
+        "type": "product",
+        "aliases": "fridge, freezer"
+    },
+    {
+        "name": "Washing Machine",
+        "label": "Washing Machines",
+        "slug": "washing-machines",
+        "type": "product",
+        "aliases": "washer, laundry machine"
+    },
+    {
+        "name": "Air Conditioner",
+        "label": "Air Conditioners",
+        "slug": "air-conditioners",
+        "type": "product",
+        "aliases": "ac, air conditioning"
+    },
+    {
+        "name": "Ceiling Fan",
+        "label": "Ceiling Fans",
+        "slug": "ceiling-fans",
+        "type": "product",
+        "aliases": "fan, electric fan"
+    },
+    {
+        "name": "Air Cooler",
+        "label": "Air Coolers",
+        "slug": "air-coolers",
+        "type": "product",
+        "aliases": "cooler, room cooler"
+    },
+    {
+        "name": "Water Purifier",
+        "label": "Water Purifiers",
+        "slug": "water-purifiers",
+        "type": "product",
+        "aliases": "ro purifier, water filter"
+    },
+    {
+        "name": "Kitchen Appliance",
+        "label": "Kitchen Appliances",
+        "slug": "kitchen-appliances",
+        "type": "product",
+        "aliases": "kitchen electronics, cooking appliance"
+    },
+    {
+        "name": "Mixer Grinder",
+        "label": "Mixer Grinders",
+        "slug": "mixer-grinders",
+        "type": "product",
+        "aliases": "mixer, grinder, mixie"
+    },
+    {
+        "name": "Induction Cooktop",
+        "label": "Induction Cooktops",
+        "slug": "induction-cooktops",
+        "type": "product",
+        "aliases": "induction cooker, induction stove"
+    },
+    {
+        "name": "Electric Kettle",
+        "label": "Electric Kettles",
+        "slug": "electric-kettles",
+        "type": "product",
+        "aliases": "kettle, water boiler"
+    },
+    {
+        "name": "Microwave Oven",
+        "label": "Microwave Ovens",
+        "slug": "microwave-ovens",
+        "type": "product",
+        "aliases": "microwave, oven"
+    },
+    {
+        "name": "Gas Stove",
+        "label": "Gas Stoves",
+        "slug": "gas-stoves",
+        "type": "product",
+        "aliases": "gas cooker, cooktop, burner"
+    },
+    {
+        "name": "Cookware",
+        "label": "Cookware",
+        "slug": "cookware",
+        "type": "product",
+        "aliases": "cooking utensils, pots, pans"
+    },
+    {
+        "name": "Kitchen Utensil",
+        "label": "Kitchen Utensils",
+        "slug": "kitchen-utensils",
+        "type": "product",
+        "aliases": "utensils, kitchenware, cooking tools"
+    },
+    {
+        "name": "Crockery",
+        "label": "Crockery",
+        "slug": "crockery",
+        "type": "product",
+        "aliases": "plates, bowls, dinnerware"
+    },
+    {
+        "name": "Furniture",
+        "label": "Furniture",
+        "slug": "furniture",
+        "type": "product",
+        "aliases": "home furniture, furnishings"
+    },
+    {
+        "name": "Bed",
+        "label": "Beds",
+        "slug": "beds",
+        "type": "product",
+        "aliases": "bedstead, bedroom furniture"
+    },
+    {
+        "name": "Sofa",
+        "label": "Sofas",
+        "slug": "sofas",
+        "type": "product",
+        "aliases": "couch, sofa set"
+    },
+    {
+        "name": "Chair",
+        "label": "Chairs",
+        "slug": "chairs",
+        "type": "product",
+        "aliases": "seating, office chair, dining chair"
+    },
+    {
+        "name": "Table",
+        "label": "Tables",
+        "slug": "tables",
+        "type": "product",
+        "aliases": "desk, dining table, furniture table"
+    },
+    {
+        "name": "Wardrobe",
+        "label": "Wardrobes",
+        "slug": "wardrobes",
+        "type": "product",
+        "aliases": "almirah, cupboard"
+    },
+    {
+        "name": "Mattress",
+        "label": "Mattresses",
+        "slug": "mattresses",
+        "type": "product",
+        "aliases": "bed mattress, foam mattress"
+    },
+    {
+        "name": "Home Decor",
+        "label": "Home Decor",
+        "slug": "home-decor",
+        "type": "product",
+        "aliases": "decoration, decorative items, home decoration"
+    },
+    {
+        "name": "Curtain",
+        "label": "Curtains",
+        "slug": "curtains",
+        "type": "product",
+        "aliases": "window curtain, drape"
+    },
+    {
+        "name": "Bedding",
+        "label": "Bedding",
+        "slug": "bedding",
+        "type": "product",
+        "aliases": "bedsheet, pillow, blanket"
+    },
+    {
+        "name": "Grocery",
+        "label": "Groceries",
+        "slug": "groceries",
+        "type": "product",
+        "aliases": "kirana, grocery items, daily essentials"
+    },
+    {
+        "name": "Rice",
+        "label": "Rice",
+        "slug": "rice",
+        "type": "product",
+        "aliases": "chawal, rice grain"
+    },
+    {
+        "name": "Flour",
+        "label": "Flour",
+        "slug": "flour",
+        "type": "product",
+        "aliases": "atta, maida, wheat flour"
+    },
+    {
+        "name": "Pulse",
+        "label": "Pulses",
+        "slug": "pulses",
+        "type": "product",
+        "aliases": "dal, lentils, legumes"
+    },
+    {
+        "name": "Cooking Oil",
+        "label": "Cooking Oils",
+        "slug": "cooking-oils",
+        "type": "product",
+        "aliases": "edible oil, mustard oil, sunflower oil"
+    },
+    {
+        "name": "Spice",
+        "label": "Spices",
+        "slug": "spices",
+        "type": "product",
+        "aliases": "masala, seasoning"
+    },
+    {
+        "name": "Snack",
+        "label": "Snacks",
+        "slug": "snacks",
+        "type": "product",
+        "aliases": "namkeen, chips, packaged snacks"
+    },
+    {
+        "name": "Biscuit",
+        "label": "Biscuits",
+        "slug": "biscuits",
+        "type": "product",
+        "aliases": "cookies, biscuit"
+    },
+    {
+        "name": "Beverage",
+        "label": "Beverages",
+        "slug": "beverages",
+        "type": "product",
+        "aliases": "drinks, soft drinks, juice"
+    },
+    {
+        "name": "Tea",
+        "label": "Tea",
+        "slug": "tea",
+        "type": "product",
+        "aliases": "tea leaves, chai"
+    },
+    {
+        "name": "Coffee",
+        "label": "Coffee",
+        "slug": "coffee",
+        "type": "product",
+        "aliases": "coffee powder, instant coffee"
+    },
+    {
+        "name": "Dairy Product",
+        "label": "Dairy Products",
+        "slug": "dairy-products",
+        "type": "product",
+        "aliases": "milk, butter, cheese, dairy"
+    },
+    {
+        "name": "Packaged Food",
+        "label": "Packaged Foods",
+        "slug": "packaged-foods",
+        "type": "product",
+        "aliases": "ready food, packaged grocery, processed food"
+    },
+    {
+        "name": "Fruit",
+        "label": "Fruits",
+        "slug": "fruits",
+        "type": "product",
+        "aliases": "fresh fruit, seasonal fruit"
+    },
+    {
+        "name": "Vegetable",
+        "label": "Vegetables",
+        "slug": "vegetables",
+        "type": "product",
+        "aliases": "fresh vegetables, veggies, sabzi"
+    },
+    {
+        "name": "Bakery Product",
+        "label": "Bakery Products",
+        "slug": "bakery-products",
+        "type": "product",
+        "aliases": "bread, cake, pastry, bakery"
+    },
+    {
+        "name": "Sweet",
+        "label": "Sweets",
+        "slug": "sweets",
+        "type": "product",
+        "aliases": "mithai, dessert, indian sweets"
+    },
+    {
+        "name": "Medicine",
+        "label": "Medicines",
+        "slug": "medicines",
+        "type": "product",
+        "aliases": "medication, drugs, pharmacy medicine"
+    },
+    {
+        "name": "Medical Equipment",
+        "label": "Medical Equipment",
+        "slug": "medical-equipment",
+        "type": "product",
+        "aliases": "medical device, healthcare equipment, hospital equipment"
+    },
+    {
+        "name": "First Aid Product",
+        "label": "First Aid Products",
+        "slug": "first-aid-products",
+        "type": "product",
+        "aliases": "first aid, bandage, antiseptic"
+    },
+    {
+        "name": "Personal Care Product",
+        "label": "Personal Care Products",
+        "slug": "personal-care-products",
+        "type": "product",
+        "aliases": "personal care, hygiene, grooming"
+    },
+    {
+        "name": "Cosmetic",
+        "label": "Cosmetics",
+        "slug": "cosmetics",
+        "type": "product",
+        "aliases": "makeup, beauty products, cosmetics"
+    },
+    {
+        "name": "Skin Care Product",
+        "label": "Skin Care Products",
+        "slug": "skin-care-products",
+        "type": "product",
+        "aliases": "skincare, cream, lotion, face care"
+    },
+    {
+        "name": "Hair Care Product",
+        "label": "Hair Care Products",
+        "slug": "hair-care-products",
+        "type": "product",
+        "aliases": "haircare, shampoo, conditioner, hair oil"
+    },
+    {
+        "name": "Makeup Product",
+        "label": "Makeup Products",
+        "slug": "makeup-products",
+        "type": "product",
+        "aliases": "makeup, lipstick, foundation, cosmetics"
+    },
+    {
+        "name": "Perfume",
+        "label": "Perfumes",
+        "slug": "perfumes",
+        "type": "product",
+        "aliases": "fragrance, deodorant, scent"
+    },
+    {
+        "name": "Stationery",
+        "label": "Stationery",
+        "slug": "stationery",
+        "type": "product",
+        "aliases": "stationary, school supplies, office supplies"
+    },
+    {
+        "name": "Book",
+        "label": "Books",
+        "slug": "books",
+        "type": "product",
+        "aliases": "textbook, novel, study book"
+    },
+    {
+        "name": "Notebook",
+        "label": "Notebooks",
+        "slug": "notebooks",
+        "type": "product",
+        "aliases": "copy, exercise book, writing book"
+    },
+    {
+        "name": "Pen",
+        "label": "Pens",
+        "slug": "pens",
+        "type": "product",
+        "aliases": "ball pen, gel pen, writing pen"
+    },
+    {
+        "name": "School Supply",
+        "label": "School Supplies",
+        "slug": "school-supplies",
+        "type": "product",
+        "aliases": "student supplies, school stationery"
+    },
+    {
+        "name": "Office Supply",
+        "label": "Office Supplies",
+        "slug": "office-supplies",
+        "type": "product",
+        "aliases": "office stationery, office items"
+    },
+    {
+        "name": "Gift",
+        "label": "Gifts",
+        "slug": "gifts",
+        "type": "product",
+        "aliases": "gift items, presents, gifting"
+    },
+    {
+        "name": "Toy",
+        "label": "Toys",
+        "slug": "toys",
+        "type": "product",
+        "aliases": "kids toys, children's toys, games"
+    },
+    {
+        "name": "Baby Product",
+        "label": "Baby Products",
+        "slug": "baby-products",
+        "type": "product",
+        "aliases": "infant products, baby care, newborn products"
+    },
+    {
+        "name": "Sports Product",
+        "label": "Sports Products",
+        "slug": "sports-products",
+        "type": "product",
+        "aliases": "sports goods, sporting goods, sports equipment"
+    },
+    {
+        "name": "Fitness Equipment",
+        "label": "Fitness Equipment",
+        "slug": "fitness-equipment",
+        "type": "product",
+        "aliases": "gym equipment, exercise equipment"
+    },
+    {
+        "name": "Hardware",
+        "label": "Hardware",
+        "slug": "hardware",
+        "type": "product",
+        "aliases": "hardware items, tools, building hardware"
+    },
+    {
+        "name": "Hand Tool",
+        "label": "Hand Tools",
+        "slug": "hand-tools",
+        "type": "product",
+        "aliases": "tools, screwdriver, wrench, hammer"
+    },
+    {
+        "name": "Power Tool",
+        "label": "Power Tools",
+        "slug": "power-tools",
+        "type": "product",
+        "aliases": "drill machine, electric tools, cutting tools"
+    },
+    {
+        "name": "Building Material",
+        "label": "Building Materials",
+        "slug": "building-materials",
+        "type": "product",
+        "aliases": "construction materials, cement, construction supplies"
+    },
+    {
+        "name": "Paint",
+        "label": "Paints",
+        "slug": "paints",
+        "type": "product",
+        "aliases": "wall paint, colour, coating"
+    },
+    {
+        "name": "Plumbing Product",
+        "label": "Plumbing Products",
+        "slug": "plumbing-products",
+        "type": "product",
+        "aliases": "pipe, plumbing fittings, sanitary fittings"
+    },
+    {
+        "name": "Sanitaryware",
+        "label": "Sanitaryware",
+        "slug": "sanitaryware",
+        "type": "product",
+        "aliases": "bathroom fittings, sanitary items, bathroom accessories"
+    },
+    {
+        "name": "Electrical Product",
+        "label": "Electrical Products",
+        "slug": "electrical-products",
+        "type": "product",
+        "aliases": "electrical goods, electric items, electrical supplies"
+    },
+    {
+        "name": "Light",
+        "label": "Lights",
+        "slug": "lights",
+        "type": "product",
+        "aliases": "lighting, led light, bulb, lamp"
+    },
+    {
+        "name": "Switch",
+        "label": "Switches",
+        "slug": "switches",
+        "type": "product",
+        "aliases": "electrical switch, modular switch"
+    },
+    {
+        "name": "Wire & Cable",
+        "label": "Wires & Cables",
+        "slug": "wires-and-cables",
+        "type": "product",
+        "aliases": "electrical wire, electrical cable, wiring"
+    },
+    {
+        "name": "Inverter",
+        "label": "Inverters",
+        "slug": "inverters",
+        "type": "product",
+        "aliases": "power inverter, home inverter"
+    },
+    {
+        "name": "Battery",
+        "label": "Batteries",
+        "slug": "batteries",
+        "type": "product",
+        "aliases": "battery, inverter battery, power battery"
+    },
+    {
+        "name": "Automobile Part",
+        "label": "Automobile Parts",
+        "slug": "automobile-parts",
+        "type": "product",
+        "aliases": "auto parts, vehicle parts, spare parts"
+    },
+    {
+        "name": "Car Accessory",
+        "label": "Car Accessories",
+        "slug": "car-accessories",
+        "type": "product",
+        "aliases": "automotive accessories, vehicle accessories"
+    },
+    {
+        "name": "Motorcycle Accessory",
+        "label": "Motorcycle Accessories",
+        "slug": "motorcycle-accessories",
+        "type": "product",
+        "aliases": "bike accessories, two wheeler accessories"
+    },
+    {
+        "name": "Tyre",
+        "label": "Tyres",
+        "slug": "tyres",
+        "type": "product",
+        "aliases": "tire, car tyre, bike tyre"
+    },
+    {
+        "name": "Pet Product",
+        "label": "Pet Products",
+        "slug": "pet-products",
+        "type": "product",
+        "aliases": "pet supplies, animal products, pet accessories"
+    },
+    {
+        "name": "Pet Food",
+        "label": "Pet Food",
+        "slug": "pet-food",
+        "type": "product",
+        "aliases": "dog food, cat food, animal food"
+    },
+    {
+        "name": "General Physician",
+        "label": "General Physicians",
+        "slug": "general-physicians",
+        "type": "specialty",
+        "aliases": "general doctor, physician, family doctor, primary care doctor"
+    },
+    {
+        "name": "Pediatrician",
+        "label": "Pediatricians",
+        "slug": "pediatricians",
+        "type": "specialty",
+        "aliases": "child specialist, child doctor, kids doctor, paediatrician"
+    },
+    {
+        "name": "Gynecologist",
+        "label": "Gynecologists",
+        "slug": "gynecologists",
+        "type": "specialty",
+        "aliases": "gynaecologist, gynae, women's health doctor, female specialist"
+    },
+    {
+        "name": "Cardiologist",
+        "label": "Cardiologists",
+        "slug": "cardiologists",
+        "type": "specialty",
+        "aliases": "heart doctor, heart specialist, cardiac specialist"
+    },
+    {
+        "name": "Dermatologist",
+        "label": "Dermatologists",
+        "slug": "dermatologists",
+        "type": "specialty",
+        "aliases": "skin doctor, skin specialist, hair specialist"
+    },
+    {
+        "name": "Orthopedic Surgeon",
+        "label": "Orthopedic Surgeons",
+        "slug": "orthopedic-surgeons",
+        "type": "specialty",
+        "aliases": "orthopaedic doctor, orthopedic doctor, bone doctor, joint specialist"
+    },
+    {
+        "name": "ENT Specialist",
+        "label": "ENT Specialists",
+        "slug": "ent-specialists",
+        "type": "specialty",
+        "aliases": "ear nose throat doctor, otolaryngologist, ear specialist, nose specialist"
+    },
+    {
+        "name": "Ophthalmologist",
+        "label": "Ophthalmologists",
+        "slug": "ophthalmologists",
+        "type": "specialty",
+        "aliases": "eye doctor, eye specialist"
+    },
+    {
+        "name": "Dentist",
+        "label": "Dentists",
+        "slug": "dentists",
+        "type": "specialty",
+        "aliases": "dental doctor, dental surgeon, teeth doctor"
+    },
+    {
+        "name": "Neurologist",
+        "label": "Neurologists",
+        "slug": "neurologists",
+        "type": "specialty",
+        "aliases": "brain doctor, nerve specialist, neuro doctor"
+    },
+    {
+        "name": "Psychiatrist",
+        "label": "Psychiatrists",
+        "slug": "psychiatrists",
+        "type": "specialty",
+        "aliases": "mental health doctor, psychiatric doctor"
+    },
+    {
+        "name": "Gastroenterologist",
+        "label": "Gastroenterologists",
+        "slug": "gastroenterologists",
+        "type": "specialty",
+        "aliases": "stomach doctor, digestive specialist, gastro doctor"
+    },
+    {
+        "name": "Pulmonologist",
+        "label": "Pulmonologists",
+        "slug": "pulmonologists",
+        "type": "specialty",
+        "aliases": "lung doctor, chest specialist, respiratory specialist"
+    },
+    {
+        "name": "Diabetologist",
+        "label": "Diabetologists",
+        "slug": "diabetologists",
+        "type": "specialty",
+        "aliases": "diabetes doctor, sugar specialist, diabetes specialist"
+    },
+    {
+        "name": "Endocrinologist",
+        "label": "Endocrinologists",
+        "slug": "endocrinologists",
+        "type": "specialty",
+        "aliases": "hormone specialist, thyroid doctor, endocrine specialist"
+    },
+    {
+        "name": "Urologist",
+        "label": "Urologists",
+        "slug": "urologists",
+        "type": "specialty",
+        "aliases": "urinary specialist, prostate doctor, urinary tract doctor"
+    },
+    {
+        "name": "Nephrologist",
+        "label": "Nephrologists",
+        "slug": "nephrologists",
+        "type": "specialty",
+        "aliases": "kidney doctor, kidney specialist, renal specialist"
+    },
+    {
+        "name": "General Surgeon",
+        "label": "General Surgeons",
+        "slug": "general-surgeons",
+        "type": "specialty",
+        "aliases": "surgeon, surgery doctor, general surgery specialist"
+    },
+    {
+        "name": "Oncologist",
+        "label": "Oncologists",
+        "slug": "oncologists",
+        "type": "specialty",
+        "aliases": "cancer doctor, cancer specialist, oncology specialist"
+    },
+    {
+        "name": "Physiotherapist",
+        "label": "Physiotherapists",
+        "slug": "physiotherapists",
+        "type": "specialty",
+        "aliases": "physio, physical therapist, physiotherapy specialist"
+    }
+]

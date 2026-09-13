@@ -1,0 +1,382 @@
+[
+    {
+        "name": "Men's Clothing",
+        "label": "Men's Clothing",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "menswear, men's fashion, men clothes",
+        "sort_order": 1,
+        "is_active": true,
+        "is_featured": true
+    },
+    {
+        "name": "Women's Clothing",
+        "label": "Women's Clothing",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "womenswear, women's fashion, women clothes",
+        "sort_order": 2,
+        "is_active": true,
+        "is_featured": true
+    },
+    {
+        "name": "Kids' Clothing",
+        "label": "Kids' Clothing",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "children clothing, kidswear, boys clothing, girls clothing",
+        "sort_order": 3,
+        "is_active": true,
+        "is_featured": true
+    },
+    {
+        "name": "T-Shirt",
+        "label": "T-Shirts",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "tshirt, tee, tees",
+        "sort_order": 4,
+        "is_active": true,
+        "is_featured": true
+    },
+    {
+        "name": "Men's T-Shirt",
+        "label": "Men's T-Shirts",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "men tshirt, mens t-shirt, men's tees",
+        "sort_order": 5,
+        "is_active": true,
+        "is_featured": true
+    },
+    {
+        "name": "Women's T-Shirt",
+        "label": "Women's T-Shirts",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "women tshirt, womens t-shirt, women's tees",
+        "sort_order": 6,
+        "is_active": true,
+        "is_featured": true
+    },
+    {
+        "name": "Kids' T-Shirt",
+        "label": "Kids' T-Shirts",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "kids tshirt, children t-shirt, boys t-shirt, girls t-shirt",
+        "sort_order": 7,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Shirt",
+        "label": "Shirts",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "shirt, formal shirt, casual shirt",
+        "sort_order": 8,
+        "is_active": true,
+        "is_featured": true
+    },
+    {
+        "name": "Men's Shirt",
+        "label": "Men's Shirts",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "men shirts, mens shirt, formal shirts for men",
+        "sort_order": 9,
+        "is_active": true,
+        "is_featured": true
+    },
+    {
+        "name": "Women's Shirt",
+        "label": "Women's Shirts",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "women shirts, womens shirt, formal shirts for women",
+        "sort_order": 10,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Jean",
+        "label": "Jeans",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "denim, denim pants",
+        "sort_order": 11,
+        "is_active": true,
+        "is_featured": true
+    },
+    {
+        "name": "Men's Jean",
+        "label": "Men's Jeans",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "men jeans, mens denim",
+        "sort_order": 12,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Women's Jean",
+        "label": "Women's Jeans",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "women jeans, womens denim",
+        "sort_order": 13,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Trouser",
+        "label": "Trousers",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "pants, formal pants",
+        "sort_order": 14,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Men's Trouser",
+        "label": "Men's Trousers",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "men trousers, mens pants, formal pants for men",
+        "sort_order": 15,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Women's Trouser",
+        "label": "Women's Trousers",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "women trousers, womens pants",
+        "sort_order": 16,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Kurta",
+        "label": "Kurtas",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "kurta, ethnic kurta",
+        "sort_order": 17,
+        "is_active": true,
+        "is_featured": true
+    },
+    {
+        "name": "Men's Kurta",
+        "label": "Men's Kurtas",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "men kurta, mens kurta, punjabi kurta",
+        "sort_order": 18,
+        "is_active": true,
+        "is_featured": true
+    },
+    {
+        "name": "Kurti",
+        "label": "Kurtis",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "kurti, women's kurti, ladies kurti",
+        "sort_order": 19,
+        "is_active": true,
+        "is_featured": true
+    },
+    {
+        "name": "Saree",
+        "label": "Sarees",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "saree, sari, traditional saree",
+        "sort_order": 20,
+        "is_active": true,
+        "is_featured": true
+    },
+    {
+        "name": "Salwar Suit",
+        "label": "Salwar Suits",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "salwar kameez, suit set, ladies suit",
+        "sort_order": 21,
+        "is_active": true,
+        "is_featured": true
+    },
+    {
+        "name": "Lehenga",
+        "label": "Lehengas",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "lehenga, lehenga choli, bridal lehenga",
+        "sort_order": 22,
+        "is_active": true,
+        "is_featured": true
+    },
+    {
+        "name": "Ethnic Wear",
+        "label": "Ethnic Wear",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "traditional wear, festive wear, indian wear",
+        "sort_order": 23,
+        "is_active": true,
+        "is_featured": true
+    },
+    {
+        "name": "Dress",
+        "label": "Dresses",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "dress, western dress, women's dress",
+        "sort_order": 24,
+        "is_active": true,
+        "is_featured": true
+    },
+    {
+        "name": "Top",
+        "label": "Tops",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "women tops, ladies tops, fashion tops",
+        "sort_order": 25,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Skirt",
+        "label": "Skirts",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "skirt, women's skirts",
+        "sort_order": 26,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Legging",
+        "label": "Leggings",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "legging, women's leggings",
+        "sort_order": 27,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Short",
+        "label": "Shorts",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "short pants, casual shorts",
+        "sort_order": 28,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Track Pant",
+        "label": "Track Pants",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "joggers, trackpants, sports pants",
+        "sort_order": 29,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Sweatshirt",
+        "label": "Sweatshirts",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "sweatshirt, pullover",
+        "sort_order": 30,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Hoodie",
+        "label": "Hoodies",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "hoodie, hooded sweatshirt",
+        "sort_order": 31,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Jacket",
+        "label": "Jackets",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "jacket, winter jacket, casual jacket",
+        "sort_order": 32,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Sweater",
+        "label": "Sweaters",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "sweater, woollen wear, winter wear",
+        "sort_order": 33,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Nightwear",
+        "label": "Nightwear",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "sleepwear, night dress, night suit",
+        "sort_order": 34,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Innerwear",
+        "label": "Innerwear",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "underwear, undergarments, lingerie",
+        "sort_order": 35,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Sportswear",
+        "label": "Sportswear",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "activewear, gym wear, sports clothing",
+        "sort_order": 36,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Formal Wear",
+        "label": "Formal Wear",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "office wear, formal clothing",
+        "sort_order": 37,
+        "is_active": true,
+        "is_featured": false
+    },
+    {
+        "name": "Party Wear",
+        "label": "Party Wear",
+        "type": "product",
+        "parent": "Clothing",
+        "aliases": "party dress, occasion wear, festive clothing",
+        "sort_order": 38,
+        "is_active": true,
+        "is_featured": true
+    }
+]
