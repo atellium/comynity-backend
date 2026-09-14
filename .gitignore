@@ -69,6 +69,4 @@ celerybeat.pid
 # Django translations
 *.mo
 task.txt
-categories.txt
-business_categories.json
-data_format.json
+
