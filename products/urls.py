@@ -12,6 +12,11 @@ urlpatterns = [
         name="product-category-list",
     ),
     path(
+        "products/categories/import/",
+        views.product_category_bulk_import,
+        name="product-category-bulk-import",
+    ),
+    path(
         "businesses/<slug:business_slug>/products/",
         views.business_product_list,
         name="business-product-list",
