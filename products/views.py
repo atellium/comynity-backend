@@ -1,14 +1,16 @@
 from django.db import transaction
 from rest_framework import status
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, parser_classes, permission_classes
 from rest_framework.exceptions import NotFound, PermissionDenied
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.parsers import FormParser, MultiPartParser
+from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 
 from businesses.services import get_business_for_update, get_public_business_by_slug
 from products.models import Product
 from products.serializers import (
     ProductCategoryListQuerySerializer,
+    ProductCategoryBulkImportSerializer,
     ProductCategorySerializer,
     ProductSerializer,
     ProductWriteSerializer,
@@ -38,6 +40,12 @@ def _owned_product(request, business_slug, product_slug):
     business = _owned_business(request, business_slug)
     product = (
         Product.objects.filter(business=business, slug=product_slug)
+        .select_related(
+            "business",
+            "business__city",
+            "business__city__state",
+            "business__cover_image",
+        )
         .prefetch_related("categories", "product_images__upload")
         .first()
     )
@@ -66,6 +74,28 @@ def product_category_list(request):
                 context={"request": request},
             ).data,
         }
+    )
+
+
+@api_view(["POST"])
+@permission_classes([IsAdminUser])
+@parser_classes([MultiPartParser, FormParser])
+def product_category_bulk_import(request):
+    serializer = ProductCategoryBulkImportSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    result = serializer.save()
+    return Response(
+        {
+            "created": result["created"],
+            "updated": result["updated"],
+            "total": result["total"],
+            "results": ProductCategorySerializer(
+                result["categories"],
+                many=True,
+                context={"request": request},
+            ).data,
+        },
+        status=status.HTTP_201_CREATED,
     )
 
 
@@ -113,6 +143,12 @@ def public_product_detail(request, product_slug):
         Product.objects.filter(
             slug=product_slug,
             status=Product.Status.ACTIVE,
+        )
+        .select_related(
+            "business",
+            "business__city",
+            "business__city__state",
+            "business__cover_image",
         )
         .prefetch_related("categories", "product_images__upload")
         .first()
