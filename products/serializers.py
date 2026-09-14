@@ -1,5 +1,9 @@
+import json
+
 from django.core.exceptions import ValidationError as DjangoValidationError
 from django.core.files.storage import default_storage
+from django.db import transaction
+from django.utils.text import slugify
 from rest_framework import serializers
 
 from products.models import Product, ProductCategory, ProductImage
@@ -158,6 +162,151 @@ class ProductCategorySerializer(serializers.ModelSerializer):
         return request.build_absolute_uri(obj.image.url) if request else obj.image.url
 
 
+class ProductCategoryBulkImportSerializer(serializers.Serializer):
+    file = serializers.FileField(write_only=True)
+    parent_id = serializers.IntegerField(
+        required=False,
+        allow_null=True,
+        min_value=1,
+        write_only=True,
+    )
+
+    def validate_file(self, value):
+        if not value.name.lower().endswith(".json"):
+            raise serializers.ValidationError("Upload a .json file.")
+        return value
+
+    def validate(self, attrs):
+        parent_id = attrs.get("parent_id")
+        parent = None
+        if parent_id is not None:
+            parent = ProductCategory.objects.filter(pk=parent_id).first()
+            if parent is None:
+                raise serializers.ValidationError(
+                    {"parent_id": f"Product category with ID {parent_id} does not exist."}
+                )
+
+        categories = self._read_categories(attrs["file"])
+        seen_slugs = set()
+        validated_categories = []
+        for index, category in enumerate(categories, start=1):
+            values = self._validated_category(category, index)
+            if values["slug"] in seen_slugs:
+                raise serializers.ValidationError(
+                    {"file": f"Category #{index} repeats slug {values['slug']!r}."}
+                )
+            seen_slugs.add(values["slug"])
+            validated_categories.append(values)
+
+        attrs["parent"] = parent
+        attrs["categories"] = validated_categories
+        return attrs
+
+    def _read_categories(self, uploaded_file):
+        try:
+            uploaded_file.seek(0)
+            content = b"".join(uploaded_file.chunks()).decode("utf-8")
+            categories = json.loads(content)
+        except UnicodeDecodeError as exc:
+            raise serializers.ValidationError(
+                {"file": "The JSON file must be UTF-8 encoded."}
+            ) from exc
+        except json.JSONDecodeError as exc:
+            raise serializers.ValidationError(
+                {"file": f"Invalid JSON file: {exc.msg}."}
+            ) from exc
+
+        if isinstance(categories, dict):
+            categories = categories.get("categories")
+
+        if not isinstance(categories, list):
+            raise serializers.ValidationError(
+                {"file": "The JSON file must contain a list, or an object with a categories list."}
+            )
+        return categories
+
+    def _validated_category(self, category, index):
+        if not isinstance(category, dict):
+            raise serializers.ValidationError(
+                {"file": f"Category #{index} must be a JSON object."}
+            )
+
+        name = str(category.get("name", "")).strip()
+        if not name:
+            raise serializers.ValidationError(
+                {"file": f"Category #{index} is missing a non-empty name."}
+            )
+
+        sort_order = category.get("sort_order", 100)
+        if isinstance(sort_order, bool) or not isinstance(sort_order, int) or sort_order < 0:
+            raise serializers.ValidationError(
+                {"file": f"Category #{index} sort_order must be a non-negative integer."}
+            )
+
+        boolean_values = {}
+        for field, default in (
+            ("is_active", True),
+            ("is_featured", False),
+        ):
+            value = category.get(field, default)
+            if not isinstance(value, bool):
+                raise serializers.ValidationError(
+                    {"file": f"Category #{index} {field} must be a boolean."}
+                )
+            boolean_values[field] = value
+
+        slug = str(
+            category.get("slug") or slugify(category.get("label") or name)
+        ).strip()
+        if not slug:
+            raise serializers.ValidationError(
+                {"file": f"Category #{index} slug could not be generated."}
+            )
+
+        return {
+            "name": name,
+            "slug": slug,
+            "label": str(category.get("label", "")).strip(),
+            "display_name": str(category.get("display_name", "")).strip(),
+            "aliases": str(category.get("aliases", "")).strip(),
+            "sort_order": sort_order,
+            **boolean_values,
+        }
+
+    @transaction.atomic
+    def save(self, **kwargs):
+        parent = self.validated_data["parent"]
+        created_count = 0
+        updated_count = 0
+        imported_categories = []
+
+        for values in self.validated_data["categories"]:
+            category = ProductCategory.objects.filter(slug=values["slug"]).first()
+            created = category is None
+            if created:
+                category = ProductCategory(slug=values["slug"])
+
+            for field, value in values.items():
+                setattr(category, field, value)
+            category.parent = parent
+            try:
+                category.full_clean()
+            except DjangoValidationError as exc:
+                raise serializers.ValidationError(exc.message_dict) from exc
+            category.save()
+
+            created_count += int(created)
+            updated_count += int(not created)
+            imported_categories.append(category)
+
+        return {
+            "created": created_count,
+            "updated": updated_count,
+            "total": len(imported_categories),
+            "categories": imported_categories,
+        }
+
+
 class ProductImageSerializer(serializers.ModelSerializer):
     upload = UploadSerializer(read_only=True)
 
@@ -166,7 +315,36 @@ class ProductImageSerializer(serializers.ModelSerializer):
         fields = ("id", "upload", "sort_order")
 
 
+class ProductBusinessSerializer(serializers.Serializer):
+    id = serializers.UUIDField(read_only=True)
+    name = serializers.CharField(read_only=True)
+    slug = serializers.SlugField(read_only=True)
+    locality = serializers.CharField(read_only=True)
+    city = serializers.SerializerMethodField()
+    media = serializers.SerializerMethodField()
+
+    def get_city(self, obj):
+        if not obj.city:
+            return None
+        return {
+            "id": obj.city_id,
+            "name": obj.city.name,
+            "state_id": obj.city.state_id,
+            "state": obj.city.state.name,
+        }
+
+    def get_media(self, obj):
+        cover_image = None
+        if obj.cover_image_id:
+            request = self.context.get("request")
+            cover_image = default_storage.url(obj.cover_image.object_key)
+            if request and cover_image.startswith("/"):
+                cover_image = request.build_absolute_uri(cover_image)
+        return {"cover_image": cover_image}
+
+
 class ProductSerializer(serializers.ModelSerializer):
+    business = ProductBusinessSerializer(read_only=True)
     categories = ProductCategorySerializer(many=True, read_only=True)
     images = ProductImageSerializer(
         many=True,
@@ -181,6 +359,7 @@ class ProductSerializer(serializers.ModelSerializer):
             "public_id",
             "name",
             "slug",
+            "business",
             "description",
             "categories",
             "price_type",

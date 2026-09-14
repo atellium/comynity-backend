@@ -1,12 +1,20 @@
+import json
+from uuid import UUID
 from unittest.mock import patch
 from types import SimpleNamespace
 
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import SimpleTestCase
 from django.urls import reverse
 from rest_framework.test import APIRequestFactory, force_authenticate
 
 from products.product import Product, generate_product_public_id
-from products.serializers import ProductCategoryListQuerySerializer
+from products.serializers import (
+    ProductCategoryBulkImportSerializer,
+    ProductBusinessSerializer,
+    ProductCategoryListQuerySerializer,
+    ProductSerializer,
+)
 from products.views import product_list_create
 
 
@@ -46,6 +54,12 @@ class ProductEndpointTests(SimpleTestCase):
             "/api/products/categories/",
         )
 
+    def test_category_bulk_import_url(self):
+        self.assertEqual(
+            reverse("products:product-category-bulk-import"),
+            "/api/products/categories/import/",
+        )
+
     def test_create_url_uses_business_slug(self):
         self.assertEqual(
             reverse(
@@ -83,6 +97,40 @@ class ProductEndpointTests(SimpleTestCase):
                 },
             ),
             "/api/businesses/mine/royal-store/products/linen-shirt-a1b2c3d4/",
+        )
+
+    def test_product_detail_serializer_includes_business_information(self):
+        self.assertIn("business", ProductSerializer.Meta.fields)
+
+        business = SimpleNamespace(
+            id=UUID("6fa5af1f-07fd-4513-af73-8ece22d7af51"),
+            name="Royal Store",
+            slug="royal-store",
+            locality="Park Street",
+            city_id=12,
+            city=SimpleNamespace(
+                name="Kolkata",
+                state_id=3,
+                state=SimpleNamespace(name="West Bengal"),
+            ),
+            cover_image_id=None,
+        )
+
+        self.assertEqual(
+            ProductBusinessSerializer(business).data,
+            {
+                "id": "6fa5af1f-07fd-4513-af73-8ece22d7af51",
+                "name": "Royal Store",
+                "slug": "royal-store",
+                "locality": "Park Street",
+                "city": {
+                    "id": 12,
+                    "name": "Kolkata",
+                    "state_id": 3,
+                    "state": "West Bengal",
+                },
+                "media": {"cover_image": None},
+            },
         )
 
     @patch("products.views.ProductSerializer")
@@ -129,6 +177,60 @@ class ProductEndpointTests(SimpleTestCase):
         self.assertEqual(response.data["results"], [{"id": 1, "name": "Linen Shirt"}])
         product_model.objects.filter.assert_called_once_with(business=business)
         order_products.assert_called_once_with(products)
+
+    def test_category_bulk_import_accepts_json_file_contract(self):
+        upload = SimpleUploadedFile(
+            "categories.json",
+            json.dumps(
+                [
+                    {
+                        "name": "Mobile Phone",
+                        "slug": "mobile-phones",
+                        "label": "Mobile Phones",
+                        "display_name": "Mobiles",
+                        "aliases": "smartphones,cell phones",
+                        "sort_order": 5,
+                        "is_active": True,
+                        "is_featured": False,
+                    }
+                ]
+            ).encode("utf-8"),
+            content_type="application/json",
+        )
+
+        serializer = ProductCategoryBulkImportSerializer(data={"file": upload})
+
+        self.assertTrue(serializer.is_valid(), serializer.errors)
+        self.assertEqual(
+            serializer.validated_data["categories"][0],
+            {
+                "name": "Mobile Phone",
+                "slug": "mobile-phones",
+                "label": "Mobile Phones",
+                "display_name": "Mobiles",
+                "aliases": "smartphones,cell phones",
+                "sort_order": 5,
+                "is_active": True,
+                "is_featured": False,
+            },
+        )
+
+    def test_category_bulk_import_rejects_duplicate_slugs_in_file(self):
+        upload = SimpleUploadedFile(
+            "categories.json",
+            json.dumps(
+                [
+                    {"name": "Mobile Phone", "slug": "mobile-phones"},
+                    {"name": "Smartphone", "slug": "mobile-phones"},
+                ]
+            ).encode("utf-8"),
+            content_type="application/json",
+        )
+
+        serializer = ProductCategoryBulkImportSerializer(data={"file": upload})
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn("file", serializer.errors)
 
 
 class ProductCategoryListQuerySerializerTests(SimpleTestCase):
