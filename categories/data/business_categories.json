@@ -1,0 +1,2692 @@
+[
+  {
+    "name": "Clothing Store",
+    "display_name": "Clothing Store",
+    "label": "Clothing Stores",
+    "aliases": "clothes,garments,fashion",
+    "parent": 1,
+    "sort_order": 1,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Footwear Store",
+    "display_name": "Footwear Store",
+    "label": "Footwear Stores",
+    "aliases": "shoes,sandals,slippers,footwear",
+    "parent": 1,
+    "sort_order": 2,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Jewellery Store",
+    "display_name": "Jewellery Store",
+    "label": "Jewellery Stores",
+    "aliases": "jewelry,gold,silver,ornaments",
+    "parent": 1,
+    "sort_order": 3,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Cosmetics Store",
+    "display_name": "Cosmetics Store",
+    "label": "Cosmetics Stores",
+    "aliases": "beauty products,makeup,skincare",
+    "parent": 1,
+    "sort_order": 4,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Furniture Store",
+    "display_name": "Furniture Store",
+    "label": "Furniture Stores",
+    "aliases": "sofa,bed,table,chair",
+    "parent": 1,
+    "sort_order": 5,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Gift Shop",
+    "display_name": "Gift Shop",
+    "label": "Gift Shops",
+    "aliases": "gifts,presents,novelty",
+    "parent": 1,
+    "sort_order": 6,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Toy Store",
+    "display_name": "Toy Store",
+    "label": "Toy Stores",
+    "aliases": "toys,kids toys,games",
+    "parent": 1,
+    "sort_order": 7,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Stationery Store",
+    "display_name": "Stationery Store",
+    "label": "Stationery Stores",
+    "aliases": "stationery,school supplies,office supplies",
+    "parent": 1,
+    "sort_order": 8,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Home Decor Store",
+    "display_name": "Home Decor Store",
+    "label": "Home Decor Stores",
+    "aliases": "decor,interior decor,home accessories",
+    "parent": 1,
+    "sort_order": 9,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Kitchenware Store",
+    "display_name": "Kitchenware Store",
+    "label": "Kitchenware Stores",
+    "aliases": "utensils,kitchen items,cookware",
+    "parent": 1,
+    "sort_order": 10,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Watch Store",
+    "display_name": "Watch Store",
+    "label": "Watch Stores",
+    "aliases": "watches,clock,timepiece",
+    "parent": 1,
+    "sort_order": 11,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Optical Store",
+    "display_name": "Optical Store",
+    "label": "Optical Stores",
+    "aliases": "spectacles,eyeglasses,frames,optician",
+    "parent": 1,
+    "sort_order": 12,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Book Store",
+    "display_name": "Book Store",
+    "label": "Book Stores",
+    "aliases": "books,bookshop,novels,textbooks",
+    "parent": 1,
+    "sort_order": 13,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Sports Goods Store",
+    "display_name": "Sports Goods Store",
+    "label": "Sports Goods Stores",
+    "aliases": "sports equipment,fitness goods",
+    "parent": 1,
+    "sort_order": 14,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Department Store",
+    "display_name": "Department Store",
+    "label": "Department Stores",
+    "aliases": "retail,multi brand store,shopping",
+    "parent": 1,
+    "sort_order": 15,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Restaurant",
+    "display_name": "Restaurant",
+    "label": "Restaurants",
+    "aliases": "food,dining,eatery",
+    "parent": 2,
+    "sort_order": 1,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Cafe",
+    "display_name": "Cafe",
+    "label": "Cafes",
+    "aliases": "coffee,tea,snacks",
+    "parent": 2,
+    "sort_order": 2,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Fast Food Restaurant",
+    "display_name": "Fast Food",
+    "label": "Fast Food Restaurants",
+    "aliases": "burger,pizza,quick bites",
+    "parent": 2,
+    "sort_order": 3,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Bakery",
+    "display_name": "Bakery",
+    "label": "Bakeries",
+    "aliases": "cake,bread,pastry",
+    "parent": 2,
+    "sort_order": 4,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Sweet Shop",
+    "display_name": "Sweet Shop",
+    "label": "Sweet Shops",
+    "aliases": "sweets,mithai,dessert",
+    "parent": 2,
+    "sort_order": 5,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Ice Cream Parlour",
+    "display_name": "Ice Cream Parlour",
+    "label": "Ice Cream Parlours",
+    "aliases": "ice cream,gelato,dessert",
+    "parent": 2,
+    "sort_order": 6,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Food Court",
+    "display_name": "Food Court",
+    "label": "Food Courts",
+    "aliases": "food stalls,dining",
+    "parent": 2,
+    "sort_order": 7,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Dhaba",
+    "display_name": "Dhaba",
+    "label": "Dhabas",
+    "aliases": "roadside restaurant,north indian food",
+    "parent": 2,
+    "sort_order": 8,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Cloud Kitchen",
+    "display_name": "Cloud Kitchen",
+    "label": "Cloud Kitchens",
+    "aliases": "delivery kitchen,online food",
+    "parent": 2,
+    "sort_order": 9,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Catering Service",
+    "display_name": "Catering Service",
+    "label": "Catering Services",
+    "aliases": "caterer,event food,party food",
+    "parent": 2,
+    "sort_order": 10,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Juice Bar",
+    "display_name": "Juice Bar",
+    "label": "Juice Bars",
+    "aliases": "juice,shakes,beverages",
+    "parent": 2,
+    "sort_order": 11,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Tea Stall",
+    "display_name": "Tea Stall",
+    "label": "Tea Stalls",
+    "aliases": "tea,chai,snacks",
+    "parent": 2,
+    "sort_order": 12,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Street Food Outlet",
+    "display_name": "Street Food",
+    "label": "Street Food Outlets",
+    "aliases": "street food,chaat,fast snacks",
+    "parent": 2,
+    "sort_order": 13,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Pharmacy",
+    "display_name": "Pharmacy",
+    "label": "Pharmacies",
+    "aliases": "medical store,chemist,medicine",
+    "parent": 3,
+    "sort_order": 1,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Doctor",
+    "display_name": "Doctor",
+    "label": "Doctors",
+    "aliases": "physician,medical practitioner",
+    "parent": 3,
+    "sort_order": 2,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Hospital",
+    "display_name": "Hospital",
+    "label": "Hospitals",
+    "aliases": "healthcare,medical center",
+    "parent": 3,
+    "sort_order": 3,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Nursing Home",
+    "display_name": "Nursing Home",
+    "label": "Nursing Homes",
+    "aliases": "healthcare,patient care",
+    "parent": 3,
+    "sort_order": 4,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Diagnostic Centre",
+    "display_name": "Diagnostic Centre",
+    "label": "Diagnostic Centres",
+    "aliases": "diagnostics,pathology,lab,test",
+    "parent": 3,
+    "sort_order": 5,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Dental Clinic",
+    "display_name": "Dental Clinic",
+    "label": "Dental Clinics",
+    "aliases": "dentist,dental care,oral care",
+    "parent": 3,
+    "sort_order": 6,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Eye Care Centre",
+    "display_name": "Eye Care Centre",
+    "label": "Eye Care Centres",
+    "aliases": "eye clinic,ophthalmology,vision",
+    "parent": 3,
+    "sort_order": 7,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Physiotherapy Centre",
+    "display_name": "Physiotherapy Centre",
+    "label": "Physiotherapy Centres",
+    "aliases": "physio,rehabilitation,therapy",
+    "parent": 3,
+    "sort_order": 8,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Blood Bank",
+    "display_name": "Blood Bank",
+    "label": "Blood Banks",
+    "aliases": "blood donation,blood storage",
+    "parent": 3,
+    "sort_order": 9,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Ambulance Service",
+    "display_name": "Ambulance Service",
+    "label": "Ambulance Services",
+    "aliases": "emergency ambulance,patient transport",
+    "parent": 3,
+    "sort_order": 10,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Nurse & Aya Centre",
+    "display_name": "Nurse & Aya Centre",
+    "label": "Nurse & Aya Centres",
+    "aliases": "nursing service,aya,caregiver",
+    "parent": 3,
+    "sort_order": 11,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Medical Equipment Store",
+    "display_name": "Medical Equipment Store",
+    "label": "Medical Equipment Stores",
+    "aliases": "medical devices,health equipment,surgical goods",
+    "parent": 3,
+    "sort_order": 12,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Home Healthcare Service",
+    "display_name": "Home Healthcare Service",
+    "label": "Home Healthcare Services",
+    "aliases": "home nursing,patient care,elder care",
+    "parent": 3,
+    "sort_order": 13,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Beauty Salon",
+    "display_name": "Beauty Salon",
+    "label": "Beauty Salons",
+    "aliases": "salon,beauty parlour,haircut",
+    "parent": 4,
+    "sort_order": 1,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Barber Shop",
+    "display_name": "Barber Shop",
+    "label": "Barber Shops",
+    "aliases": "barber,haircut,mens salon",
+    "parent": 4,
+    "sort_order": 2,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Spa",
+    "display_name": "Spa",
+    "label": "Spas",
+    "aliases": "massage,wellness,relaxation",
+    "parent": 4,
+    "sort_order": 3,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Nail Salon",
+    "display_name": "Nail Salon",
+    "label": "Nail Salons",
+    "aliases": "nail art,manicure,pedicure",
+    "parent": 4,
+    "sort_order": 4,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Makeup Artist",
+    "display_name": "Makeup Artist",
+    "label": "Makeup Artists",
+    "aliases": "makeup,bridal makeup,beautician",
+    "parent": 4,
+    "sort_order": 5,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Bridal Studio",
+    "display_name": "Bridal Studio",
+    "label": "Bridal Studios",
+    "aliases": "bridal makeup,wedding beauty",
+    "parent": 4,
+    "sort_order": 6,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Skin Care Clinic",
+    "display_name": "Skin Care Clinic",
+    "label": "Skin Care Clinics",
+    "aliases": "skin treatment,facial,beauty clinic",
+    "parent": 4,
+    "sort_order": 7,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Hair Treatment Clinic",
+    "display_name": "Hair Treatment Clinic",
+    "label": "Hair Treatment Clinics",
+    "aliases": "hair care,hair treatment,scalp",
+    "parent": 4,
+    "sort_order": 8,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Massage Centre",
+    "display_name": "Massage Centre",
+    "label": "Massage Centres",
+    "aliases": "massage,body massage,relaxation",
+    "parent": 4,
+    "sort_order": 9,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Wellness Centre",
+    "display_name": "Wellness Centre",
+    "label": "Wellness Centres",
+    "aliases": "wellness,holistic care,relaxation",
+    "parent": 4,
+    "sort_order": 10,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Tattoo Studio",
+    "display_name": "Tattoo Studio",
+    "label": "Tattoo Studios",
+    "aliases": "tattoo,body art,piercing",
+    "parent": 4,
+    "sort_order": 11,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "School",
+    "display_name": "School",
+    "label": "Schools",
+    "aliases": "education,primary school,secondary school",
+    "parent": 5,
+    "sort_order": 1,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "College",
+    "display_name": "College",
+    "label": "Colleges",
+    "aliases": "higher education,degree college",
+    "parent": 5,
+    "sort_order": 2,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Coaching Centre",
+    "display_name": "Coaching Centre",
+    "label": "Coaching Centres",
+    "aliases": "tuition,coaching,exam preparation",
+    "parent": 5,
+    "sort_order": 3,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Private Tutor",
+    "display_name": "Private Tutor",
+    "label": "Private Tutors",
+    "aliases": "home tutor,tuition teacher",
+    "parent": 5,
+    "sort_order": 4,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Computer Training Institute",
+    "display_name": "Computer Training Institute",
+    "label": "Computer Training Institutes",
+    "aliases": "computer course,it training",
+    "parent": 5,
+    "sort_order": 5,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Language Institute",
+    "display_name": "Language Institute",
+    "label": "Language Institutes",
+    "aliases": "language classes,spoken english",
+    "parent": 5,
+    "sort_order": 6,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Music School",
+    "display_name": "Music School",
+    "label": "Music Schools",
+    "aliases": "music classes,singing,instrument",
+    "parent": 5,
+    "sort_order": 7,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Dance School",
+    "display_name": "Dance School",
+    "label": "Dance Schools",
+    "aliases": "dance classes,dance academy",
+    "parent": 5,
+    "sort_order": 8,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Art School",
+    "display_name": "Art School",
+    "label": "Art Schools",
+    "aliases": "drawing,painting,art classes",
+    "parent": 5,
+    "sort_order": 9,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Vocational Training Centre",
+    "display_name": "Vocational Training Centre",
+    "label": "Vocational Training Centres",
+    "aliases": "skill training,vocational course",
+    "parent": 5,
+    "sort_order": 10,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Preschool",
+    "display_name": "Preschool",
+    "label": "Preschools",
+    "aliases": "play school,nursery,kindergarten",
+    "parent": 5,
+    "sort_order": 11,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Plumber",
+    "display_name": "Plumber",
+    "label": "Plumbers",
+    "aliases": "plumbing,pipe repair,water fitting",
+    "parent": 6,
+    "sort_order": 1,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Electrician",
+    "display_name": "Electrician",
+    "label": "Electricians",
+    "aliases": "electrical repair,wiring,electric service",
+    "parent": 6,
+    "sort_order": 2,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Carpenter",
+    "display_name": "Carpenter",
+    "label": "Carpenters",
+    "aliases": "woodwork,furniture repair,carpentry",
+    "parent": 6,
+    "sort_order": 3,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Painter",
+    "display_name": "Painter",
+    "label": "Painters",
+    "aliases": "house painting,wall painting",
+    "parent": 6,
+    "sort_order": 4,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "House Cleaning Service",
+    "display_name": "House Cleaning Service",
+    "label": "House Cleaning Services",
+    "aliases": "cleaning,deep cleaning,home cleaning",
+    "parent": 6,
+    "sort_order": 5,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Pest Control Service",
+    "display_name": "Pest Control Service",
+    "label": "Pest Control Services",
+    "aliases": "pest control,termite control",
+    "parent": 6,
+    "sort_order": 6,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Interior Designer",
+    "display_name": "Interior Designer",
+    "label": "Interior Designers",
+    "aliases": "interior design,home design",
+    "parent": 6,
+    "sort_order": 7,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Home Renovation Service",
+    "display_name": "Home Renovation Service",
+    "label": "Home Renovation Services",
+    "aliases": "renovation,remodeling,home improvement",
+    "parent": 6,
+    "sort_order": 8,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Water Purifier Service",
+    "display_name": "Water Purifier Service",
+    "label": "Water Purifier Services",
+    "aliases": "ro service,water filter repair",
+    "parent": 6,
+    "sort_order": 9,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "AC Service",
+    "display_name": "AC Service",
+    "label": "AC Services",
+    "aliases": "air conditioner service,ac installation",
+    "parent": 6,
+    "sort_order": 10,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Appliance Installation Service",
+    "display_name": "Appliance Installation Service",
+    "label": "Appliance Installation Services",
+    "aliases": "installation,home appliance setup",
+    "parent": 6,
+    "sort_order": 11,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Gardening Service",
+    "display_name": "Gardening Service",
+    "label": "Gardening Services",
+    "aliases": "gardener,landscaping,garden maintenance",
+    "parent": 6,
+    "sort_order": 12,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Car Dealer",
+    "display_name": "Car Dealer",
+    "label": "Car Dealers",
+    "aliases": "car showroom,new car,used car",
+    "parent": 7,
+    "sort_order": 1,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Two Wheeler Dealer",
+    "display_name": "Two Wheeler Dealer",
+    "label": "Two Wheeler Dealers",
+    "aliases": "bike showroom,scooter,motorcycle",
+    "parent": 7,
+    "sort_order": 2,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Car Repair Garage",
+    "display_name": "Car Repair Garage",
+    "label": "Car Repair Garages",
+    "aliases": "car repair,garage,auto repair",
+    "parent": 7,
+    "sort_order": 3,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Bike Repair Shop",
+    "display_name": "Bike Repair Shop",
+    "label": "Bike Repair Shops",
+    "aliases": "bike service,motorcycle repair",
+    "parent": 7,
+    "sort_order": 4,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Tyre Shop",
+    "display_name": "Tyre Shop",
+    "label": "Tyre Shops",
+    "aliases": "tires,car tyre,bike tyre",
+    "parent": 7,
+    "sort_order": 5,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Battery Shop",
+    "display_name": "Battery Shop",
+    "label": "Battery Shops",
+    "aliases": "car battery,bike battery,inverter battery",
+    "parent": 7,
+    "sort_order": 6,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Auto Parts Store",
+    "display_name": "Auto Parts Store",
+    "label": "Auto Parts Stores",
+    "aliases": "spare parts,car parts,bike parts",
+    "parent": 7,
+    "sort_order": 7,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Car Wash",
+    "display_name": "Car Wash",
+    "label": "Car Washes",
+    "aliases": "car cleaning,vehicle wash",
+    "parent": 7,
+    "sort_order": 8,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Vehicle Detailing Centre",
+    "display_name": "Vehicle Detailing Centre",
+    "label": "Vehicle Detailing Centres",
+    "aliases": "car detailing,polishing,ceramic coating",
+    "parent": 7,
+    "sort_order": 9,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Driving School",
+    "display_name": "Driving School",
+    "label": "Driving Schools",
+    "aliases": "driving lessons,driver training",
+    "parent": 7,
+    "sort_order": 10,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "EV Charging Station",
+    "display_name": "EV Charging Station",
+    "label": "EV Charging Stations",
+    "aliases": "electric vehicle charging,ev charger",
+    "parent": 7,
+    "sort_order": 11,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Used Vehicle Dealer",
+    "display_name": "Used Vehicle Dealer",
+    "label": "Used Vehicle Dealers",
+    "aliases": "used car,used bike,pre owned vehicle",
+    "parent": 7,
+    "sort_order": 12,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Real Estate Agent",
+    "display_name": "Real Estate Agent",
+    "label": "Real Estate Agents",
+    "aliases": "property dealer,broker,realtor",
+    "parent": 8,
+    "sort_order": 1,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Property Developer",
+    "display_name": "Property Developer",
+    "label": "Property Developers",
+    "aliases": "builder,developer,real estate developer",
+    "parent": 8,
+    "sort_order": 2,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Apartment Rental",
+    "display_name": "Apartment Rental",
+    "label": "Apartment Rentals",
+    "aliases": "flat rent,house rent,apartment",
+    "parent": 8,
+    "sort_order": 3,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Room Rental",
+    "display_name": "Room Rental",
+    "label": "Room Rentals",
+    "aliases": "room rent,single room,paying room",
+    "parent": 8,
+    "sort_order": 4,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "PG Accommodation",
+    "display_name": "PG Accommodation",
+    "label": "PG Accommodations",
+    "aliases": "paying guest,hostel,pg",
+    "parent": 8,
+    "sort_order": 5,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Commercial Property",
+    "display_name": "Commercial Property",
+    "label": "Commercial Properties",
+    "aliases": "office space,shop rent,commercial space",
+    "parent": 8,
+    "sort_order": 6,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Land & Plot",
+    "display_name": "Land & Plot",
+    "label": "Land & Plots",
+    "aliases": "land sale,plot sale,property",
+    "parent": 8,
+    "sort_order": 7,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Property Management Service",
+    "display_name": "Property Management Service",
+    "label": "Property Management Services",
+    "aliases": "property management,rental management",
+    "parent": 8,
+    "sort_order": 8,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Architect",
+    "display_name": "Architect",
+    "label": "Architects",
+    "aliases": "architecture,building design",
+    "parent": 8,
+    "sort_order": 9,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Construction Company",
+    "display_name": "Construction Company",
+    "label": "Construction Companies",
+    "aliases": "construction,builder,civil work",
+    "parent": 8,
+    "sort_order": 10,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Mobile Repair Shop",
+    "display_name": "Mobile Repair Shop",
+    "label": "Mobile Repair Shops",
+    "aliases": "phone repair,smartphone repair",
+    "parent": 9,
+    "sort_order": 1,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Computer Repair Service",
+    "display_name": "Computer Repair Service",
+    "label": "Computer Repair Services",
+    "aliases": "pc repair,laptop repair,computer service",
+    "parent": 9,
+    "sort_order": 2,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Appliance Repair Service",
+    "display_name": "Appliance Repair Service",
+    "label": "Appliance Repair Services",
+    "aliases": "home appliance repair",
+    "parent": 9,
+    "sort_order": 3,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "TV Repair Service",
+    "display_name": "TV Repair Service",
+    "label": "TV Repair Services",
+    "aliases": "television repair,led tv repair",
+    "parent": 9,
+    "sort_order": 4,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Refrigerator Repair Service",
+    "display_name": "Refrigerator Repair Service",
+    "label": "Refrigerator Repair Services",
+    "aliases": "fridge repair,refrigerator service",
+    "parent": 9,
+    "sort_order": 5,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Washing Machine Repair Service",
+    "display_name": "Washing Machine Repair Service",
+    "label": "Washing Machine Repair Services",
+    "aliases": "washing machine repair,laundry appliance repair",
+    "parent": 9,
+    "sort_order": 6,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "AC Repair Service",
+    "display_name": "AC Repair Service",
+    "label": "AC Repair Services",
+    "aliases": "air conditioner repair,ac technician",
+    "parent": 9,
+    "sort_order": 7,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Watch Repair Shop",
+    "display_name": "Watch Repair Shop",
+    "label": "Watch Repair Shops",
+    "aliases": "watch repair,clock repair",
+    "parent": 9,
+    "sort_order": 8,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Shoe Repair Shop",
+    "display_name": "Shoe Repair Shop",
+    "label": "Shoe Repair Shops",
+    "aliases": "cobbler,shoe repair",
+    "parent": 9,
+    "sort_order": 9,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Tailoring Service",
+    "display_name": "Tailoring Service",
+    "label": "Tailoring Services",
+    "aliases": "tailor,alteration,stitching",
+    "parent": 9,
+    "sort_order": 10,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Locksmith",
+    "display_name": "Locksmith",
+    "label": "Locksmiths",
+    "aliases": "lock repair,key maker,lock service",
+    "parent": 9,
+    "sort_order": 11,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Generator Repair Service",
+    "display_name": "Generator Repair Service",
+    "label": "Generator Repair Services",
+    "aliases": "generator repair,generator service",
+    "parent": 9,
+    "sort_order": 12,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Mobile Phone Store",
+    "display_name": "Mobile Phone Store",
+    "label": "Mobile Phone Stores",
+    "aliases": "mobile shop,smartphone,phone dealer",
+    "parent": 10,
+    "sort_order": 1,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Electronics Store",
+    "display_name": "Electronics Store",
+    "label": "Electronics Stores",
+    "aliases": "electronics,electrical goods,appliances",
+    "parent": 10,
+    "sort_order": 2,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Computer Store",
+    "display_name": "Computer Store",
+    "label": "Computer Stores",
+    "aliases": "computer,laptop,pc",
+    "parent": 10,
+    "sort_order": 3,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Laptop Store",
+    "display_name": "Laptop Store",
+    "label": "Laptop Stores",
+    "aliases": "laptop,notebook,computer",
+    "parent": 10,
+    "sort_order": 4,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Mobile Accessories Store",
+    "display_name": "Mobile Accessories Store",
+    "label": "Mobile Accessories Stores",
+    "aliases": "charger,earbuds,back cover,power bank",
+    "parent": 10,
+    "sort_order": 5,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Home Appliance Store",
+    "display_name": "Home Appliance Store",
+    "label": "Home Appliance Stores",
+    "aliases": "refrigerator,washing machine,ac,tv",
+    "parent": 10,
+    "sort_order": 6,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Electrical Store",
+    "display_name": "Electrical Store",
+    "label": "Electrical Stores",
+    "aliases": "wire,switch,fan,electrical goods",
+    "parent": 10,
+    "sort_order": 7,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Solar Equipment Store",
+    "display_name": "Solar Equipment Store",
+    "label": "Solar Equipment Stores",
+    "aliases": "solar panel,solar inverter,solar system",
+    "parent": 10,
+    "sort_order": 8,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "IT Service Provider",
+    "display_name": "IT Service Provider",
+    "label": "IT Service Providers",
+    "aliases": "it services,technology support,computer service",
+    "parent": 10,
+    "sort_order": 9,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Software Company",
+    "display_name": "Software Company",
+    "label": "Software Companies",
+    "aliases": "software development,app development,it company",
+    "parent": 10,
+    "sort_order": 10,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Internet Service Provider",
+    "display_name": "Internet Service Provider",
+    "label": "Internet Service Providers",
+    "aliases": "broadband,internet,wifi,isp",
+    "parent": 10,
+    "sort_order": 11,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Bank",
+    "display_name": "Bank",
+    "label": "Banks",
+    "aliases": "banking,loan,savings",
+    "parent": 11,
+    "sort_order": 1,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Insurance Agency",
+    "display_name": "Insurance Agency",
+    "label": "Insurance Agencies",
+    "aliases": "insurance,policy,agent",
+    "parent": 11,
+    "sort_order": 2,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Chartered Accountant",
+    "display_name": "Chartered Accountant",
+    "label": "Chartered Accountants",
+    "aliases": "ca,accounting,tax",
+    "parent": 11,
+    "sort_order": 3,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Tax Consultant",
+    "display_name": "Tax Consultant",
+    "label": "Tax Consultants",
+    "aliases": "income tax,gst,tax filing",
+    "parent": 11,
+    "sort_order": 4,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Lawyer",
+    "display_name": "Lawyer",
+    "label": "Lawyers",
+    "aliases": "advocate,legal service,attorney",
+    "parent": 11,
+    "sort_order": 5,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Law Firm",
+    "display_name": "Law Firm",
+    "label": "Law Firms",
+    "aliases": "legal firm,advocates,legal services",
+    "parent": 11,
+    "sort_order": 6,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Financial Advisor",
+    "display_name": "Financial Advisor",
+    "label": "Financial Advisors",
+    "aliases": "investment advisor,financial planning",
+    "parent": 11,
+    "sort_order": 7,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Loan Agency",
+    "display_name": "Loan Agency",
+    "label": "Loan Agencies",
+    "aliases": "loan,finance,credit",
+    "parent": 11,
+    "sort_order": 8,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Mutual Fund Advisor",
+    "display_name": "Mutual Fund Advisor",
+    "label": "Mutual Fund Advisors",
+    "aliases": "mutual fund,investment,sip",
+    "parent": 11,
+    "sort_order": 9,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Stock Broker",
+    "display_name": "Stock Broker",
+    "label": "Stock Brokers",
+    "aliases": "share market,broker,trading",
+    "parent": 11,
+    "sort_order": 10,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Accounting Service",
+    "display_name": "Accounting Service",
+    "label": "Accounting Services",
+    "aliases": "bookkeeping,accounts,gst",
+    "parent": 11,
+    "sort_order": 11,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Hotel",
+    "display_name": "Hotel",
+    "label": "Hotels",
+    "aliases": "stay,accommodation,lodging",
+    "parent": 12,
+    "sort_order": 1,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Guest House",
+    "display_name": "Guest House",
+    "label": "Guest Houses",
+    "aliases": "guesthouse,lodging,stay",
+    "parent": 12,
+    "sort_order": 2,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Resort",
+    "display_name": "Resort",
+    "label": "Resorts",
+    "aliases": "holiday resort,vacation stay",
+    "parent": 12,
+    "sort_order": 3,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Homestay",
+    "display_name": "Homestay",
+    "label": "Homestays",
+    "aliases": "home stay,local accommodation",
+    "parent": 12,
+    "sort_order": 4,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Travel Agency",
+    "display_name": "Travel Agency",
+    "label": "Travel Agencies",
+    "aliases": "tour,travel booking,holiday package",
+    "parent": 12,
+    "sort_order": 5,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Tour Operator",
+    "display_name": "Tour Operator",
+    "label": "Tour Operators",
+    "aliases": "tour package,sightseeing,travel",
+    "parent": 12,
+    "sort_order": 6,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Bus Booking Agency",
+    "display_name": "Bus Booking Agency",
+    "label": "Bus Booking Agencies",
+    "aliases": "bus ticket,travel booking",
+    "parent": 12,
+    "sort_order": 7,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Car Rental Service",
+    "display_name": "Car Rental Service",
+    "label": "Car Rental Services",
+    "aliases": "car hire,rental car",
+    "parent": 12,
+    "sort_order": 8,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Bike Rental Service",
+    "display_name": "Bike Rental Service",
+    "label": "Bike Rental Services",
+    "aliases": "bike hire,scooter rental",
+    "parent": 12,
+    "sort_order": 9,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Tourist Guide",
+    "display_name": "Tourist Guide",
+    "label": "Tourist Guides",
+    "aliases": "travel guide,local guide",
+    "parent": 12,
+    "sort_order": 10,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Lodge",
+    "display_name": "Lodge",
+    "label": "Lodges",
+    "aliases": "budget stay,lodging",
+    "parent": 12,
+    "sort_order": 11,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Event Planner",
+    "display_name": "Event Planner",
+    "label": "Event Planners",
+    "aliases": "event management,party planner",
+    "parent": 13,
+    "sort_order": 1,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Wedding Planner",
+    "display_name": "Wedding Planner",
+    "label": "Wedding Planners",
+    "aliases": "wedding planning,marriage event",
+    "parent": 13,
+    "sort_order": 2,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Banquet Hall",
+    "display_name": "Banquet Hall",
+    "label": "Banquet Halls",
+    "aliases": "wedding hall,event venue",
+    "parent": 13,
+    "sort_order": 3,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Marriage Hall",
+    "display_name": "Marriage Hall",
+    "label": "Marriage Halls",
+    "aliases": "wedding venue,ceremony hall",
+    "parent": 13,
+    "sort_order": 4,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Party Hall",
+    "display_name": "Party Hall",
+    "label": "Party Halls",
+    "aliases": "party venue,event hall",
+    "parent": 13,
+    "sort_order": 5,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "DJ Service",
+    "display_name": "DJ Service",
+    "label": "DJ Services",
+    "aliases": "dj,music,event music",
+    "parent": 13,
+    "sort_order": 6,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Decorator",
+    "display_name": "Decorator",
+    "label": "Decorators",
+    "aliases": "event decoration,wedding decoration",
+    "parent": 13,
+    "sort_order": 7,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Photographer",
+    "display_name": "Photographer",
+    "label": "Photographers",
+    "aliases": "photography,wedding photography,photo shoot",
+    "parent": 13,
+    "sort_order": 8,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Videographer",
+    "display_name": "Videographer",
+    "label": "Videographers",
+    "aliases": "videography,wedding video",
+    "parent": 13,
+    "sort_order": 9,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Cinema Hall",
+    "display_name": "Cinema Hall",
+    "label": "Cinema Halls",
+    "aliases": "movie theatre,theatre,cinema",
+    "parent": 13,
+    "sort_order": 10,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Gaming Zone",
+    "display_name": "Gaming Zone",
+    "label": "Gaming Zones",
+    "aliases": "games,arcade,gaming",
+    "parent": 13,
+    "sort_order": 11,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Amusement Park",
+    "display_name": "Amusement Park",
+    "label": "Amusement Parks",
+    "aliases": "theme park,rides,entertainment",
+    "parent": 13,
+    "sort_order": 12,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Gym",
+    "display_name": "Gym",
+    "label": "Gyms",
+    "aliases": "fitness,gymnasium,workout",
+    "parent": 14,
+    "sort_order": 1,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Fitness Centre",
+    "display_name": "Fitness Centre",
+    "label": "Fitness Centres",
+    "aliases": "fitness,workout,training",
+    "parent": 14,
+    "sort_order": 2,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Yoga Centre",
+    "display_name": "Yoga Centre",
+    "label": "Yoga Centres",
+    "aliases": "yoga,meditation,wellness",
+    "parent": 14,
+    "sort_order": 3,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Sports Academy",
+    "display_name": "Sports Academy",
+    "label": "Sports Academies",
+    "aliases": "sports coaching,training",
+    "parent": 14,
+    "sort_order": 4,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Cricket Academy",
+    "display_name": "Cricket Academy",
+    "label": "Cricket Academies",
+    "aliases": "cricket coaching,cricket training",
+    "parent": 14,
+    "sort_order": 5,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Football Academy",
+    "display_name": "Football Academy",
+    "label": "Football Academies",
+    "aliases": "football coaching,soccer training",
+    "parent": 14,
+    "sort_order": 6,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Swimming Pool",
+    "display_name": "Swimming Pool",
+    "label": "Swimming Pools",
+    "aliases": "swimming,swim training",
+    "parent": 14,
+    "sort_order": 7,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Martial Arts Academy",
+    "display_name": "Martial Arts Academy",
+    "label": "Martial Arts Academies",
+    "aliases": "karate,taekwondo,martial arts",
+    "parent": 14,
+    "sort_order": 8,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Dance Fitness Centre",
+    "display_name": "Dance Fitness Centre",
+    "label": "Dance Fitness Centres",
+    "aliases": "zumba,dance workout,fitness",
+    "parent": 14,
+    "sort_order": 9,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Personal Trainer",
+    "display_name": "Personal Trainer",
+    "label": "Personal Trainers",
+    "aliases": "fitness trainer,gym trainer",
+    "parent": 14,
+    "sort_order": 10,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Pet Shop",
+    "display_name": "Pet Shop",
+    "label": "Pet Shops",
+    "aliases": "pet supplies,pet food,animals",
+    "parent": 15,
+    "sort_order": 1,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Veterinary Clinic",
+    "display_name": "Veterinary Clinic",
+    "label": "Veterinary Clinics",
+    "aliases": "vet,animal doctor,pet clinic",
+    "parent": 15,
+    "sort_order": 2,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Pet Grooming Service",
+    "display_name": "Pet Grooming Service",
+    "label": "Pet Grooming Services",
+    "aliases": "pet grooming,dog grooming,cat grooming",
+    "parent": 15,
+    "sort_order": 3,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Pet Boarding",
+    "display_name": "Pet Boarding",
+    "label": "Pet Boarding Services",
+    "aliases": "pet hostel,pet stay,boarding",
+    "parent": 15,
+    "sort_order": 4,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Pet Trainer",
+    "display_name": "Pet Trainer",
+    "label": "Pet Trainers",
+    "aliases": "dog trainer,pet training",
+    "parent": 15,
+    "sort_order": 5,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Aquarium Store",
+    "display_name": "Aquarium Store",
+    "label": "Aquarium Stores",
+    "aliases": "fish,aquarium,fish tank",
+    "parent": 15,
+    "sort_order": 6,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Pet Food Store",
+    "display_name": "Pet Food Store",
+    "label": "Pet Food Stores",
+    "aliases": "dog food,cat food,pet supplies",
+    "parent": 15,
+    "sort_order": 7,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Animal Shelter",
+    "display_name": "Animal Shelter",
+    "label": "Animal Shelters",
+    "aliases": "animal rescue,pet adoption,shelter",
+    "parent": 15,
+    "sort_order": 8,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Courier Service",
+    "display_name": "Courier Service",
+    "label": "Courier Services",
+    "aliases": "courier,parcel,delivery",
+    "parent": 16,
+    "sort_order": 1,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Packers & Movers",
+    "display_name": "Packers & Movers",
+    "label": "Packers & Movers",
+    "aliases": "moving,relocation,transport",
+    "parent": 16,
+    "sort_order": 2,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Transport Company",
+    "display_name": "Transport Company",
+    "label": "Transport Companies",
+    "aliases": "goods transport,logistics,freight",
+    "parent": 16,
+    "sort_order": 3,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Truck Rental Service",
+    "display_name": "Truck Rental Service",
+    "label": "Truck Rental Services",
+    "aliases": "truck hire,goods vehicle rental",
+    "parent": 16,
+    "sort_order": 4,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Delivery Service",
+    "display_name": "Delivery Service",
+    "label": "Delivery Services",
+    "aliases": "local delivery,parcel delivery",
+    "parent": 16,
+    "sort_order": 5,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Warehouse",
+    "display_name": "Warehouse",
+    "label": "Warehouses",
+    "aliases": "storage,godown,logistics",
+    "parent": 16,
+    "sort_order": 6,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Freight Forwarder",
+    "display_name": "Freight Forwarder",
+    "label": "Freight Forwarders",
+    "aliases": "freight,shipping,logistics",
+    "parent": 16,
+    "sort_order": 7,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Cargo Service",
+    "display_name": "Cargo Service",
+    "label": "Cargo Services",
+    "aliases": "cargo,freight,goods transport",
+    "parent": 16,
+    "sort_order": 8,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Bike Delivery Service",
+    "display_name": "Bike Delivery Service",
+    "label": "Bike Delivery Services",
+    "aliases": "bike courier,local delivery",
+    "parent": 16,
+    "sort_order": 9,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Logistics Company",
+    "display_name": "Logistics Company",
+    "label": "Logistics Companies",
+    "aliases": "supply chain,transport,delivery",
+    "parent": 16,
+    "sort_order": 10,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Consulting Firm",
+    "display_name": "Consulting Firm",
+    "label": "Consulting Firms",
+    "aliases": "consultant,business consulting,advisory",
+    "parent": 17,
+    "sort_order": 1,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Wholesaler",
+    "display_name": "Wholesaler",
+    "label": "Wholesalers",
+    "aliases": "wholesale,bulk supplier,distributor",
+    "parent": 17,
+    "sort_order": 2,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Distributor",
+    "display_name": "Distributor",
+    "label": "Distributors",
+    "aliases": "distribution,supplier,stockist",
+    "parent": 17,
+    "sort_order": 3,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "HR Consultancy",
+    "display_name": "HR Consultancy",
+    "label": "HR Consultancies",
+    "aliases": "recruitment,staffing,jobs",
+    "parent": 17,
+    "sort_order": 4,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Recruitment Agency",
+    "display_name": "Recruitment Agency",
+    "label": "Recruitment Agencies",
+    "aliases": "jobs,hiring,staffing",
+    "parent": 17,
+    "sort_order": 5,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Business Consultant",
+    "display_name": "Business Consultant",
+    "label": "Business Consultants",
+    "aliases": "business advice,consulting",
+    "parent": 17,
+    "sort_order": 6,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Office Supply Store",
+    "display_name": "Office Supply Store",
+    "label": "Office Supply Stores",
+    "aliases": "office supplies,stationery,b2b",
+    "parent": 17,
+    "sort_order": 7,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Printing Service",
+    "display_name": "Printing Service",
+    "label": "Printing Services",
+    "aliases": "print,printing,business cards",
+    "parent": 17,
+    "sort_order": 8,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Legal Documentation Service",
+    "display_name": "Legal Documentation Service",
+    "label": "Legal Documentation Services",
+    "aliases": "documentation,registration,forms",
+    "parent": 17,
+    "sort_order": 9,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Company Registration Service",
+    "display_name": "Company Registration Service",
+    "label": "Company Registration Services",
+    "aliases": "company registration,gst registration,business setup",
+    "parent": 17,
+    "sort_order": 10,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Coworking Space",
+    "display_name": "Coworking Space",
+    "label": "Coworking Spaces",
+    "aliases": "shared office,workspace,office rental",
+    "parent": 17,
+    "sort_order": 11,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Advertising Agency",
+    "display_name": "Advertising Agency",
+    "label": "Advertising Agencies",
+    "aliases": "advertising,ads,marketing",
+    "parent": 18,
+    "sort_order": 1,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Digital Marketing Agency",
+    "display_name": "Digital Marketing Agency",
+    "label": "Digital Marketing Agencies",
+    "aliases": "seo,social media,online marketing",
+    "parent": 18,
+    "sort_order": 2,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Social Media Agency",
+    "display_name": "Social Media Agency",
+    "label": "Social Media Agencies",
+    "aliases": "social media,content marketing",
+    "parent": 18,
+    "sort_order": 3,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Graphic Design Studio",
+    "display_name": "Graphic Design Studio",
+    "label": "Graphic Design Studios",
+    "aliases": "graphic design,branding,creative",
+    "parent": 18,
+    "sort_order": 4,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Web Design Agency",
+    "display_name": "Web Design Agency",
+    "label": "Web Design Agencies",
+    "aliases": "website design,web development",
+    "parent": 18,
+    "sort_order": 5,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Photography Studio",
+    "display_name": "Photography Studio",
+    "label": "Photography Studios",
+    "aliases": "photo studio,photography",
+    "parent": 18,
+    "sort_order": 6,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Video Production Company",
+    "display_name": "Video Production Company",
+    "label": "Video Production Companies",
+    "aliases": "video production,film,commercial video",
+    "parent": 18,
+    "sort_order": 7,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Printing Press",
+    "display_name": "Printing Press",
+    "label": "Printing Presses",
+    "aliases": "printing,offset printing,digital printing",
+    "parent": 18,
+    "sort_order": 8,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Signage Company",
+    "display_name": "Signage Company",
+    "label": "Signage Companies",
+    "aliases": "signboard,led sign,branding",
+    "parent": 18,
+    "sort_order": 9,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "PR Agency",
+    "display_name": "PR Agency",
+    "label": "PR Agencies",
+    "aliases": "public relations,media relations",
+    "parent": 18,
+    "sort_order": 10,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Newspaper Publisher",
+    "display_name": "Newspaper Publisher",
+    "label": "Newspaper Publishers",
+    "aliases": "newspaper,media,publishing",
+    "parent": 18,
+    "sort_order": 11,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Radio Station",
+    "display_name": "Radio Station",
+    "label": "Radio Stations",
+    "aliases": "radio,fm,broadcasting",
+    "parent": 18,
+    "sort_order": 12,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Garment Manufacturer",
+    "display_name": "Garment Manufacturer",
+    "label": "Garment Manufacturers",
+    "aliases": "clothing manufacturer,textile,garments",
+    "parent": 19,
+    "sort_order": 1,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Food Manufacturer",
+    "display_name": "Food Manufacturer",
+    "label": "Food Manufacturers",
+    "aliases": "food processing,packaged food",
+    "parent": 19,
+    "sort_order": 2,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Furniture Manufacturer",
+    "display_name": "Furniture Manufacturer",
+    "label": "Furniture Manufacturers",
+    "aliases": "furniture factory,wood furniture",
+    "parent": 19,
+    "sort_order": 3,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Plastic Manufacturer",
+    "display_name": "Plastic Manufacturer",
+    "label": "Plastic Manufacturers",
+    "aliases": "plastic products,plastic factory",
+    "parent": 19,
+    "sort_order": 4,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Metal Fabricator",
+    "display_name": "Metal Fabricator",
+    "label": "Metal Fabricators",
+    "aliases": "metal work,fabrication,steel",
+    "parent": 19,
+    "sort_order": 5,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Packaging Manufacturer",
+    "display_name": "Packaging Manufacturer",
+    "label": "Packaging Manufacturers",
+    "aliases": "packaging,boxes,containers",
+    "parent": 19,
+    "sort_order": 6,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Machinery Manufacturer",
+    "display_name": "Machinery Manufacturer",
+    "label": "Machinery Manufacturers",
+    "aliases": "industrial machinery,machines",
+    "parent": 19,
+    "sort_order": 7,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Chemical Manufacturer",
+    "display_name": "Chemical Manufacturer",
+    "label": "Chemical Manufacturers",
+    "aliases": "chemicals,industrial chemicals",
+    "parent": 19,
+    "sort_order": 8,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Textile Manufacturer",
+    "display_name": "Textile Manufacturer",
+    "label": "Textile Manufacturers",
+    "aliases": "fabric,textile mill,cloth",
+    "parent": 19,
+    "sort_order": 9,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Printing & Packaging Unit",
+    "display_name": "Printing & Packaging Unit",
+    "label": "Printing & Packaging Units",
+    "aliases": "printing,packaging,labels",
+    "parent": 19,
+    "sort_order": 10,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Industrial Supplier",
+    "display_name": "Industrial Supplier",
+    "label": "Industrial Suppliers",
+    "aliases": "industrial goods,machinery parts,b2b",
+    "parent": 19,
+    "sort_order": 11,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Farm",
+    "display_name": "Farm",
+    "label": "Farms",
+    "aliases": "agriculture,farming,crops",
+    "parent": 20,
+    "sort_order": 1,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Seed Store",
+    "display_name": "Seed Store",
+    "label": "Seed Stores",
+    "aliases": "seeds,agriculture seeds,farming",
+    "parent": 20,
+    "sort_order": 2,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Fertilizer Store",
+    "display_name": "Fertilizer Store",
+    "label": "Fertilizer Stores",
+    "aliases": "fertilizer,manure,agriculture",
+    "parent": 20,
+    "sort_order": 3,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Pesticide Store",
+    "display_name": "Pesticide Store",
+    "label": "Pesticide Stores",
+    "aliases": "pesticide,crop protection,agro chemicals",
+    "parent": 20,
+    "sort_order": 4,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Agricultural Equipment Store",
+    "display_name": "Agricultural Equipment Store",
+    "label": "Agricultural Equipment Stores",
+    "aliases": "farm equipment,agriculture tools,machinery",
+    "parent": 20,
+    "sort_order": 5,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Tractor Dealer",
+    "display_name": "Tractor Dealer",
+    "label": "Tractor Dealers",
+    "aliases": "tractor,farm vehicle,agriculture machinery",
+    "parent": 20,
+    "sort_order": 6,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Nursery",
+    "display_name": "Nursery",
+    "label": "Nurseries",
+    "aliases": "plants,garden plants,saplings",
+    "parent": 20,
+    "sort_order": 7,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Dairy Farm",
+    "display_name": "Dairy Farm",
+    "label": "Dairy Farms",
+    "aliases": "milk,dairy,cattle",
+    "parent": 20,
+    "sort_order": 8,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Poultry Farm",
+    "display_name": "Poultry Farm",
+    "label": "Poultry Farms",
+    "aliases": "poultry,chicken,eggs",
+    "parent": 20,
+    "sort_order": 9,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Fish Farm",
+    "display_name": "Fish Farm",
+    "label": "Fish Farms",
+    "aliases": "fishery,aquaculture,fish farming",
+    "parent": 20,
+    "sort_order": 10,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Organic Farm",
+    "display_name": "Organic Farm",
+    "label": "Organic Farms",
+    "aliases": "organic farming,organic produce",
+    "parent": 20,
+    "sort_order": 11,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Security Agency",
+    "display_name": "Security Agency",
+    "label": "Security Agencies",
+    "aliases": "security guard,security service",
+    "parent": 21,
+    "sort_order": 1,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "CCTV Installation Service",
+    "display_name": "CCTV Installation Service",
+    "label": "CCTV Installation Services",
+    "aliases": "cctv,camera installation,surveillance",
+    "parent": 21,
+    "sort_order": 2,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "CCTV Store",
+    "display_name": "CCTV Store",
+    "label": "CCTV Stores",
+    "aliases": "security camera,cctv camera,dvr",
+    "parent": 21,
+    "sort_order": 3,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Alarm System Provider",
+    "display_name": "Alarm System Provider",
+    "label": "Alarm System Providers",
+    "aliases": "security alarm,burglar alarm",
+    "parent": 21,
+    "sort_order": 4,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Fire Safety Equipment Store",
+    "display_name": "Fire Safety Equipment Store",
+    "label": "Fire Safety Equipment Stores",
+    "aliases": "fire extinguisher,fire safety",
+    "parent": 21,
+    "sort_order": 5,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Access Control Provider",
+    "display_name": "Access Control Provider",
+    "label": "Access Control Providers",
+    "aliases": "access control,biometric,door security",
+    "parent": 21,
+    "sort_order": 6,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Private Detective Agency",
+    "display_name": "Private Detective Agency",
+    "label": "Private Detective Agencies",
+    "aliases": "detective,investigation,private investigator",
+    "parent": 21,
+    "sort_order": 7,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Security Equipment Supplier",
+    "display_name": "Security Equipment Supplier",
+    "label": "Security Equipment Suppliers",
+    "aliases": "security devices,surveillance equipment",
+    "parent": 21,
+    "sort_order": 8,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "NGO",
+    "display_name": "NGO",
+    "label": "NGOs",
+    "aliases": "non profit,charity,social organization",
+    "parent": 22,
+    "sort_order": 1,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Club",
+    "display_name": "Club",
+    "label": "Clubs",
+    "aliases": "social club,community club,association",
+    "parent": 22,
+    "sort_order": 2,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Residents Association",
+    "display_name": "Residents Association",
+    "label": "Residents Associations",
+    "aliases": "housing society,resident welfare,community",
+    "parent": 22,
+    "sort_order": 3,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Religious Organization",
+    "display_name": "Religious Organization",
+    "label": "Religious Organizations",
+    "aliases": "religious group,faith organization",
+    "parent": 22,
+    "sort_order": 4,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Charitable Trust",
+    "display_name": "Charitable Trust",
+    "label": "Charitable Trusts",
+    "aliases": "charity,trust,non profit",
+    "parent": 22,
+    "sort_order": 5,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Youth Club",
+    "display_name": "Youth Club",
+    "label": "Youth Clubs",
+    "aliases": "youth organization,community club",
+    "parent": 22,
+    "sort_order": 6,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Cultural Organization",
+    "display_name": "Cultural Organization",
+    "label": "Cultural Organizations",
+    "aliases": "culture,arts,community",
+    "parent": 22,
+    "sort_order": 7,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Social Service Organization",
+    "display_name": "Social Service Organization",
+    "label": "Social Service Organizations",
+    "aliases": "social work,welfare,community service",
+    "parent": 22,
+    "sort_order": 8,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Community Centre",
+    "display_name": "Community Centre",
+    "label": "Community Centres",
+    "aliases": "community hall,community services",
+    "parent": 22,
+    "sort_order": 9,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Professional Association",
+    "display_name": "Professional Association",
+    "label": "Professional Associations",
+    "aliases": "association,professional body,member organization",
+    "parent": 22,
+    "sort_order": 10,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Municipal Office",
+    "display_name": "Municipal Office",
+    "label": "Municipal Offices",
+    "aliases": "municipality,civic body,local government",
+    "parent": 23,
+    "sort_order": 1,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Police Station",
+    "display_name": "Police Station",
+    "label": "Police Stations",
+    "aliases": "police,law enforcement",
+    "parent": 23,
+    "sort_order": 2,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Fire Station",
+    "display_name": "Fire Station",
+    "label": "Fire Stations",
+    "aliases": "fire brigade,emergency service",
+    "parent": 23,
+    "sort_order": 3,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Post Office",
+    "display_name": "Post Office",
+    "label": "Post Offices",
+    "aliases": "postal service,mail,india post",
+    "parent": 23,
+    "sort_order": 4,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Government Hospital",
+    "display_name": "Government Hospital",
+    "label": "Government Hospitals",
+    "aliases": "public hospital,government healthcare",
+    "parent": 23,
+    "sort_order": 5,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Government School",
+    "display_name": "Government School",
+    "label": "Government Schools",
+    "aliases": "public school,state school",
+    "parent": 23,
+    "sort_order": 6,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Government College",
+    "display_name": "Government College",
+    "label": "Government Colleges",
+    "aliases": "public college,state college",
+    "parent": 23,
+    "sort_order": 7,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Block Development Office",
+    "display_name": "Block Development Office",
+    "label": "Block Development Offices",
+    "aliases": "bdo,block office,government",
+    "parent": 23,
+    "sort_order": 8,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Panchayat Office",
+    "display_name": "Panchayat Office",
+    "label": "Panchayat Offices",
+    "aliases": "gram panchayat,village office",
+    "parent": 23,
+    "sort_order": 9,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Public Service Centre",
+    "display_name": "Public Service Centre",
+    "label": "Public Service Centres",
+    "aliases": "government service,citizen service",
+    "parent": 23,
+    "sort_order": 10,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Court",
+    "display_name": "Court",
+    "label": "Courts",
+    "aliases": "judiciary,legal court",
+    "parent": 23,
+    "sort_order": 11,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Electricity Board Office",
+    "display_name": "Electricity Board Office",
+    "label": "Electricity Board Offices",
+    "aliases": "electricity office,power board",
+    "parent": 23,
+    "sort_order": 12,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Water Supply Office",
+    "display_name": "Water Supply Office",
+    "label": "Water Supply Offices",
+    "aliases": "water board,municipal water",
+    "parent": 23,
+    "sort_order": 13,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Grocery Store",
+    "display_name": "Grocery Store",
+    "label": "Grocery Stores",
+    "aliases": "grocery,kirana,daily essentials",
+    "parent": 24,
+    "sort_order": 1,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "Supermarket",
+    "display_name": "Supermarket",
+    "label": "Supermarkets",
+    "aliases": "grocery,department store,daily needs",
+    "parent": 24,
+    "sort_order": 2,
+    "is_active": true,
+    "is_featured": true
+  },
+  {
+    "name": "General Store",
+    "display_name": "General Store",
+    "label": "General Stores",
+    "aliases": "daily needs,household items,kirana",
+    "parent": 24,
+    "sort_order": 3,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Vegetable Shop",
+    "display_name": "Vegetable Shop",
+    "label": "Vegetable Shops",
+    "aliases": "vegetables,fresh produce,sabji",
+    "parent": 24,
+    "sort_order": 4,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Fruit Shop",
+    "display_name": "Fruit Shop",
+    "label": "Fruit Shops",
+    "aliases": "fruits,fresh fruit,produce",
+    "parent": 24,
+    "sort_order": 5,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Dairy Store",
+    "display_name": "Dairy Store",
+    "label": "Dairy Stores",
+    "aliases": "milk,dairy,curd,paneer",
+    "parent": 24,
+    "sort_order": 6,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Meat Shop",
+    "display_name": "Meat Shop",
+    "label": "Meat Shops",
+    "aliases": "meat,mutton,chicken",
+    "parent": 24,
+    "sort_order": 7,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Fish Shop",
+    "display_name": "Fish Shop",
+    "label": "Fish Shops",
+    "aliases": "fish,seafood,fresh fish",
+    "parent": 24,
+    "sort_order": 8,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Water Supplier",
+    "display_name": "Water Supplier",
+    "label": "Water Suppliers",
+    "aliases": "drinking water,water jar,water delivery",
+    "parent": 24,
+    "sort_order": 9,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Gas Agency",
+    "display_name": "Gas Agency",
+    "label": "Gas Agencies",
+    "aliases": "lpg,cooking gas,gas cylinder",
+    "parent": 24,
+    "sort_order": 10,
+    "is_active": true,
+    "is_featured": false
+  },
+  {
+    "name": "Household Essentials Store",
+    "display_name": "Household Essentials Store",
+    "label": "Household Essentials Stores",
+    "aliases": "household,daily use,essentials",
+    "parent": 24,
+    "sort_order": 11,
+    "is_active": true,
+    "is_featured": false
+  }
+]
