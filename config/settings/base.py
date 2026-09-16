@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "businesses",
     "products",
     "bookmarks",
+    "doctors",
     # "catalogs",
     # "offers",
     "uploads",

@@ -8,7 +8,10 @@ from PIL import Image
 from rest_framework import status
 from rest_framework.test import APITestCase
 
+from categories.models import BusinessCategory
 from core.image_service import _encode_webp, compress_image
+from doctors.models import DoctorSpecialty
+from products.models import ProductCategory
 
 
 class ImageCompressionTests(SimpleTestCase):
@@ -117,3 +120,67 @@ class HealthEndpointTests(APITestCase):
         self.assertEqual(
             response["Access-Control-Allow-Origin"], "https://app.example.com"
         )
+
+
+class SearchEndpointTests(APITestCase):
+    def setUp(self):
+        BusinessCategory.objects.create(
+            name="Clinic",
+            label="Clinics",
+            display_name="Clinics",
+            slug="clinics",
+            aliases="doctor chamber, medical centre",
+            sort_order=2,
+        )
+        DoctorSpecialty.objects.create(
+            name="Cardiologist",
+            label="Cardiologists",
+            slug="cardiologists",
+            aliases="heart doctor",
+            sort_order=1,
+        )
+        ProductCategory.objects.create(
+            name="Stethoscope",
+            label="Stethoscopes",
+            display_name="Stethoscopes",
+            slug="stethoscopes",
+            aliases="medical equipment",
+            sort_order=3,
+        )
+
+    def test_search_lists_supported_types_without_images(self):
+        response = self.client.get(reverse("core:search"))
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        data = response.json()
+        self.assertEqual(len(data), 3)
+        self.assertEqual(
+            {item["type"] for item in data},
+            {"business", "doctor", "product"},
+        )
+        for item in data:
+            self.assertNotIn("image", item)
+            self.assertNotIn("is_featured", item)
+
+    def test_search_filters_by_query(self):
+        response = self.client.get(reverse("core:search"), {"q": "heart"})
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        data = response.json()
+        self.assertEqual(len(data), 1)
+        self.assertEqual(data[0]["slug"], "cardiologists")
+        self.assertEqual(data[0]["type"], "doctor")
+
+    def test_search_filters_by_type(self):
+        response = self.client.get(reverse("core:search"), {"type": "product"})
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        data = response.json()
+        self.assertEqual(len(data), 1)
+        self.assertEqual(data[0]["type"], "product")
+        self.assertEqual(data[0]["slug"], "stethoscopes")
+
+    def test_search_rejects_unknown_type(self):
+        response = self.client.get(reverse("core:search"), {"type": "unknown"})
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)

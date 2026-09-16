@@ -1,4 +1,7 @@
 from django.core.paginator import Paginator
+from django.contrib.gis.db.models.functions import Distance
+from django.contrib.gis.geos import Point
+from django.contrib.gis.measure import D
 from django.db.models import Case, IntegerField, Q, When
 
 from products.models import Product, ProductCategory
@@ -55,13 +58,47 @@ def list_public_products(business, filters):
     return order_products(queryset.distinct(), filters["sort_by"], filters["sort_order"])
 
 
+def list_nearby_products(filters):
+    user_location = Point(float(filters["lng"]), float(filters["lat"]), srid=4326)
+    return (
+        Product.objects.filter(
+            status=Product.Status.ACTIVE,
+            is_available=True,
+            business__is_active=True,
+            business__location__isnull=False,
+            categories__slug=filters["category"],
+            categories__is_active=True,
+        )
+        .filter(
+            business__location__distance_lte=(
+                user_location,
+                D(km=filters["radius_km"]),
+            )
+        )
+        .annotate(distance=Distance("business__location", user_location))
+        .select_related(
+            "business",
+            "business__city",
+            "business__city__state",
+            "business__cover_image",
+        )
+        .prefetch_related("categories", "product_images__upload")
+        .order_by("distance", "sort_order", "-created_at")
+        .distinct()
+    )
+
+
+def find_active_product_category(slug):
+    return ProductCategory.objects.filter(slug=slug, is_active=True).first()
+
+
 def list_featured_product_categories(business):
     return (
         ProductCategory.objects.filter(
             products__business=business,
             products__status=Product.Status.ACTIVE,
-            products__is_featured=True,
             is_active=True,
+            is_featured=True,
         )
         .select_related("parent")
         .distinct()

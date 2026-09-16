@@ -25,7 +25,10 @@ def list_business_categories(filters):
     if filters.get("slug"):
         queryset = queryset.filter(slug=filters["slug"])
 
-    for field in ("is_active", "is_featured"):
+    if filters.get("parent_slug"):
+        queryset = queryset.filter(parent__slug=filters["parent_slug"])
+
+    for field in ("is_active", "is_featured", "is_popular"):
         if field in filters:
             queryset = queryset.filter(**{field: filters[field]})
 

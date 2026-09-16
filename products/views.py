@@ -9,6 +9,7 @@ from rest_framework.response import Response
 from businesses.services import get_business_for_update, get_public_business_by_slug
 from products.models import Product
 from products.serializers import (
+    NearbyProductListQuerySerializer,
     ProductCategoryListQuerySerializer,
     ProductCategoryBulkImportSerializer,
     ProductCategorySerializer,
@@ -18,7 +19,9 @@ from products.serializers import (
     PublicProductListQuerySerializer,
 )
 from products.services import (
+    find_active_product_category,
     list_featured_product_categories,
+    list_nearby_products,
     list_product_categories,
     list_public_products,
     order_products,
@@ -52,6 +55,37 @@ def _owned_product(request, business_slug, product_slug):
     if product is None:
         raise NotFound("Product not found.")
     return product
+
+
+@api_view(["GET"])
+@permission_classes([AllowAny])
+def nearby_product_list(request):
+    query = NearbyProductListQuerySerializer(data=request.query_params)
+    query.is_valid(raise_exception=True)
+    filters = query.validated_data
+    category = find_active_product_category(filters["category"])
+    if category is None:
+        raise NotFound("Product category not found.")
+
+    products, pagination = paginate_products(
+        list_nearby_products(filters),
+        filters["page"],
+        filters["page_size"],
+    )
+    return Response(
+        {
+            "category": ProductCategorySerializer(
+                category,
+                context={"request": request},
+            ).data,
+            "pagination": pagination,
+            "results": ProductSerializer(
+                products,
+                many=True,
+                context={"request": request},
+            ).data,
+        }
+    )
 
 
 @api_view(["GET"])

@@ -10,12 +10,14 @@ from rest_framework.test import APIRequestFactory, force_authenticate
 
 from products.product import Product, generate_product_public_id
 from products.serializers import (
+    NearbyProductListQuerySerializer,
     ProductCategoryBulkImportSerializer,
     ProductBusinessSerializer,
     ProductCategoryListQuerySerializer,
     ProductSerializer,
 )
-from products.views import product_list_create
+from products.services import list_featured_product_categories
+from products.views import nearby_product_list, product_list_create
 
 
 class ProductIdentityTests(SimpleTestCase):
@@ -48,6 +50,12 @@ class ProductIdentityTests(SimpleTestCase):
 
 
 class ProductEndpointTests(SimpleTestCase):
+    def test_nearby_product_list_url(self):
+        self.assertEqual(
+            reverse("products:nearby-product-list"),
+            "/api/products/",
+        )
+
     def test_category_list_url(self):
         self.assertEqual(
             reverse("products:product-category-list"),
@@ -178,6 +186,47 @@ class ProductEndpointTests(SimpleTestCase):
         product_model.objects.filter.assert_called_once_with(business=business)
         order_products.assert_called_once_with(products)
 
+    @patch("products.views.ProductSerializer")
+    @patch("products.views.ProductCategorySerializer")
+    @patch("products.views.paginate_products")
+    @patch("products.views.list_nearby_products")
+    @patch("products.views.find_active_product_category")
+    def test_nearby_product_list_includes_category_information(
+        self,
+        find_category,
+        list_products,
+        paginate_products,
+        category_serializer,
+        product_serializer,
+    ):
+        category = SimpleNamespace(slug="stethoscopes")
+        products = object()
+        page_products = object()
+        request = APIRequestFactory().get(
+            reverse("products:nearby-product-list"),
+            {
+                "lat": "22.467778888332326",
+                "lng": "88.40233304308231",
+                "category": "stethoscopes",
+            },
+        )
+        find_category.return_value = category
+        list_products.return_value = products
+        paginate_products.return_value = (
+            page_products,
+            {"page": 1, "page_size": 20, "total_pages": 1},
+        )
+        category_serializer.return_value.data = {"slug": "stethoscopes"}
+        product_serializer.return_value.data = [{"name": "Classic Stethoscope"}]
+
+        response = nearby_product_list(request)
+
+        self.assertEqual(response.data["category"], {"slug": "stethoscopes"})
+        self.assertEqual(response.data["results"], [{"name": "Classic Stethoscope"}])
+        find_category.assert_called_once_with("stethoscopes")
+        list_products.assert_called_once()
+        paginate_products.assert_called_once_with(products, 1, 20)
+
     def test_category_bulk_import_accepts_json_file_contract(self):
         upload = SimpleUploadedFile(
             "categories.json",
@@ -233,6 +282,29 @@ class ProductEndpointTests(SimpleTestCase):
         self.assertIn("file", serializer.errors)
 
 
+class ProductServiceTests(SimpleTestCase):
+    @patch("products.services.ProductCategory")
+    def test_featured_product_categories_require_featured_categories_with_active_products(
+        self,
+        product_category,
+    ):
+        business = SimpleNamespace(pk="business-id")
+        ordered_categories = object()
+        product_category.objects.filter.return_value.select_related.return_value.distinct.return_value.order_by.return_value = (
+            ordered_categories
+        )
+
+        result = list_featured_product_categories(business)
+
+        self.assertIs(result, ordered_categories)
+        product_category.objects.filter.assert_called_once_with(
+            products__business=business,
+            products__status=Product.Status.ACTIVE,
+            is_active=True,
+            is_featured=True,
+        )
+
+
 class ProductCategoryListQuerySerializerTests(SimpleTestCase):
     def test_rejects_multiple_hierarchy_filters(self):
         serializer = ProductCategoryListQuerySerializer(
@@ -252,3 +324,38 @@ class ProductCategoryListQuerySerializerTests(SimpleTestCase):
 
         self.assertFalse(serializer.is_valid())
         self.assertIn("created_before", serializer.errors)
+
+
+class NearbyProductListQuerySerializerTests(SimpleTestCase):
+    def test_requires_location_and_category(self):
+        serializer = NearbyProductListQuerySerializer(data={})
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn("lat", serializer.errors)
+        self.assertIn("lng", serializer.errors)
+        self.assertIn("category", serializer.errors)
+
+    def test_defaults_radius_to_five_km(self):
+        serializer = NearbyProductListQuerySerializer(
+            data={
+                "lat": "22.467778888332326",
+                "lng": "88.40233304308231",
+                "category": "stethoscopes",
+            }
+        )
+
+        self.assertTrue(serializer.is_valid(), serializer.errors)
+        self.assertEqual(serializer.validated_data["radius_km"], 5)
+
+    def test_accepts_radius_alias(self):
+        serializer = NearbyProductListQuerySerializer(
+            data={
+                "lat": "22.467778888332326",
+                "lng": "88.40233304308231",
+                "category": "stethoscopes",
+                "radius": "10",
+            }
+        )
+
+        self.assertTrue(serializer.is_valid(), serializer.errors)
+        self.assertEqual(serializer.validated_data["radius_km"], 10)

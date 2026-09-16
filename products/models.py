@@ -48,6 +48,11 @@ class ProductCategory(AutoSlugModel, TimestampedModel):
         db_index=True,
     )
 
+    is_search = models.BooleanField(
+        default=False,
+        db_index=True,
+    )
+
     sort_order = models.PositiveIntegerField(
         default=100,
     )

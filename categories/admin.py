@@ -29,19 +29,21 @@ class BusinessCategoryAdmin(admin.ModelAdmin):
         "parent",
         "is_active",
         "is_featured",
+        "is_popular",
         "sort_order",
-        "updated_at",
     )
 
     list_editable = (
         "is_active",
         "is_featured",
+        "is_popular",
         "sort_order",
     )
 
     list_filter = (
         "is_active",
         "is_featured",
+        "is_popular",
         "parent",
     )
 
@@ -93,6 +95,7 @@ class BusinessCategoryAdmin(admin.ModelAdmin):
                 "fields": (
                     "is_active",
                     "is_featured",
+                    "is_popular",
                 )
             },
         ),

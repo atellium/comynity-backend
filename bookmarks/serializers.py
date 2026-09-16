@@ -2,6 +2,8 @@ from rest_framework import serializers
 
 from bookmarks.models import SavedItem
 from businesses.models import Business
+from doctors.models import Doctor
+from doctors.serializers import DoctorListItemSerializer
 from products.models import Product
 from businesses.serializers import BusinessListSerializer
 from products.serializers import PublicProductListSerializer
@@ -10,6 +12,7 @@ from products.serializers import PublicProductListSerializer
 ITEM_TYPE_MODELS = {
     SavedItem.ItemType.BUSINESS: Business,
     SavedItem.ItemType.PRODUCT: Product,
+    SavedItem.ItemType.DOCTOR: Doctor,
 }
 
 
@@ -65,6 +68,7 @@ class SavedItemListSerializer(SavedItemSerializer):
 
         serializer_class = {
             SavedItem.ItemType.BUSINESS: BusinessListSerializer,
+            SavedItem.ItemType.DOCTOR: DoctorListItemSerializer,
             SavedItem.ItemType.PRODUCT: PublicProductListSerializer,
         }.get(obj.item_type)
         if serializer_class is None:
