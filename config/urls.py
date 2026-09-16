@@ -12,7 +12,7 @@ urlpatterns = [
     path("api/", include("categories.urls")),
     path("api/", include("businesses.urls")),
     path("api/", include("products.urls")),
-    # path("api/", include("catalogs.urls")),
+    path("api/", include("doctors.urls")),
     path("api/", include("bookmarks.urls")),
     # path("api/", include("offers.urls")),
     path("api/", include("uploads.urls")),

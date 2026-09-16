@@ -6,6 +6,7 @@ class SavedItem(models.Model):
     class ItemType(models.TextChoices):
         BUSINESS = "business", "Business"
         PRODUCT = "product", "Product"
+        DOCTOR = "doctor", "Doctor"
 
     id = models.UUIDField(
         primary_key=True,

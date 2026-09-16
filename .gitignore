@@ -69,4 +69,3 @@ celerybeat.pid
 # Django translations
 *.mo
 task.txt
-

@@ -33,6 +33,10 @@ class UploadCompleteSerializer(serializers.Serializer):
         return upload_ids
 
 
+class UploadDeleteSerializer(UploadCompleteSerializer):
+    pass
+
+
 class UploadSerializer(serializers.ModelSerializer):
     url = serializers.SerializerMethodField()
 
@@ -41,13 +45,8 @@ class UploadSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "object_key",
-            "mime_type",
-            "size",
-            "title",
-            "status",
             "url",
-            "created_at",
-            "updated_at",
+            "title",
         )
         read_only_fields = fields
 

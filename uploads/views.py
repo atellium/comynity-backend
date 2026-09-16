@@ -18,6 +18,7 @@ from uploads.models import Upload
 from uploads.serializers import (
     UploadCompleteSerializer,
     UploadCreateSerializer,
+    UploadDeleteSerializer,
     UploadSerializer,
 )
 
@@ -139,5 +140,59 @@ def upload_complete(request):
                 context={"request": request},
             ).data,
             "completed_at": timezone.now(),
+        }
+    )
+
+
+@api_view(["DELETE", "POST"])
+@permission_classes([IsAuthenticated])
+def upload_delete(request):
+    if not settings.R2_ENABLED:
+        return Response(
+            {"detail": "Direct uploads require R2_ENABLED."},
+            status=status.HTTP_503_SERVICE_UNAVAILABLE,
+        )
+
+    serializer = UploadDeleteSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    upload_ids = serializer.validated_data["upload_ids"]
+    uploads = list(
+        Upload.objects.filter(
+            uploaded_by=request.user,
+            pk__in=upload_ids,
+        )
+    )
+    uploads_by_id = {upload.pk: upload for upload in uploads}
+    missing_ids = set(upload_ids) - set(uploads_by_id)
+    if missing_ids:
+        raise NotFound(
+            "Uploads not found: "
+            + ", ".join(str(upload_id) for upload_id in sorted(missing_ids, key=str))
+        )
+
+    client = r2_client()
+    try:
+        delete_response = client.delete_objects(
+            Bucket=settings.R2_BUCKET_NAME,
+            Delete={
+                "Objects": [
+                    {"Key": storage_key(upload.object_key)} for upload in uploads
+                ],
+                "Quiet": True,
+            },
+        )
+    except ClientError as exc:
+        raise ValidationError({"upload_ids": "Could not delete uploads from R2."}) from exc
+
+    if delete_response.get("Errors"):
+        raise ValidationError({"upload_ids": "Could not delete one or more uploads from R2."})
+
+    deleted_ids = [upload.pk for upload in uploads]
+    Upload.objects.filter(pk__in=deleted_ids).delete()
+    return Response(
+        {
+            "deleted": len(deleted_ids),
+            "upload_ids": deleted_ids,
+            "deleted_at": timezone.now(),
         }
     )

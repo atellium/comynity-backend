@@ -1,0 +1,639 @@
+[
+    {
+        "name": "General Physician",
+        "label": "General Physicians",
+        "slug": "general-physicians",
+        "aliases": "general doctor, general practitioner, gp, medicine doctor, physician",
+        "body_part": "general"
+    },
+    {
+        "name": "Pediatrician",
+        "label": "Pediatricians",
+        "slug": "pediatricians",
+        "aliases": "child doctor, child specialist, kids doctor, children's doctor",
+        "body_part": "child_health"
+    },
+    {
+        "name": "Gynecologist",
+        "label": "Gynecologists",
+        "slug": "gynecologists",
+        "aliases": "gynaecologist, women's doctor, women's health specialist, female doctor",
+        "body_part": "womens_health"
+    },
+    {
+        "name": "Dermatologist",
+        "label": "Dermatologists",
+        "slug": "dermatologists",
+        "aliases": "skin doctor, skin specialist, hair specialist, nail specialist",
+        "body_part": "skin"
+    },
+    {
+        "name": "Cardiologist",
+        "label": "Cardiologists",
+        "slug": "cardiologists",
+        "aliases": "heart doctor, heart specialist, cardiac specialist",
+        "body_part": "heart"
+    },
+    {
+        "name": "Orthopedic",
+        "label": "Orthopedics",
+        "slug": "orthopedics",
+        "aliases": "orthopaedic, bone doctor, bone specialist, joint specialist",
+        "body_part": "bones_joints"
+    },
+    {
+        "name": "ENT Specialist",
+        "label": "ENT Specialists",
+        "slug": "ent-specialists",
+        "aliases": "ent doctor, ear doctor, nose doctor, throat doctor, otolaryngologist",
+        "body_part": "ent"
+    },
+    {
+        "name": "Ophthalmologist",
+        "label": "Ophthalmologists",
+        "slug": "ophthalmologists",
+        "aliases": "eye doctor, eye specialist, eye surgeon",
+        "body_part": "eye"
+    },
+    {
+        "name": "Dentist",
+        "label": "Dentists",
+        "slug": "dentists",
+        "aliases": "dental doctor, dental surgeon, teeth doctor, tooth doctor",
+        "body_part": "teeth_mouth"
+    },
+    {
+        "name": "Neurologist",
+        "label": "Neurologists",
+        "slug": "neurologists",
+        "aliases": "brain doctor, nerve specialist, brain specialist, neuro doctor",
+        "body_part": "brain_nervous_system"
+    },
+    {
+        "name": "Gastroenterologist",
+        "label": "Gastroenterologists",
+        "slug": "gastroenterologists",
+        "aliases": "stomach doctor, digestive specialist, gastro doctor, digestion doctor",
+        "body_part": "digestive_system"
+    },
+    {
+        "name": "Psychiatrist",
+        "label": "Psychiatrists",
+        "slug": "psychiatrists",
+        "aliases": "mental health doctor, mental health specialist, psychiatric doctor",
+        "body_part": "mental_health"
+    },
+    {
+        "name": "Pulmonologist",
+        "label": "Pulmonologists",
+        "slug": "pulmonologists",
+        "aliases": "lung doctor, chest specialist, respiratory specialist, chest doctor",
+        "body_part": "lungs"
+    },
+    {
+        "name": "Endocrinologist",
+        "label": "Endocrinologists",
+        "slug": "endocrinologists",
+        "aliases": "hormone doctor, hormone specialist, thyroid specialist, endocrine specialist",
+        "body_part": "hormones_metabolism"
+    },
+    {
+        "name": "Diabetologist",
+        "label": "Diabetologists",
+        "slug": "diabetologists",
+        "aliases": "diabetes doctor, diabetes specialist, sugar doctor",
+        "body_part": "hormones_metabolism"
+    },
+    {
+        "name": "Urologist",
+        "label": "Urologists",
+        "slug": "urologists",
+        "aliases": "urine specialist, urinary doctor, bladder specialist, prostate specialist",
+        "body_part": "urinary_system"
+    },
+    {
+        "name": "Nephrologist",
+        "label": "Nephrologists",
+        "slug": "nephrologists",
+        "aliases": "kidney doctor, kidney specialist, renal specialist",
+        "body_part": "kidney"
+    },
+    {
+        "name": "General Surgeon",
+        "label": "General Surgeons",
+        "slug": "general-surgeons",
+        "aliases": "surgeon, surgery doctor, general surgery specialist",
+        "body_part": "general"
+    },
+    {
+        "name": "Obstetrician",
+        "label": "Obstetricians",
+        "slug": "obstetricians",
+        "aliases": "pregnancy doctor, maternity doctor, pregnancy specialist, obstetrics specialist",
+        "body_part": "womens_health"
+    },
+    {
+        "name": "Rheumatologist",
+        "label": "Rheumatologists",
+        "slug": "rheumatologists",
+        "aliases": "arthritis doctor, arthritis specialist, joint pain specialist, autoimmune specialist",
+        "body_part": "bones_joints"
+    },
+    {
+        "name": "Oncologist",
+        "label": "Oncologists",
+        "slug": "oncologists",
+        "aliases": "cancer doctor, cancer specialist, oncology doctor",
+        "body_part": "cancer"
+    },
+    {
+        "name": "Hematologist",
+        "label": "Hematologists",
+        "slug": "hematologists",
+        "aliases": "blood doctor, blood specialist, haematologist",
+        "body_part": "blood"
+    },
+    {
+        "name": "Internal Medicine Specialist",
+        "label": "Internal Medicine Specialists",
+        "slug": "internal-medicine-specialists",
+        "aliases": "internal medicine doctor, medicine specialist, physician",
+        "body_part": "general"
+    },
+    {
+        "name": "Family Medicine Specialist",
+        "label": "Family Medicine Specialists",
+        "slug": "family-medicine-specialists",
+        "aliases": "family doctor, family physician, primary care doctor",
+        "body_part": "general"
+    },
+    {
+        "name": "Hepatologist",
+        "label": "Hepatologists",
+        "slug": "hepatologists",
+        "aliases": "liver doctor, liver specialist, hepatology doctor",
+        "body_part": "liver"
+    },
+    {
+        "name": "Neurosurgeon",
+        "label": "Neurosurgeons",
+        "slug": "neurosurgeons",
+        "aliases": "brain surgeon, spine surgeon, nerve surgeon, neuro surgeon",
+        "body_part": "brain_nervous_system"
+    },
+    {
+        "name": "Orthopedic Surgeon",
+        "label": "Orthopedic Surgeons",
+        "slug": "orthopedic-surgeons",
+        "aliases": "orthopaedic surgeon, bone surgeon, joint surgeon",
+        "body_part": "bones_joints"
+    },
+    {
+        "name": "Cardiac Surgeon",
+        "label": "Cardiac Surgeons",
+        "slug": "cardiac-surgeons",
+        "aliases": "heart surgeon, cardiac surgery doctor",
+        "body_part": "heart"
+    },
+    {
+        "name": "Cardiothoracic Surgeon",
+        "label": "Cardiothoracic Surgeons",
+        "slug": "cardiothoracic-surgeons",
+        "aliases": "heart and chest surgeon, thoracic surgeon, cardiac surgeon",
+        "body_part": "heart"
+    },
+    {
+        "name": "Vascular Surgeon",
+        "label": "Vascular Surgeons",
+        "slug": "vascular-surgeons",
+        "aliases": "blood vessel surgeon, vascular specialist, vein specialist",
+        "body_part": "heart"
+    },
+    {
+        "name": "Pediatric Surgeon",
+        "label": "Pediatric Surgeons",
+        "slug": "pediatric-surgeons",
+        "aliases": "child surgeon, children surgeon, kids surgeon",
+        "body_part": "child_health"
+    },
+    {
+        "name": "Neonatologist",
+        "label": "Neonatologists",
+        "slug": "neonatologists",
+        "aliases": "newborn specialist, newborn doctor, neonatal doctor, baby specialist",
+        "body_part": "child_health"
+    },
+    {
+        "name": "Developmental Pediatrician",
+        "label": "Developmental Pediatricians",
+        "slug": "developmental-pediatricians",
+        "aliases": "child development specialist, developmental doctor, developmental pediatric specialist",
+        "body_part": "child_health"
+    },
+    {
+        "name": "Pediatric Cardiologist",
+        "label": "Pediatric Cardiologists",
+        "slug": "pediatric-cardiologists",
+        "aliases": "child heart doctor, pediatric heart specialist",
+        "body_part": "heart"
+    },
+    {
+        "name": "Pediatric Neurologist",
+        "label": "Pediatric Neurologists",
+        "slug": "pediatric-neurologists",
+        "aliases": "child neurologist, child brain specialist, pediatric brain doctor",
+        "body_part": "brain_nervous_system"
+    },
+    {
+        "name": "Pediatric Gastroenterologist",
+        "label": "Pediatric Gastroenterologists",
+        "slug": "pediatric-gastroenterologists",
+        "aliases": "child stomach doctor, pediatric digestive specialist",
+        "body_part": "child_health"
+    },
+    {
+        "name": "Pediatric Endocrinologist",
+        "label": "Pediatric Endocrinologists",
+        "slug": "pediatric-endocrinologists",
+        "aliases": "child hormone specialist, pediatric hormone doctor",
+        "body_part": "child_health"
+    },
+    {
+        "name": "Pediatric Nephrologist",
+        "label": "Pediatric Nephrologists",
+        "slug": "pediatric-nephrologists",
+        "aliases": "child kidney doctor, pediatric kidney specialist",
+        "body_part": "child_health"
+    },
+    {
+        "name": "Pediatric Pulmonologist",
+        "label": "Pediatric Pulmonologists",
+        "slug": "pediatric-pulmonologists",
+        "aliases": "child lung doctor, pediatric chest specialist, child respiratory specialist",
+        "body_part": "child_health"
+    },
+    {
+        "name": "Child Psychiatrist",
+        "label": "Child Psychiatrists",
+        "slug": "child-psychiatrists",
+        "aliases": "child mental health doctor, pediatric psychiatrist, child psychiatry specialist",
+        "body_part": "mental_health"
+    },
+    {
+        "name": "Clinical Psychologist",
+        "label": "Clinical Psychologists",
+        "slug": "clinical-psychologists",
+        "aliases": "clinical psychology, mental health psychologist, psychologist",
+        "body_part": "mental_health"
+    },
+    {
+        "name": "Psychologist",
+        "label": "Psychologists",
+        "slug": "psychologists",
+        "aliases": "mental health specialist, counselling specialist, psychology doctor",
+        "body_part": "mental_health"
+    },
+    {
+        "name": "Counseling Psychologist",
+        "label": "Counseling Psychologists",
+        "slug": "counseling-psychologists",
+        "aliases": "counselling psychologist, counselor, mental health counselor",
+        "body_part": "mental_health"
+    },
+    {
+        "name": "Neuropsychiatrist",
+        "label": "Neuropsychiatrists",
+        "slug": "neuropsychiatrists",
+        "aliases": "brain psychiatry specialist, neurological psychiatrist",
+        "body_part": "mental_health"
+    },
+    {
+        "name": "Addiction Psychiatrist",
+        "label": "Addiction Psychiatrists",
+        "slug": "addiction-psychiatrists",
+        "aliases": "addiction doctor, de addiction specialist, substance abuse specialist",
+        "body_part": "mental_health"
+    },
+    {
+        "name": "Chest Physician",
+        "label": "Chest Physicians",
+        "slug": "chest-physicians",
+        "aliases": "chest doctor, lung doctor, respiratory doctor, pulmonary doctor",
+        "body_part": "lungs"
+    },
+    {
+        "name": "Respiratory Medicine Specialist",
+        "label": "Respiratory Medicine Specialists",
+        "slug": "respiratory-medicine-specialists",
+        "aliases": "respiratory doctor, lung specialist, chest specialist",
+        "body_part": "lungs"
+    },
+    {
+        "name": "Sleep Medicine Specialist",
+        "label": "Sleep Medicine Specialists",
+        "slug": "sleep-medicine-specialists",
+        "aliases": "sleep doctor, sleep specialist, snoring specialist, sleep apnea specialist",
+        "body_part": "lungs"
+    },
+    {
+        "name": "Allergy & Immunology Specialist",
+        "label": "Allergy & Immunology Specialists",
+        "slug": "allergy-immunology-specialists",
+        "aliases": "allergy doctor, allergy specialist, immunology specialist, allergist",
+        "body_part": "general"
+    },
+    {
+        "name": "Immunologist",
+        "label": "Immunologists",
+        "slug": "immunologists",
+        "aliases": "immune system specialist, immunity doctor",
+        "body_part": "general"
+    },
+    {
+        "name": "Infectious Disease Specialist",
+        "label": "Infectious Disease Specialists",
+        "slug": "infectious-disease-specialists",
+        "aliases": "infection doctor, infectious disease doctor, infection specialist",
+        "body_part": "general"
+    },
+    {
+        "name": "Geriatrician",
+        "label": "Geriatricians",
+        "slug": "geriatricians",
+        "aliases": "elderly care doctor, senior citizen doctor, geriatric specialist",
+        "body_part": "general"
+    },
+    {
+        "name": "Sports Medicine Specialist",
+        "label": "Sports Medicine Specialists",
+        "slug": "sports-medicine-specialists",
+        "aliases": "sports injury doctor, sports injury specialist, sports physician",
+        "body_part": "bones_joints"
+    },
+    {
+        "name": "Pain Management Specialist",
+        "label": "Pain Management Specialists",
+        "slug": "pain-management-specialists",
+        "aliases": "pain doctor, chronic pain specialist, pain physician",
+        "body_part": "general"
+    },
+    {
+        "name": "Critical Care Specialist",
+        "label": "Critical Care Specialists",
+        "slug": "critical-care-specialists",
+        "aliases": "critical care doctor, intensive care specialist, icu specialist",
+        "body_part": "general"
+    },
+    {
+        "name": "Emergency Medicine Specialist",
+        "label": "Emergency Medicine Specialists",
+        "slug": "emergency-medicine-specialists",
+        "aliases": "emergency doctor, emergency physician, casualty doctor",
+        "body_part": "general"
+    },
+    {
+        "name": "Anesthesiologist",
+        "label": "Anesthesiologists",
+        "slug": "anesthesiologists",
+        "aliases": "anaesthesiologist, anesthesia doctor, anaesthesia specialist",
+        "body_part": "general"
+    },
+    {
+        "name": "Radiologist",
+        "label": "Radiologists",
+        "slug": "radiologists",
+        "aliases": "radiology doctor, imaging specialist, diagnostic imaging doctor",
+        "body_part": "general"
+    },
+    {
+        "name": "Interventional Radiologist",
+        "label": "Interventional Radiologists",
+        "slug": "interventional-radiologists",
+        "aliases": "interventional radiology specialist, vascular radiologist",
+        "body_part": "general"
+    },
+    {
+        "name": "Pathologist",
+        "label": "Pathologists",
+        "slug": "pathologists",
+        "aliases": "pathology doctor, laboratory specialist, lab doctor",
+        "body_part": "general"
+    },
+    {
+        "name": "Nuclear Medicine Specialist",
+        "label": "Nuclear Medicine Specialists",
+        "slug": "nuclear-medicine-specialists",
+        "aliases": "nuclear medicine doctor, nuclear imaging specialist",
+        "body_part": "general"
+    },
+    {
+        "name": "Plastic Surgeon",
+        "label": "Plastic Surgeons",
+        "slug": "plastic-surgeons",
+        "aliases": "cosmetic surgeon, reconstructive surgeon, plastic surgery doctor",
+        "body_part": "skin"
+    },
+    {
+        "name": "Dermatologic Surgeon",
+        "label": "Dermatologic Surgeons",
+        "slug": "dermatologic-surgeons",
+        "aliases": "skin surgeon, dermatology surgeon, dermatologic surgery specialist",
+        "body_part": "skin"
+    },
+    {
+        "name": "Trichologist",
+        "label": "Trichologists",
+        "slug": "trichologists",
+        "aliases": "hair specialist, hair loss specialist, scalp specialist",
+        "body_part": "skin"
+    },
+    {
+        "name": "Retina Specialist",
+        "label": "Retina Specialists",
+        "slug": "retina-specialists",
+        "aliases": "retina doctor, retinal specialist, retinal surgeon",
+        "body_part": "eye"
+    },
+    {
+        "name": "Cornea Specialist",
+        "label": "Cornea Specialists",
+        "slug": "cornea-specialists",
+        "aliases": "cornea doctor, corneal specialist, cornea surgeon",
+        "body_part": "eye"
+    },
+    {
+        "name": "Glaucoma Specialist",
+        "label": "Glaucoma Specialists",
+        "slug": "glaucoma-specialists",
+        "aliases": "glaucoma doctor, glaucoma surgeon, eye pressure specialist",
+        "body_part": "eye"
+    },
+    {
+        "name": "Cataract Surgeon",
+        "label": "Cataract Surgeons",
+        "slug": "cataract-surgeons",
+        "aliases": "cataract doctor, cataract specialist, cataract surgery doctor",
+        "body_part": "eye"
+    },
+    {
+        "name": "Pediatric Ophthalmologist",
+        "label": "Pediatric Ophthalmologists",
+        "slug": "pediatric-ophthalmologists",
+        "aliases": "child eye doctor, pediatric eye specialist, kids eye doctor",
+        "body_part": "eye"
+    },
+    {
+        "name": "Oral & Maxillofacial Surgeon",
+        "label": "Oral & Maxillofacial Surgeons",
+        "slug": "oral-maxillofacial-surgeons",
+        "aliases": "oral surgeon, maxillofacial surgeon, jaw surgeon, dental surgeon",
+        "body_part": "teeth_mouth"
+    },
+    {
+        "name": "Orthodontist",
+        "label": "Orthodontists",
+        "slug": "orthodontists",
+        "aliases": "braces doctor, braces specialist, teeth alignment specialist",
+        "body_part": "teeth_mouth"
+    },
+    {
+        "name": "Periodontist",
+        "label": "Periodontists",
+        "slug": "periodontists",
+        "aliases": "gum doctor, gum specialist, periodontal specialist",
+        "body_part": "teeth_mouth"
+    },
+    {
+        "name": "Endodontist",
+        "label": "Endodontists",
+        "slug": "endodontists",
+        "aliases": "root canal specialist, root canal doctor, dental pulp specialist",
+        "body_part": "teeth_mouth"
+    },
+    {
+        "name": "Prosthodontist",
+        "label": "Prosthodontists",
+        "slug": "prosthodontists",
+        "aliases": "denture specialist, dental prosthesis specialist, dental implant specialist",
+        "body_part": "teeth_mouth"
+    },
+    {
+        "name": "Pediatric Dentist",
+        "label": "Pediatric Dentists",
+        "slug": "pediatric-dentists",
+        "aliases": "child dentist, kids dentist, children's dentist",
+        "body_part": "teeth_mouth"
+    },
+    {
+        "name": "Medical Oncologist",
+        "label": "Medical Oncologists",
+        "slug": "medical-oncologists",
+        "aliases": "cancer medicine specialist, chemotherapy doctor, cancer doctor",
+        "body_part": "cancer"
+    },
+    {
+        "name": "Surgical Oncologist",
+        "label": "Surgical Oncologists",
+        "slug": "surgical-oncologists",
+        "aliases": "cancer surgeon, cancer surgery specialist, oncology surgeon",
+        "body_part": "cancer"
+    },
+    {
+        "name": "Radiation Oncologist",
+        "label": "Radiation Oncologists",
+        "slug": "radiation-oncologists",
+        "aliases": "radiation cancer doctor, radiotherapy specialist, radiation therapy doctor",
+        "body_part": "cancer"
+    },
+    {
+        "name": "Gynecologic Oncologist",
+        "label": "Gynecologic Oncologists",
+        "slug": "gynecologic-oncologists",
+        "aliases": "gynecological oncologist, women's cancer specialist, gynecologic cancer doctor",
+        "body_part": "cancer"
+    },
+    {
+        "name": "Pediatric Oncologist",
+        "label": "Pediatric Oncologists",
+        "slug": "pediatric-oncologists",
+        "aliases": "child cancer doctor, pediatric cancer specialist, childhood cancer doctor",
+        "body_part": "cancer"
+    },
+    {
+        "name": "Interventional Cardiologist",
+        "label": "Interventional Cardiologists",
+        "slug": "interventional-cardiologists",
+        "aliases": "angioplasty doctor, interventional heart specialist, cardiac intervention specialist",
+        "body_part": "heart"
+    },
+    {
+        "name": "Cardiac Electrophysiologist",
+        "label": "Cardiac Electrophysiologists",
+        "slug": "cardiac-electrophysiologists",
+        "aliases": "heart rhythm specialist, arrhythmia specialist, electrophysiology cardiologist",
+        "body_part": "heart"
+    },
+    {
+        "name": "Andrologist",
+        "label": "Andrologists",
+        "slug": "andrologists",
+        "aliases": "male fertility doctor, men's reproductive specialist, male reproductive doctor",
+        "body_part": "reproductive_system"
+    },
+    {
+        "name": "Infertility Specialist",
+        "label": "Infertility Specialists",
+        "slug": "infertility-specialists",
+        "aliases": "fertility doctor, fertility specialist, infertility doctor, ivf specialist",
+        "body_part": "reproductive_system"
+    },
+    {
+        "name": "Reproductive Medicine Specialist",
+        "label": "Reproductive Medicine Specialists",
+        "slug": "reproductive-medicine-specialists",
+        "aliases": "fertility specialist, reproductive doctor, ivf doctor",
+        "body_part": "reproductive_system"
+    },
+    {
+        "name": "Gastrointestinal Surgeon",
+        "label": "Gastrointestinal Surgeons",
+        "slug": "gastrointestinal-surgeons",
+        "aliases": "gi surgeon, digestive surgeon, gastrointestinal surgery specialist",
+        "body_part": "digestive_system"
+    },
+    {
+        "name": "Laparoscopic Surgeon",
+        "label": "Laparoscopic Surgeons",
+        "slug": "laparoscopic-surgeons",
+        "aliases": "laparoscopy surgeon, keyhole surgeon, minimally invasive surgeon",
+        "body_part": "general"
+    },
+    {
+        "name": "Colorectal Surgeon",
+        "label": "Colorectal Surgeons",
+        "slug": "colorectal-surgeons",
+        "aliases": "colon surgeon, rectal surgeon, colorectal specialist",
+        "body_part": "digestive_system"
+    },
+    {
+        "name": "Proctologist",
+        "label": "Proctologists",
+        "slug": "proctologists",
+        "aliases": "piles doctor, hemorrhoid specialist, anorectal specialist",
+        "body_part": "digestive_system"
+    },
+    {
+        "name": "Bariatric Surgeon",
+        "label": "Bariatric Surgeons",
+        "slug": "bariatric-surgeons",
+        "aliases": "weight loss surgeon, obesity surgeon, bariatric specialist",
+        "body_part": "digestive_system"
+    },
+    {
+        "name": "Palliative Care Specialist",
+        "label": "Palliative Care Specialists",
+        "slug": "palliative-care-specialists",
+        "aliases": "palliative doctor, supportive care specialist, end of life care doctor",
+        "body_part": "general"
+    }
+]

@@ -6,6 +6,7 @@ from products import views
 app_name = "products"
 
 urlpatterns = [
+    path("products/", views.nearby_product_list, name="nearby-product-list"),
     path(
         "products/categories/",
         views.product_category_list,

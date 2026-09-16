@@ -48,6 +48,7 @@ class BusinessCategory(AutoSlugModel, TimestampedModel):
 
     is_active = models.BooleanField(default=True)
     is_featured = models.BooleanField(default=False)
+    is_popular = models.BooleanField(default=False)
 
     sort_order = models.PositiveIntegerField(default=100)
 

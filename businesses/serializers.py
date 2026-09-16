@@ -13,6 +13,13 @@ class OptionalBooleanField(serializers.BooleanField):
     default_empty_html = serializers.empty
 
 
+class OptionalIntegerField(serializers.IntegerField):
+    def run_validation(self, data=serializers.empty):
+        if data == "" and self.allow_null:
+            data = None
+        return super().run_validation(data)
+
+
 class BusinessHourSerializer(serializers.ModelSerializer):
     class Meta:
         model = BusinessHour
@@ -333,7 +340,7 @@ class BusinessUpdateSerializer(serializers.ModelSerializer):
     )
     description = serializers.CharField(source="profile.description", required=False, allow_blank=True, allow_null=True)
     services = serializers.JSONField(source="profile.services", required=False, allow_null=True)
-    established_year = serializers.IntegerField(required=False, allow_null=True, min_value=1800)
+    established_year = OptionalIntegerField(required=False, allow_null=True, min_value=1800)
     alternate_numbers = serializers.JSONField(source="profile.alternate_numbers", required=False, allow_null=True)
     social_urls = serializers.JSONField(source="profile.social_urls", required=False, allow_null=True)
     seo_title = serializers.CharField(source="profile.seo_title", required=False, allow_blank=True)
