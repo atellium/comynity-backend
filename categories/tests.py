@@ -176,6 +176,7 @@ class CategoryListEndpointTests(APITestCase):
             slug="food",
             sort_order=1,
             is_featured=True,
+            is_popular=True,
         )
         cls.restaurant = BusinessCategory.objects.create(
             name="Restaurant",
@@ -184,6 +185,7 @@ class CategoryListEndpointTests(APITestCase):
             slug="restaurants",
             aliases="food,dining",
             sort_order=2,
+            parent=cls.featured,
         )
         BusinessCategory.objects.create(
             name="Inactive cafe",
@@ -218,9 +220,35 @@ class CategoryListEndpointTests(APITestCase):
                 "search": "dining",
                 "is_active": "true",
                 "is_featured": "false",
+                "is_popular": "false",
                 "sort_by": "name",
                 "sort_order": "desc",
             },
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(
+            [category["slug"] for category in response.data["results"]],
+            ["restaurants"],
+        )
+
+    def test_filters_popular_categories(self):
+        response = self.client.get(
+            reverse("categories:business-category-list"),
+            {"is_popular": "true"},
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(
+            [category["slug"] for category in response.data["results"]],
+            ["food"],
+        )
+        self.assertTrue(response.data["results"][0]["is_popular"])
+
+    def test_filters_by_parent_slug(self):
+        response = self.client.get(
+            reverse("categories:business-category-list"),
+            {"parent_slug": "food"},
         )
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)

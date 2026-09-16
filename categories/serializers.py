@@ -13,8 +13,10 @@ class BusinessCategoryListQuerySerializer(serializers.Serializer):
     label = serializers.CharField(required=False, max_length=200, trim_whitespace=True)
     display_name = serializers.CharField(required=False, max_length=100, trim_whitespace=True)
     slug = serializers.SlugField(required=False, max_length=255)
+    parent_slug = serializers.SlugField(required=False, max_length=255)
     is_active = OptionalBooleanField(required=False)
     is_featured = OptionalBooleanField(required=False)
+    is_popular = OptionalBooleanField(required=False)
     created_after = serializers.DateTimeField(required=False)
     created_before = serializers.DateTimeField(required=False)
     updated_after = serializers.DateTimeField(required=False)
@@ -22,7 +24,19 @@ class BusinessCategoryListQuerySerializer(serializers.Serializer):
     sort_by = serializers.ChoiceField(
         required=False,
         default="sort_order",
-        choices=("id", "name", "label", "display_name", "slug", "sort_order", "is_active", "is_featured", "created_at", "updated_at"),
+        choices=(
+            "id",
+            "name",
+            "label",
+            "display_name",
+            "slug",
+            "sort_order",
+            "is_active",
+            "is_featured",
+            "is_popular",
+            "created_at",
+            "updated_at",
+        ),
     )
     sort_order = serializers.ChoiceField(
         required=False,
@@ -57,6 +71,7 @@ class BusinessCategoryListSerializer(serializers.ModelSerializer):
             "sort_order",
             "is_active",
             "is_featured",
+            "is_popular",
             "created_at",
             "updated_at",
         )

@@ -130,6 +130,41 @@ class PublicProductListQuerySerializer(serializers.Serializer):
         return attrs
 
 
+class NearbyProductListQuerySerializer(serializers.Serializer):
+    lat = serializers.FloatField(min_value=-90, max_value=90)
+    lng = serializers.FloatField(min_value=-180, max_value=180)
+    category = serializers.SlugField(max_length=255)
+    radius = serializers.FloatField(
+        required=False,
+        min_value=0.1,
+        max_value=100,
+    )
+    radius_km = serializers.FloatField(
+        required=False,
+        min_value=0.1,
+        max_value=100,
+        default=5,
+    )
+    page = serializers.IntegerField(required=False, default=1, min_value=1)
+    page_size = serializers.IntegerField(
+        required=False,
+        default=20,
+        min_value=1,
+        max_value=100,
+    )
+
+    def validate(self, attrs):
+        radius = attrs.pop("radius", None)
+        radius_km = attrs.get("radius_km")
+        if radius is not None and radius_km is not None and radius != radius_km:
+            raise serializers.ValidationError(
+                {"radius": "Use either radius or radius_km, not conflicting values."}
+            )
+        if radius is not None:
+            attrs["radius_km"] = radius
+        return attrs
+
+
 class ProductCategorySerializer(serializers.ModelSerializer):
     display_name = serializers.CharField(read_only=True)
     image = serializers.SerializerMethodField()

@@ -724,6 +724,25 @@ class BusinessUpdateAPITests(SimpleTestCase):
         self.assertTrue(serializer.is_valid(), serializer.errors)
         self.assertEqual(serializer.validated_data["profile"]["description"], "")
 
+    def test_description_and_established_year_are_optional_for_patch(self):
+        serializer = BusinessUpdateSerializer(
+            data={"is_active": True},
+            partial=True,
+        )
+
+        self.assertTrue(serializer.is_valid(), serializer.errors)
+        self.assertNotIn("profile", serializer.validated_data)
+        self.assertNotIn("established_year", serializer.validated_data)
+
+    def test_blank_established_year_patch_is_normalized_to_null(self):
+        serializer = BusinessUpdateSerializer(
+            data={"established_year": ""},
+            partial=True,
+        )
+
+        self.assertTrue(serializer.is_valid(), serializer.errors)
+        self.assertIsNone(serializer.validated_data["established_year"])
+
     def test_public_endpoint_is_read_only_and_owner_endpoint_supports_patch(self):
         self.assertNotIn("patch", business_detail.cls.http_method_names)
         self.assertIn("patch", owner_business_detail.cls.http_method_names)

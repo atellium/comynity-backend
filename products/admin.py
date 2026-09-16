@@ -31,19 +31,21 @@ class ProductCategoryAdmin(admin.ModelAdmin):
         "parent",
         "is_active",
         "is_featured",
+        "is_search",
         "sort_order",
-        "updated_at",
     )
 
     list_editable = (
         "is_active",
         "is_featured",
+        "is_search",
         "sort_order",
     )
 
     list_filter = (
         "is_active",
         "is_featured",
+        "is_search",
         "parent",
     )
 
@@ -99,6 +101,7 @@ class ProductCategoryAdmin(admin.ModelAdmin):
                 "fields": (
                     "is_active",
                     "is_featured",
+                    "is_search",
                 )
             },
         ),
