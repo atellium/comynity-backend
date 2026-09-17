@@ -18,12 +18,8 @@ def business_category_list(request):
     query = BusinessCategoryListQuerySerializer(data=request.query_params)
     query.is_valid(raise_exception=True)
     filters = query.validated_data
-    cache_key = None
-    if filters.get("is_featured") is True:
-        cache_key = category_cache_key(
-            "business-list:featured",
-            request.query_params,
-        )
+    cache_key = _business_category_list_cache_key(filters, request.query_params)
+    if cache_key:
         cached_response = cache.get(cache_key)
         if cached_response is not None:
             return Response(cached_response)
@@ -40,6 +36,14 @@ def business_category_list(request):
     if cache_key:
         cache.set(cache_key, response_data, timeout=CATEGORY_CACHE_TIMEOUT)
     return Response(response_data)
+
+
+def _business_category_list_cache_key(filters, query_params):
+    if filters.get("is_featured") is True:
+        return category_cache_key("business-list:featured", query_params)
+    if "parent_slug" in filters and "is_featured" in filters:
+        return category_cache_key("business-list:parent-featured", query_params)
+    return None
 
 
 @api_view(["GET"])

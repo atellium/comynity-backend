@@ -24,7 +24,7 @@ from businesses.serializers import BusinessDetailSerializer, BusinessGalleryImag
 from businesses.services import BUSINESS_HOUR_PATTERNS, get_business_hours_status, normalize_business, normalize_business_profile, paginate_businesses, prepare_business_for_save, save_business
 from businesses.management.commands.seed_dummy_businesses import BUSINESS_NAMES, CENTER_LATITUDE, CENTER_LONGITUDE, RADIUS_KM
 from businesses.validators import validate_alternate_numbers, validate_established_year, validate_social_urls
-from businesses.views import business_detail, business_hours_update, my_business_list, owner_business_detail
+from businesses.views import business_detail, business_hours_update, business_list, my_business_list, owner_business_detail
 from categories.models import BusinessCategory
 from catalogs.models import Catalog, CatalogCategory
 from locations.models import City, State
@@ -380,6 +380,25 @@ class MyBusinessListAPITests(SimpleTestCase):
         self.assertEqual(response.status_code, 200)
         filters = list_businesses_mock.call_args.args[0]
         self.assertEqual(filters["owner_id"], owner_id)
+        self.assertNotIn("enforce_public_visibility", list_businesses_mock.call_args.kwargs)
+
+
+class BusinessListAPITests(SimpleTestCase):
+    @patch("businesses.views.get_business_category", return_value=None)
+    @patch("businesses.views.paginate_businesses", return_value=([], {}))
+    @patch("businesses.views.list_businesses", return_value=[])
+    def test_public_list_enforces_paid_visibility_rules(
+        self,
+        list_businesses_mock,
+        paginate_businesses_mock,
+        get_business_category_mock,
+    ):
+        request = APIRequestFactory().get("/api/businesses/")
+
+        response = business_list(request)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(list_businesses_mock.call_args.kwargs["enforce_public_visibility"])
 
 
 class BusinessGalleryAPITests(SimpleTestCase):

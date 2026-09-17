@@ -1,60 +1,43 @@
 from django.contrib import admin
-from django.utils.html import format_html
+from django.db.models import Count
 
-from .models import Catalog, CatalogCategory, CatalogImage
-
-
-class CatalogImageInline(admin.TabularInline):
-    model = CatalogImage
-    extra = 1
-    fields = (
-        "image",
-        "image_preview",
-        "alt_text",
-        "is_primary",
-        "is_active",
-        "sort_order",
-    )
-    readonly_fields = ("image_preview",)
-    ordering = ("sort_order", "created_at")
-
-    @admin.display(description="Preview")
-    def image_preview(self, obj):
-        if obj.pk and obj.image:
-            return format_html(
-                '<img src="{}" style="width:80px;height:80px;'
-                'object-fit:cover;border-radius:8px;" />',
-                obj.image.url,
-            )
-        return "—"
+from catalogs.models import Catalog
 
 
 @admin.register(Catalog)
 class CatalogAdmin(admin.ModelAdmin):
-    inlines = (CatalogImageInline,)
-
     list_display = (
         "name",
         "public_id",
         "business",
         "type",
-        "price_type",
-        "price",
         "is_active",
-        "is_featured",
-        "sort_order",
-        "updated_at",
+        "is_available",
+        "image_count",
+        "created_at",
     )
-    list_editable = ("is_active", "is_featured", "sort_order")
-    list_filter = ("type", "price_type", "is_active", "is_featured")
+
+    list_filter = (
+        "type",
+        "is_active",
+        "is_available",
+        "created_at",
+    )
+
     search_fields = (
         "name",
         "public_id",
         "slug",
+        "description",
         "business__name",
+        "business__slug",
     )
-    autocomplete_fields = ("business", "categories")
-    list_select_related = ("business",)
+
+    autocomplete_fields = (
+        "business",
+        "images",
+    )
+
     readonly_fields = (
         "id",
         "public_id",
@@ -62,41 +45,61 @@ class CatalogAdmin(admin.ModelAdmin):
         "created_at",
         "updated_at",
     )
-    ordering = ("sort_order", "-created_at")
+
+    list_editable = (
+        "is_active",
+        "is_available",
+    )
+
+    list_select_related = (
+        "business",
+    )
+
+    ordering = (
+        "name",
+        "-created_at",
+    )
+
+    date_hierarchy = "created_at"
     list_per_page = 50
     save_on_top = True
 
     fieldsets = (
         (
-            "Catalog Item",
+            "Catalog",
             {
                 "fields": (
                     "business",
                     "type",
                     "name",
                     "description",
-                    "categories",
                 )
             },
         ),
         (
-            "Pricing",
+            "Media",
             {
                 "fields": (
-                    "price_type",
-                    "price",
-                    "max_price",
-                    "original_price",
+                    "images",
                 )
             },
         ),
         (
             "Details",
-            {"fields": ("variants", "specifications", "custom_fields")},
+            {
+                "fields": (
+                    "custom_fields",
+                )
+            },
         ),
         (
-            "Visibility and Ordering",
-            {"fields": ("is_active", "is_featured", "sort_order")},
+            "Visibility",
+            {
+                "fields": (
+                    "is_active",
+                    "is_available",
+                )
+            },
         ),
         (
             "System",
@@ -113,89 +116,38 @@ class CatalogAdmin(admin.ModelAdmin):
         ),
     )
 
-
-@admin.register(CatalogCategory)
-class CatalogCategoryAdmin(admin.ModelAdmin):
-    list_display = (
-        "name",
-        "label",
-        "type",
-        "parent",
-        "is_active",
-        "is_featured",
-        "is_display",
-        "sort_order",
-        "updated_at",
-    )
-    list_editable = (
-        "is_active",
-        "is_featured",
-        "is_display",
-        "sort_order",
-    )
-    list_filter = (
-        "type",
-        "is_active",
-        "is_featured",
-        "is_display",
-    )
-    search_fields = (
-        "name",
-        "label",
-        "aliases",
-        "slug",
-        "parent__name",
-    )
-    autocomplete_fields = ("parent",)
-    list_select_related = ("parent",)
-    readonly_fields = (
-        "image_preview",
-        "created_at",
-        "updated_at",
-    )
-    ordering = (
-        "type",
-        "sort_order",
-        "name",
-    )
-    list_per_page = 50
-    save_on_top = True
-
-    fieldsets = (
-        (
-            "Category",
-            {
-                "fields": (
-                    "name",
-                    "label",
-                    "type",
-                    "parent",
-                    "aliases",
-                )
-            },
-        ),
-        ("URL", {"fields": ("slug",)}),
-        ("Image", {"fields": ("image", "image_preview")}),
-        ("Ordering", {"fields": ("sort_order",)}),
-        (
-            "Visibility",
-            {"fields": ("is_active", "is_featured", "is_display")},
-        ),
-        (
-            "System",
-            {
-                "classes": ("collapse",),
-                "fields": ("created_at", "updated_at"),
-            },
-        ),
+    actions = (
+        "mark_as_active",
+        "mark_as_inactive",
+        "mark_as_available",
+        "mark_as_unavailable",
     )
 
-    @admin.display(description="Preview")
-    def image_preview(self, obj):
-        if obj.pk and obj.image:
-            return format_html(
-                '<img src="{}" style="width:100px;height:100px;'
-                'object-fit:cover;border-radius:8px;" />',
-                obj.image.url,
-            )
-        return "—"
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request)
+
+        return (
+            queryset
+            .select_related("business")
+            .annotate(_image_count=Count("images"))
+        )
+
+    @admin.display(description="Images", ordering="_image_count")
+    def image_count(self, obj):
+        return obj._image_count
+
+    @admin.action(description="Mark selected catalogs as active")
+    def mark_as_active(self, request, queryset):
+        queryset.update(is_active=True)
+
+    @admin.action(description="Mark selected catalogs as inactive")
+    def mark_as_inactive(self, request, queryset):
+        queryset.update(is_active=False)
+
+    @admin.action(description="Mark selected catalogs as available")
+    def mark_as_available(self, request, queryset):
+        queryset.update(is_available=True)
+
+    @admin.action(description="Mark selected catalogs as unavailable")
+    def mark_as_unavailable(self, request, queryset):
+        queryset.update(is_available=False)

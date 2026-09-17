@@ -20,7 +20,12 @@ def list_nearby_offers(filters, *, now=None):
     return (
         Offer.objects.active()
         .filter(business_id__in=nearby_businesses.order_by().values("pk"))
-        .select_related("business", "business__city", "business__city__state")
+        .select_related(
+            "business",
+            "business__city",
+            "business__city__state",
+            "image",
+        )
         .annotate(
             distance_km=ExpressionWrapper(
                 Distance("business__location", origin) / 1000.0,

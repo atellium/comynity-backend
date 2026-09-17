@@ -15,9 +15,16 @@ class OfferQuerySet(models.QuerySet):
         return self.filter(
             is_active=True,
         ).filter(
-            Q(starts_at__isnull=True) | Q(starts_at__lte=now),
-            Q(expires_at__isnull=True) | Q(expires_at__gte=now),
+            Q(is_all_time=True) |
+            (
+                Q(is_all_time=False)
+                & (Q(starts_at__isnull=True) | Q(starts_at__lte=now))
+                & (Q(expires_at__isnull=True) | Q(expires_at__gte=now))
+            )
         )
+
+    def all_time(self):
+        return self.filter(is_all_time=True)
 
 
 class Offer(TimestampedModel):
@@ -41,13 +48,18 @@ class Offer(TimestampedModel):
         blank=True,
     )
 
-    image = models.ImageField(
-        upload_to="offers/",
-        max_length=500,
+    image = models.ForeignKey(
+        "uploads.Upload",
+        on_delete=models.SET_NULL,
         null=True,
         blank=True,
+        related_name="+",
     )
 
+    is_all_time = models.BooleanField(
+        default=False,
+        db_index=True,
+    )
     starts_at = models.DateTimeField(
         null=True,
         blank=True,
@@ -97,6 +109,11 @@ class Offer(TimestampedModel):
     def clean(self):
         super().clean()
 
+        if self.is_all_time:
+            self.starts_at = None
+            self.expires_at = None
+            return
+
         if (
             self.starts_at
             and self.expires_at
@@ -111,6 +128,9 @@ class Offer(TimestampedModel):
         if not self.is_active:
             return "disabled"
 
+        if self.is_all_time:
+            return "all_time"
+
         now = timezone.now()
 
         if self.starts_at and self.starts_at > now:
@@ -123,4 +143,18 @@ class Offer(TimestampedModel):
 
     @property
     def is_currently_active(self):
-        return self.status == "active"
+        return self.status in {"active", "all_time"}
+
+    def save(self, *args, **kwargs):
+        if self.is_all_time:
+            self.starts_at = None
+            self.expires_at = None
+
+            update_fields = kwargs.get("update_fields")
+            if update_fields is not None:
+                kwargs["update_fields"] = (
+                    set(update_fields)
+                    | {"starts_at", "expires_at"}
+                )
+
+        return super().save(*args, **kwargs)

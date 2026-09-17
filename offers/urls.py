@@ -7,6 +7,11 @@ app_name = "offers"
 
 urlpatterns = [
     path(
+        "businesses/<slug:business_slug>/offers/",
+        views.public_business_offer_list,
+        name="public-business-offer-list",
+    ),
+    path(
         "offers/nearby/",
         views.nearby_offer_list,
         name="nearby-offer-list",
@@ -21,5 +26,4 @@ urlpatterns = [
         views.offer_manage,
         name="offer-manage",
     ),
-    path("businesses/mine/<slug:business_slug>/offers/<uuid:offer_id>/image/uploads/", views.offer_image_upload_create, name="offer-image-upload-create"),
 ]

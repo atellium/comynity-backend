@@ -309,6 +309,35 @@ class CategoryListEndpointTests(APITestCase):
 
         self.assertEqual(list_categories.call_count, 2)
 
+    def test_parent_featured_list_response_is_cached(self):
+        url = reverse("categories:business-category-list")
+        params = {"parent_slug": "food", "is_featured": "false"}
+        with patch(
+            "categories.views.list_business_categories",
+            wraps=views.list_business_categories,
+        ) as list_categories:
+            first = self.client.get(url, params)
+            second = self.client.get(url, params)
+
+        self.assertEqual(first.status_code, status.HTTP_200_OK)
+        self.assertEqual(second.data, first.data)
+        self.assertEqual(
+            [category["slug"] for category in first.data["results"]],
+            ["restaurants"],
+        )
+        self.assertEqual(list_categories.call_count, 1)
+
+    def test_parent_list_without_featured_filter_is_not_cached(self):
+        url = reverse("categories:business-category-list")
+        with patch(
+            "categories.views.list_business_categories",
+            wraps=views.list_business_categories,
+        ) as list_categories:
+            self.client.get(url, {"parent_slug": "food"})
+            self.client.get(url, {"parent_slug": "food"})
+
+        self.assertEqual(list_categories.call_count, 2)
+
 
 @override_settings(
     CACHES={"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}}
