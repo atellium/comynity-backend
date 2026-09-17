@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.core.files.storage import default_storage
 from django.utils.html import format_html
 
 from offers.models import Offer
@@ -10,6 +11,7 @@ class OfferAdmin(admin.ModelAdmin):
         "title",
         "business",
         "status_display",
+        "is_all_time",
         "starts_at",
         "expires_at",
         "is_active",
@@ -18,6 +20,7 @@ class OfferAdmin(admin.ModelAdmin):
     )
     list_filter = (
         "is_active",
+        "is_all_time",
         "starts_at",
         "expires_at",
         "created_at",
@@ -28,8 +31,11 @@ class OfferAdmin(admin.ModelAdmin):
         "business__name",
         "business__slug",
     )
-    autocomplete_fields = ("business",)
-    list_editable = ("is_active", "sort_order")
+    autocomplete_fields = (
+        "business",
+        "image",
+    )
+    list_editable = ("is_all_time", "is_active", "sort_order")
     readonly_fields = (
         "id",
         "status_display",
@@ -61,6 +67,7 @@ class OfferAdmin(admin.ModelAdmin):
                 "fields": (
                     "starts_at",
                     "expires_at",
+                    "is_all_time",
                     "is_active",
                     "status_display",
                     "sort_order",
@@ -83,8 +90,9 @@ class OfferAdmin(admin.ModelAdmin):
     @admin.display(description="Preview")
     def image_preview(self, obj):
         if obj and obj.image:
+            url = default_storage.url(obj.image.object_key)
             return format_html(
                 '<img src="{}" alt="" style="max-height: 180px; max-width: 320px; object-fit: contain;" />',
-                obj.image.url,
+                url,
             )
         return "No image"

@@ -19,7 +19,11 @@ def business_list(request):
     filters["publication_status"] = "published"
     filters["is_active"] = True
     now = timezone.now()
-    businesses, pagination = paginate_businesses(list_businesses(filters, now=now), filters["page"], filters["page_size"])
+    businesses, pagination = paginate_businesses(
+        list_businesses(filters, now=now, enforce_public_visibility=True),
+        filters["page"],
+        filters["page_size"],
+    )
     category = get_business_category(filters.get("category"))
     serializer_context = {"request": request, "now": now}
     return Response({"pagination": pagination, "category": CategoryFilterSerializer(category).data if category else None, "results": BusinessListSerializer(businesses, many=True, context=serializer_context).data})
