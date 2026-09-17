@@ -4,6 +4,25 @@ from django.db.models import Count
 from .models import ProductCategory, Product, ProductImage
 
 
+class RootProductCategoryParentFilter(admin.SimpleListFilter):
+    title = "parent"
+    parameter_name = "parent__id__exact"
+
+    def lookups(self, request, model_admin):
+        return (
+            (category.pk, str(category))
+            for category in ProductCategory.objects.filter(parent__isnull=True).order_by(
+                "sort_order",
+                "name",
+            )
+        )
+
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.filter(parent_id=self.value())
+        return queryset
+
+
 @admin.register(ProductCategory)
 class ProductCategoryAdmin(admin.ModelAdmin):
     search_fields = (
@@ -46,7 +65,7 @@ class ProductCategoryAdmin(admin.ModelAdmin):
         "is_active",
         "is_featured",
         "is_search",
-        "parent",
+        RootProductCategoryParentFilter,
     )
 
     list_select_related = (
@@ -116,6 +135,21 @@ class ProductCategoryAdmin(admin.ModelAdmin):
             },
         ),
     )
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "parent":
+            kwargs["queryset"] = ProductCategory.objects.filter(parent__isnull=True)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+    def get_search_results(self, request, queryset, search_term):
+        queryset, may_have_duplicates = super().get_search_results(
+            request,
+            queryset,
+            search_term,
+        )
+        if request.GET.get("field_name") == "parent":
+            queryset = queryset.filter(parent__isnull=True)
+        return queryset, may_have_duplicates
 
 
 class ProductImageInline(admin.TabularInline):
