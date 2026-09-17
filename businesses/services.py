@@ -24,6 +24,7 @@ from core.utils import generate_unique_slug
 from uploads.models import Upload
 
 BUSINESS_CLOSING_SOON_MINUTES = 60
+UNPAID_BUSINESS_MAX_DISTANCE_KM = 1.0
 
 def normalize_business(business):
     business.name = (business.name or "").strip()
@@ -345,7 +346,7 @@ def replace_business_hours(business, hours):
     return business.business_hours.order_by("opens_at", "id")
 
 
-def list_businesses(filters, *, now=None):
+def list_businesses(filters, *, now=None, enforce_public_visibility=False):
     queryset = business_response_queryset(now=now)
     if filters.get("owner_id"):
         queryset = queryset.filter(owner_id=filters["owner_id"])
@@ -385,7 +386,7 @@ def list_businesses(filters, *, now=None):
     if "lat" in filters and "lng" in filters:
         origin = Point(filters["lng"], filters["lat"], srid=4326)
         direction = "-" if filters["sort_order"] == "desc" else ""
-        return (
+        queryset = (
             queryset.filter(
                 location__isnull=False,
                 location__distance_lte=(origin, D(km=filters["radius_km"])),
@@ -396,8 +397,17 @@ def list_businesses(filters, *, now=None):
                     output_field=FloatField(),
                 )
             )
-            .order_by(f"{direction}distance_km", "id")
         )
+        if enforce_public_visibility:
+            queryset = queryset.filter(
+                Q(is_paid=True)
+                | Q(
+                    distance_km__lte=UNPAID_BUSINESS_MAX_DISTANCE_KM,
+                )
+            )
+        return queryset.order_by(f"{direction}distance_km", "id")
+    if enforce_public_visibility:
+        queryset = queryset.filter(is_paid=True)
     direction = "-" if filters["sort_order"] == "desc" else ""
     return queryset.order_by(f"{direction}{filters['sort_by']}", "id")
 

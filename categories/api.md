@@ -19,9 +19,10 @@ Query parameters:
 - `page`: page number, starting at 1.
 - `page_size`: number of results from 1 to 100; defaults to 20.
 
-Responses are cached only when `is_featured=true`. Each unique combination of
-filters, sorting, and pagination has its own cache entry. Saving or deleting a
-business category invalidates these cached responses.
+Responses are cached when `is_featured=true`, and when both `parent_slug` and
+`is_featured` are supplied. Each unique combination of filters, sorting, and
+pagination has its own cache entry. Saving or deleting a business category
+invalidates these cached responses.
 
 ## Search visible categories
 
